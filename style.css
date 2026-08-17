@@ -76,11 +76,13 @@ body {
   border-color: rgba(0, 106, 255, 0.3);
 }
 
-/* --- THEME TOGGLE FAB (Left Side) --- */
+/* --- THEME TOGGLE FAB (Right Side Stacked) --- */
 .theme-toggle {
     position: fixed;
-    bottom: 30px;
-    left: 30px; 
+    /* Pushed up to 105px so it sits right above the 60px Nav FAB */
+    bottom: 105px;
+    right: 30px; 
+    left: auto; /* Clears the old left positioning */
     z-index: 1000;
     width: 60px;
     height: 60px;
