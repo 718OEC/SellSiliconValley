@@ -61,22 +61,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 }
 
 google.charts.load('current', {'packages':['corechart']});
-let chartsLoaded = false;
-google.charts.setOnLoadCallback(() => { chartsLoaded = true; checkIntersection(); });
-
-function checkIntersection() {
-    if (!chartsLoaded) return;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                drawCharts();
-                observer.disconnect();
-            }
-        });
-    });
-    const target = document.querySelector('.chart-box');
-    if (target) observer.observe(target);
-}
+google.charts.setOnLoadCallback(drawCharts);
 
 function drawCharts() {
   if (typeof masterData === 'undefined' || !masterData.length) {
