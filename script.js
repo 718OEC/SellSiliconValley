@@ -27,8 +27,34 @@ document.addEventListener('click', function(event) {
 // ---------------------
 
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    drawCharts();
+    const themeIcon = document.getElementById("themeIcon");
+    
+    if (themeIcon) {
+        // 1. Trigger the spin-out CSS animation
+        themeIcon.classList.add("spin-out");
+        
+        // 2. Wait exactly halfway through the CSS rotation (200ms)
+        setTimeout(() => {
+            // Swap the actual theme
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            // Swap the icon text visually 
+            themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
+            
+            // 3. Remove the rotation class so it spins back into view smoothly
+            themeIcon.classList.remove("spin-out");
+            
+            // Redraw the Google Charts with the new theme colors if the function exists
+            if (typeof drawCharts === 'function') {
+                drawCharts();
+            }
+        }, 200);
+    } else {
+        // Fallback just in case the icon ID gets deleted
+        document.body.classList.toggle('dark-mode');
+        if (typeof drawCharts === 'function') drawCharts();
+    }
 }
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
