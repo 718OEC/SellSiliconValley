@@ -157,5 +157,3 @@ function drawVolumeChart(pageData, colors, textStyle, gridColor) {
 }
 
 window.addEventListener('resize', drawCharts);
-
-window.addEventListener('resize', drawCharts);
