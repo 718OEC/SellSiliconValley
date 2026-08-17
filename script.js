@@ -88,6 +88,8 @@ function drawCharts() {
   drawPriceChart(pageData, colors, textStyle, gridColor);
   drawDOMChart(pageData, colors, textStyle, gridColor);
   drawVolumeChart(pageData, colors, textStyle, gridColor);
+  drawHousesChart(pageData, colors, textStyle, gridColor);
+  drawCondosChart(pageData, colors, textStyle, gridColor);
 }
   // Note how the functions now accept 'pageData' as a parameter
 function drawPriceChart(pageData, colors, textStyle, gridColor) {
@@ -113,6 +115,57 @@ function drawPriceChart(pageData, colors, textStyle, gridColor) {
   };
   var chart = new google.visualization.LineChart(document.getElementById('price_chart'));
   chart.draw(data, options);
+function drawHousesChart(pageData, colors, textStyle, gridColor) {
+  // Check if the HTML element actually exists on this page before drawing
+  if (!document.getElementById('houses_chart')) return;
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('date', 'Date');
+  data.addColumn('number', 'Single Family Houses');
+  
+  // Pulls only Date [0] and House Price [1]
+  data.addRows(pageData.map(r => [r[0], r[1]]));
+
+  var options = {
+    legend: { position: 'bottom', textStyle: textStyle },
+    colors: [colors[0]], // Uses Brand Blue
+    backgroundColor: { fill:'transparent' },
+    chartArea: { width: '85%', height: '70%' },
+    hAxis: { textStyle: textStyle, format: 'yyyy' },
+    vAxis: { textStyle: textStyle, gridlines: { color: gridColor }, format: '$#,###' },
+    lineWidth: 3, pointSize: 0,
+    curveType: 'function',
+    animation: { startup: true, duration: 1000, easing: 'out' }
+  };
+  var chart = new google.visualization.LineChart(document.getElementById('houses_chart'));
+  chart.draw(data, options);
+}
+
+function drawCondosChart(pageData, colors, textStyle, gridColor) {
+  // Check if the HTML element actually exists on this page before drawing
+  if (!document.getElementById('condos_chart')) return;
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('date', 'Date');
+  data.addColumn('number', 'Condos & Townhomes');
+  
+  // Pulls only Date [0] and Condo Price [2]
+  data.addRows(pageData.map(r => [r[0], r[2]]));
+
+  var options = {
+    legend: { position: 'bottom', textStyle: textStyle },
+    colors: [colors[1]], // Uses Brand Gold
+    backgroundColor: { fill:'transparent' },
+    chartArea: { width: '85%', height: '70%' },
+    hAxis: { textStyle: textStyle, format: 'yyyy' },
+    vAxis: { textStyle: textStyle, gridlines: { color: gridColor }, format: '$#,###' },
+    lineWidth: 3, pointSize: 0,
+    curveType: 'function',
+    animation: { startup: true, duration: 1000, easing: 'out' }
+  };
+  var chart = new google.visualization.LineChart(document.getElementById('condos_chart'));
+  chart.draw(data, options);
+}
 }
 
 function drawDOMChart(pageData, colors, textStyle, gridColor) {
