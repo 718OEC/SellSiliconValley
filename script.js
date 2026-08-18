@@ -1,92 +1,102 @@
-// --- FAB NAV LOGIC ---
+// --- 1. TOGGLE LOGIC ---
+function setStrategy(type, btn) {
+    document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.strat-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('strat-' + type).classList.add('active');
+}
+
+// --- 2. FAB & THEME ---
 function toggleFab() {
-    const container = document.getElementById('fabContainer');
+    const wrap = document.getElementById('fabWrapper');
     const icon = document.getElementById('fabIcon');
-    container.classList.toggle('active');
-    
-    if (container.classList.contains('active')) {
-        icon.textContent = 'close';
-    } else {
-        icon.textContent = 'map'; 
-    }
+    wrap.classList.toggle('active');
+    icon.textContent = wrap.classList.contains('active') ? 'close' : 'map';
 }
-
-function copyLink() {
-    navigator.clipboard.writeText(window.location.href);
-    toggleFab(); // Close menu
-    alert('Link copied to clipboard!');
-}
-
-// Close menu when clicking outside
-document.addEventListener('click', function(event) {
-    const container = document.getElementById('fabContainer');
-    if (!container.contains(event.target) && container.classList.contains('active')) {
-        toggleFab();
-    }
-});
-// ---------------------
 
 function toggleTheme() {
-    const themeIcon = document.getElementById("themeIcon");
-    
-    if (themeIcon) {
-        // 1. Trigger the spin-out CSS animation
-        themeIcon.classList.add("spin-out");
-        
-        // 2. Wait exactly halfway through the CSS rotation (200ms)
-        setTimeout(() => {
-            // Swap the actual theme
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            
-            // Swap the icon text visually 
-            themeIcon.textContent = isDark ? "light_mode" : "dark_mode";
-            
-            // 3. Remove the rotation class so it spins back into view smoothly
-            themeIcon.classList.remove("spin-out");
-            
-            // Redraw the Google Charts with the new theme colors if the function exists
-            if (typeof drawCharts === 'function') {
-                drawCharts();
-            }
-        }, 200);
-    } else {
-        // Fallback just in case the icon ID gets deleted
-        document.body.classList.toggle('dark-mode');
-        if (typeof drawCharts === 'function') drawCharts();
-    }
+    document.body.classList.toggle('dark-mode');
+    drawCharts(); // Redraw charts to update text colors
 }
+
+// Auto-detect system dark mode on load
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
 }
 
+// --- 3. CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
 function drawCharts() {
-  if (typeof masterData === 'undefined' || !masterData.length) {
-      console.warn("Chart data not found. Ensure data.js is loaded.");
-      return;
-  }
+    if (!decadeData || decadeData.length === 0) return;
 
-  // 1. Read the start and end years from the HTML <body> tag
-  const startYear = parseInt(document.body.getAttribute('data-start')) || 1998;
-  const endYear = parseInt(document.body.getAttribute('data-end')) || 2025;
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    // Lighter text color for charts in Dark Mode (#A1A1A6 is standard HIG)
+    const textC = isDark ? '#A1A1A6' : '#86868B';
+    
+    // Apple-esque brand colors matching CSS
+    const cBlue = '#007AFF';
+    const cPurple = '#AF52DE';
+    const cTeal = '#30B0C7';
 
-  // 2. Filter the master dataset to only include this page's decade
-  const pageData = masterData.filter(row => {
-      const year = row[0].getFullYear();
-      return year >= startYear && year <= endYear;
-  });
+    const commonOptions = {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '92%', height: '80%' },
+        hAxis: { 
+            textStyle: { color: textC, fontName: '-apple-system' }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        lineWidth: 4,
+        curveType: 'function', // Smooth bezier curves
+        animation: { startup: true, duration: 1200, easing: 'out' },
+        tooltip: { trigger: 'focus', showColorCode: true }
+    };
 
-  const isDark = document.body.classList.contains('dark-mode');
-  const colors = isDark ? ['#006AFF', '#FFD237', '#A6E5FF'] : ['#006AFF', '#FFD237', '#001751'];
-  const textStyle = { color: isDark ? '#b0c4de' : '#546e7a' };
-  const gridColor = isDark ? '#334' : '#e0e0e0';
+    const dateFmt = new google.visualization.DateFormat({ pattern: 'MMM yyyy' });
 
-  // 3. Pass the filtered pageData to the drawing functions
-  drawPriceChart(pageData, colors, textStyle, gridColor);
-  drawDOMChart(pageData, colors, textStyle, gridColor);
+    // --- Price Chart ---
+    const dataP = new google.visualization.DataTable();
+    dataP.addColumn('date', 'Date');
+    dataP.addColumn('number', 'Houses');
+    dataP.addColumn('number', 'Condos');
+    dataP.addColumn('number', 'Townhomes');
+    dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
+    dateFmt.format(dataP, 0);
+
+    const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
+    chartP.draw(dataP, { ...commonOptions, colors: [cBlue, cPurple, cTeal] });
+
+    // --- DOM Chart ---
+    const dataD = new google.visualization.DataTable();
+    dataD.addColumn('date', 'Date');
+    dataD.addColumn('number', 'Houses');
+    dataD.addColumn('number', 'Condos');
+    dataD.addColumn('number', 'Townhomes');
+    dataD.addRows(decadeData.map(r => [r[0], r[4], r[5], r[6]]));
+    dateFmt.format(dataD, 0);
+
+    const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
+    chartD.draw(dataD, { ...commonOptions, colors: [cBlue, cPurple, cTeal] });
+
+    // --- Volume Chart ---
+    const dataV = new google.visualization.DataTable();
+    dataV.addColumn('date', 'Date');
+    dataV.addColumn('number', 'Volume');
+    dataV.addRows(decadeData.map(r => [r[0], r[10]])); 
+    dateFmt.format(dataV, 0);
+
+    const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
+    chartV.draw(dataV, { ...commonOptions, colors: [cBlue], areaOpacity: 0.15 });
+}
+
+// Redraw cleanly on screen resize
+window.addEventListener('resize', drawCharts);  drawDOMChart(pageData, colors, textStyle, gridColor);
   drawVolumeChart(pageData, colors, textStyle, gridColor);
   drawHousesChart(pageData, colors, textStyle, gridColor);
   drawCondosChart(pageData, colors, textStyle, gridColor);
