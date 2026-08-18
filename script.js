@@ -29,7 +29,11 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
 function drawCharts() {
-    if (!decadeData || decadeData.length === 0) return;
+    // Check for masterData instead of the old dummy data
+    if (typeof masterData === 'undefined' || masterData.length === 0) {
+        console.error("masterData not found. Ensure data.js is loaded first.");
+        return;
+    }
 
     const isDark = document.body.classList.contains('dark-mode');
     
@@ -53,7 +57,7 @@ function drawCharts() {
             textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
         },
         lineWidth: 4,
-        curveType: 'function', // Smooth bezier curves
+        curveType: 'function', 
         animation: { startup: true, duration: 1200, easing: 'out' },
         tooltip: { trigger: 'focus', showColorCode: true }
     };
@@ -66,7 +70,8 @@ function drawCharts() {
     dataP.addColumn('number', 'Houses');
     dataP.addColumn('number', 'Condos');
     dataP.addColumn('number', 'Townhomes');
-    dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
+    // Using masterData here
+    dataP.addRows(masterData.map(r => [r[0], r[1], r[2], r[3]]));
     dateFmt.format(dataP, 0);
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
@@ -78,7 +83,8 @@ function drawCharts() {
     dataD.addColumn('number', 'Houses');
     dataD.addColumn('number', 'Condos');
     dataD.addColumn('number', 'Townhomes');
-    dataD.addRows(decadeData.map(r => [r[0], r[4], r[5], r[6]]));
+    // Using masterData here
+    dataD.addRows(masterData.map(r => [r[0], r[4], r[5], r[6]]));
     dateFmt.format(dataD, 0);
 
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
@@ -88,7 +94,8 @@ function drawCharts() {
     const dataV = new google.visualization.DataTable();
     dataV.addColumn('date', 'Date');
     dataV.addColumn('number', 'Volume');
-    dataV.addRows(decadeData.map(r => [r[0], r[10]])); 
+    // Using masterData here
+    dataV.addRows(masterData.map(r => [r[0], r[10]])); 
     dateFmt.format(dataV, 0);
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
