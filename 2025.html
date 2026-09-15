@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Market Report</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="market-report-main">
+    
+    <div class="fab-wrapper" id="fabWrapper">
+        <ul class="fab-menu">
+            <li><a href="#top" onclick="toggleFab()">Top</a></li>
+            <li><a href="#prices" onclick="toggleFab()">Price Trends</a></li>
+            <li><a href="#speed" onclick="toggleFab()">Speed (DOM)</a></li>
+            <li><a href="#volume" onclick="toggleFab()">Sales Volume</a></li>
+            <li><a href="#forecast" onclick="toggleFab()">2026 Forecast</a></li>
+            <li><a href="#timeline" onclick="toggleFab()">Timeline</a></li>
+            <li><a href="#strategy" onclick="toggleFab()">Strategy</a></li>
+            <li><a href="#contact" onclick="toggleFab()">Contact</a></li>
+        </ul>
+        <button class="fab-btn" onclick="toggleFab()">
+            <span class="material-symbols-rounded" id="fabIcon">map</span>
+        </button>
+    </div>
+
+    <div class="report-container">
+      <header class="hero">
+          <button class="theme-toggle" onclick="toggleTheme()">
+              <span class="material-symbols-rounded">dark_mode</span>
+          </button>
+          <h1>2025: The AI Bubble Peak?</h1>
+          <p>Silicon Valley Real Estate Rewind ⏪</p>
+      </header>
+
+      <div class="stats-row">
+          <div class="glass stat-box">
+              <div class="stat-label">House Median</div>
+              <div class="stat-val">$2.0M</div>
+              <div class="stat-delta pos">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.50% YoY
+              </div>
+          </div>
+          <div class="glass stat-box">
+              <div class="stat-label">Condo Median</div>
+              <div class="stat-val">$760k</div>
+              <div class="stat-delta neg">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_downward</span> 2.72% YoY
+              </div>
+          </div>
+          <div class="glass stat-box">
+              <div class="stat-label">Townhouse</div>
+              <div class="stat-val">$1.3M</div>
+              <div class="stat-delta pos">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.19% YoY
+              </div>
+          </div>
+      </div>
+
+      <section id="prices" class="glass chart-section">
+          <h2>Price History</h2>
+          <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br>(Charts are interactive)</p>
+          
+          <div class="legend-row">
+              <div class="legend-pill"><div class="dot" style="background:var(--a-blue)"></div> Houses</div>
+              <div class="legend-pill"><div class="dot" style="background:var(--a-purple)"></div> Condos</div>
+              <div class="legend-pill"><div class="dot" style="background:var(--a-teal)"></div> Townhomes</div>
+          </div>
+          
+          <div id="price_chart" class="chart-canvas"></div>
+          
+          <div style="padding: 24px; background: var(--toggle-bg); border-radius: 12px; border-left: 5px solid var(--a-blue); margin-top:20px;">
+             <h3 style="margin:0 0 12px 0; font-size:20px;">History Rhymes: The AI Parallel</h3>
+             <p style="margin:0; font-size:15px; color: var(--text-main);">
+               Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
+               <br><br>
+               <strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty.
+             </p>
+          </div>
+      </section>
+
+      <section id="speed" class="glass chart-section">
+          <h2>Market Speed</h2>
+          <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
+          
+          <div class="legend-row">
+              <div class="legend-pill"><div class="dot" style="background:var(--a-blue)"></div> Houses</div>
+              <div class="legend-pill"><div class="dot" style="background:var(--a-purple)"></div> Condos</div>
+              <div class="legend-pill"><div class="dot" style="background:var(--a-teal)"></div> Townhomes</div>
+          </div>
+          
+          <div id="dom_chart" class="chart-canvas"></div>
+      </section>
+
+      <section id="volume" class="glass chart-section">
+          <h2>Sales Volume</h2>
+          <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability.</p>
+          <div id="volume_chart" class="chart-canvas"></div>
+      </section>
+
+      <section id="forecast">
+          <h2 style="margin-left: 20px; margin-bottom: 20px; font-weight: 600;">2026 Forecast</h2>
+          <div class="grid-3">
+              <div class="card-small">
+                  <div class="card-label">Interest Rates</div>
+                  <h3>The Pivot Point</h3>
+                  <p style="font-size:16px; color:var(--text-sub)">Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
+              </div>
+              <div class="card-small">
+                  <div class="card-label">Inventory</div>
+                  <h3>Golden Handcuffs</h3>
+                  <p style="font-size:16px; color:var(--text-sub)">Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
+              </div>
+              <div class="card-small">
+                  <div class="card-label">Prices</div>
+                  <h3>4-8% Growth</h3>
+                  <p style="font-size:16px; color:var(--text-sub)">If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
+              </div>
+          </div>
+      </section>
+
+      <section id="timeline" class="glass chart-section">
+          <h2>Market Retrospective</h2>
+          <div class="timeline-container">
+              <div class="timeline-line"></div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2000</div>
+                  <div class="node-content">
+                      <div class="node-title">The Dot-Com Peak</div>
+                      <p class="node-text">NASDAQ hit its all-time high, fueling immense wealth and home buying.</p>
+                  </div>
+              </div>
+              <div class="timeline-node">
+                  <div class="year-bubble">2001</div>
+                  <div class="node-content">
+                      <div class="node-title">The Dot-Com Bust</div>
+                      <p class="node-text">The tech bubble burst. Stock portfolios vanished, and home prices took a hit as the local economy contracted.</p>
+                  </div>
+              </div>
+              
+              <div class="timeline-node">
+                  <div class="year-bubble">2005</div>
+                  <div class="node-content">
+                      <div class="node-title">Housing Bubble</div>
+                      <p class="node-text">Predatory lending caused an influx of home purchases by unqualified buyers. All leading up to a bubble</p>
+                  </div>
+              </div>
+              <div class="timeline-node">
+                  <div class="year-bubble">2008</div>
+                  <div class="node-content">
+                      <div class="node-title">The Great Recession</div>
+                      <p class="node-text">Foreclosures spiked. Prices bottomed out in early 2009 at ~$500k.</p>
+                      <div class="insight-box">
+                          This $500k bottom cleared the deck for the massive 2012 recovery.
+                      </div>
+                  </div>
+              </div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2012</div>
+                  <div class="node-content">
+                      <div class="node-title">Facebook IPO</div>
+                      <p class="node-text">The first major "Tech IPO" of the new era minted millionaires overnight.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2015</div>
+                  <div class="node-content">
+                      <div class="node-title">Million Dollar Floor</div>
+                      <p class="node-text">March medians crossed the $1M threshold, paving way to the housing market we know today.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2018</div>
+                  <div class="node-content">
+                      <div class="node-title">5% scare</div>
+                      <p class="node-text">Mortgage rates hit 5% once more, causing fear and a market correction</p>
+                  </div>
+              </div>
+              <div class="timeline-node">
+                  <div class="year-bubble">2020</div>
+                  <div class="node-content">
+                      <div class="node-title">The Great Pivot</div>
+                      <p class="node-text">Remote work made the suburbs hotter than ever.</p>
+                  </div>
+              </div>
+              <div class="timeline-node">
+                  <div class="year-bubble">2021</div>
+                  <div class="node-content">
+                      <div class="node-title">Free money</div>
+                      <p class="node-text">Interest rates hit historic lows (sub-3%). Buyers had infinite purchasing power, driving the steepest appreciation curve in history.</p>
+                  </div>
+              </div>
+              <div class="timeline-node">
+                  <div class="year-bubble">2022</div>
+                  <div class="node-content">
+                      <div class="node-title">The Rate Shock</div>
+                      <p class="node-text">The Fed tripled rates. Prices corrected sharply in Q3/Q4.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section id="strategy" class="glass strategy-container">
+          <h2>2026 Strategy</h2>
+          <div class="ios-toggle">
+              <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
+              <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
+          </div>
+
+          <div id="strat-buy" class="strat-content active">
+              <h3 style="color:var(--a-green)">The "Winter Floor" Trade</h3>
+              <p style="font-size:20px; color:var(--text-sub)">
+                  Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".
+              </p>
+          </div>
+
+          <div id="strat-sell" class="strat-content">
+              <h3 style="color:var(--a-blue)">Prep for Peak</h3>
+              <p style="font-size:20px; color:var(--text-sub)">
+                  Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.
+              </p>
+          </div>
+      </section>
+
+      <div id="contact" class="glass sig-block">
+          <div class="sig-info">
+              <h3>Oscar Deion Espinosa</h3>
+              <div class="sig-role">SellSiliconValley</div>
+              <div class="sig-links">
+                  <a href="tel:iPhone">(718)781-9942</a>
+                  <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
+              </div>
+          </div>
+          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion">
+      </div>
+
+    </div>
+  </div> 
+
+  <!-- Google Charts Script -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+  <!-- Link to external JS -->
+  <script src="script.js"></script>
+</body>
+</html>
