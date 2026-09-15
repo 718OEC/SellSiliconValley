@@ -354,4 +354,30 @@ body.dark-mode::before, body.dark-mode::after { opacity: 0.2; }
 
 @media (hover: hover) and (pointer: fine) {
   /* Fluid floating hover effect for glass elements */
-  .stat-box:hover, .card-small:hover, .glass:not(.sig-block):not(.chart-section):not(.strategy
+  .stat-box:hover, .card-small:hover, .glass:not(.sig-block):not(.chart-section):not(.strategy-container):hover { 
+    transform: translateY(-4px); 
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1), inset 0 1px 1px rgba(255, 255, 255, 0.6); 
+  }
+  body.dark-mode .stat-box:hover, body.dark-mode .card-small:hover, body.dark-mode .glass:not(.sig-block):hover { 
+    box-shadow: 0 16px 40px rgba(0,0,0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15); 
+  }
+  
+  .sig-links a:hover { color: var(--a-blue); }
+  .fab-btn:hover { transform: scale(1.08); }
+}
+
+/* ============================================================== */
+/* --- MOBILE RESPONSIVENESS --- */
+/* ============================================================== */
+
+@media (max-width: 768px) {
+  .app-wrapper { padding: 40px 16px; }
+  .report-container { padding: 40px 16px 100px; }
+  .chart-section, .strategy-container, .sig-block { padding: 24px; }
+  .sig-block { flex-direction: column-reverse; text-align: center; gap: 24px; }
+  .fab-wrapper { bottom: 24px; right: 24px; }
+  .timeline-container { padding-left: 12px; }
+  .timeline-line { left: 42px; }
+  .year-bubble { width: 50px; height: 50px; font-size: 14px; }
+  .theme-toggle { right: 16px; }
+}
