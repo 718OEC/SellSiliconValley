@@ -378,25 +378,25 @@ function drawCharts() {
     // FIXED: Lighter text color for charts in Dark Mode (#A1A1A6 is standard HIG)
     const textC = isDark ? '#A1A1A6' : '#86868B';
       
-    const cBlue = '#007AFF';
-    const cPurple = '#AF52DE';
-    const cTeal = '#30B0C7';
+    const cPurple = '#5F259F'; // Houses
+    const cOrange = '#F86516'; // Condos
+    const cGreen  = '#71B300'; // Townhomes
 
     const commonOptions = {
-        backgroundColor: 'transparent',
-        legend: { position: 'none' },
-        chartArea: { width: '100%', height: '85%' },
-        hAxis: { 
-            textStyle: { color: textC }, format: 'yyyy', 
-            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        vAxis: { 
-            textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        lineWidth: 3,
-        curveType: 'function',
-        animation: { startup: true, duration: 1000, easing: 'out' }
-    };
+    backgroundColor: 'transparent',
+    legend: { position: 'none' },
+    chartArea: { width: '100%', height: '85%' },
+    hAxis: { 
+        textStyle: { color: textC }, format: 'yyyy', 
+        gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+    },
+    vAxis: { 
+        textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+    },
+    lineWidth: 4, // Slightly thicker line to look richer
+    curveType: 'function',
+    animation: { startup: true, duration: 1000, easing: 'out' }
+};
 
     // --- 1. DEFINE FORMATTER ---
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
@@ -411,7 +411,7 @@ function drawCharts() {
     dateFmt.format(dataP, 0);
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
-    chartP.draw(dataP, { ...commonOptions, colors: [cBlue, cPurple, cTeal] });
+    chartP.draw(dataP, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
 
     // --- 3. DOM Chart ---
     const dataD = new google.visualization.DataTable();
@@ -423,7 +423,7 @@ function drawCharts() {
     dateFmt.format(dataD, 0);
 
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
-    chartD.draw(dataD, { ...commonOptions, colors: [cBlue, cPurple, cTeal] });
+    chartD.draw(dataD, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
 
     // --- 4. Volume Chart ---
     const dataV = new google.visualization.DataTable();
@@ -433,7 +433,6 @@ function drawCharts() {
     dateFmt.format(dataV, 0);
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
-    chartV.draw(dataV, { ...commonOptions, colors: [cBlue], areaOpacity: 0.1 });
-}
+    chartV.draw(dataV, { ...commonOptions, colors: [cPurple], areaOpacity: 0.1 });
 
 window.addEventListener('resize', drawCharts);
