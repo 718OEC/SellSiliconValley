@@ -337,8 +337,6 @@
   [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
-
-/* ========================================= */
 // --- 2. TOGGLE LOGIC ---
 function setStrategy(type, btn) {
     document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
@@ -383,20 +381,20 @@ function drawCharts() {
     const cGreen  = '#71B300'; // Townhomes
 
     const commonOptions = {
-    backgroundColor: 'transparent',
-    legend: { position: 'none' },
-    chartArea: { width: '100%', height: '85%' },
-    hAxis: { 
-        textStyle: { color: textC }, format: 'yyyy', 
-        gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-    },
-    vAxis: { 
-        textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-    },
-    lineWidth: 4, // Slightly thicker line to look richer
-    curveType: 'function',
-    animation: { startup: true, duration: 1000, easing: 'out' }
-};
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '100%', height: '85%' },
+        hAxis: { 
+            textStyle: { color: textC }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        lineWidth: 4, // Slightly thicker line to look richer
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' }
+    };
 
     // --- 1. DEFINE FORMATTER ---
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
@@ -434,5 +432,7 @@ function drawCharts() {
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
     chartV.draw(dataV, { ...commonOptions, colors: [cPurple], areaOpacity: 0.1 });
+    
+} // <--- THIS BRACE MATTERS
 
 window.addEventListener('resize', drawCharts);
