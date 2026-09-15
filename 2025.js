@@ -337,20 +337,13 @@
   [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
-// --- 2. TOGGLE LOGIC ---
-function setStrategy(type, btn) {
-    document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.strat-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('strat-' + type).classList.add('active');
-}
 
 // Auto-detect system dark mode
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
 }
 
-// --- 4. CHARTS ---
+// --- CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
@@ -383,10 +376,10 @@ function drawCharts() {
         animation: { startup: true, duration: 1000, easing: 'out' }
     };
 
-    // --- 1. DEFINE FORMATTER ---
+    // --- I. DEFINE FORMATTER ---
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
 
-    // --- 2. Price Chart ---
+    // --- II. Price Chart ---
     const dataP = new google.visualization.DataTable();
     dataP.addColumn('date', 'Date');
     dataP.addColumn('number', 'Houses');
@@ -398,7 +391,7 @@ function drawCharts() {
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
     chartP.draw(dataP, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
 
-    // --- 3. DOM Chart ---
+    // --- III. DOM Chart ---
     const dataD = new google.visualization.DataTable();
     dataD.addColumn('date', 'Date');
     dataD.addColumn('number', 'Houses');
@@ -410,7 +403,7 @@ function drawCharts() {
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
     chartD.draw(dataD, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
 
-    // --- 4. Volume Chart ---
+    // --- IV. Volume Chart ---
     const dataV = new google.visualization.DataTable();
     dataV.addColumn('date', 'Date');
     dataV.addColumn('number', 'Volume');
