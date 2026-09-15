@@ -18,8 +18,7 @@
   --g-yellow: 253, 224, 139;
 
   /* Global Defaults */
-  /* SUNRISE GRADIENT: Soft peach dawn blending into a cool morning sky */
-  --page-bg: linear-gradient(135deg, #FFF0E6 0%, #F4F7FB 45%, #E3EDF7 100%); 
+  --page-bg: #F4F7FB; 
   --text-main: #1D1D1F;
   --text-sub: #5A6A85;
   
@@ -47,8 +46,7 @@
 
 /* --- DARK MODE SMART OVERRIDES --- */
 body.dark-mode {
-  /* SUNSET GRADIENT: Deep twilight zenith fading into bruised purple and a burnt horizon */
-  --page-bg: linear-gradient(135deg, #090B14 0%, #2A1425 45%, #522114 100%); 
+  --page-bg: #0B101A; 
   --text-main: #FFFFFF;
   --text-sub: #94A3B8; 
   --line-color: rgba(255, 255, 255, 0.12);
@@ -67,7 +65,7 @@ body.dark-mode {
 }
 
 /* ============================================================== */
-/* --- GLOBAL RESETS & AMBIENT LIGHTING --- */
+/* --- GLOBAL RESETS & HORIZON GRADIENT ENGINE --- */
 /* ============================================================== */
 
 html { scroll-behavior: smooth; }
@@ -77,35 +75,38 @@ body {
   margin: 0;
   font-family: 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 300; 
-  
-  /* Anchors the gradient so it doesn't stretch or band when scrolling */
-  background: var(--page-bg) !important;
-  background-attachment: fixed !important;
-  
+  background-color: var(--page-bg) !important;
   color: var(--text-main);
   line-height: 1.5;
   font-size: 1rem;
-  transition: color 0.4s ease; /* Background image gradients cannot be CSS transitioned natively */
+  transition: color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Solid Ambient Orbs (No Gradients) to make the glass refract color */
-body::before, body::after {
-  content: ''; position: fixed; border-radius: 50%; z-index: -1;
-  filter: blur(140px); opacity: 0.3; pointer-events: none;
-  transition: opacity 0.5s ease;
-}
+/* 
+  Full-Screen Horizon Background Layer:
+  - Locks the horizon to the bottom edge of the screen across mobile, desktop, and resizing.
+  - Light Mode: Subtle Sunrise (soft morning light transitioning to pale warmth at the horizon).
+  - Dark Mode: Sunset (deep evening sky fading down to a warm horizon glow).
+*/
 body::before {
-  top: -10%; left: -10%; width: 50vw; height: 50vw;
-  background-color: var(--c-purple);
+  content: ''; 
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh; 
+  z-index: -1;
+  pointer-events: none;
+  transition: background 0.5s ease;
+  background: linear-gradient(180deg, #E8F0FE 0%, #F4F7FB 60%, #FFF3EC 100%);
 }
-body::after {
-  bottom: -10%; right: -10%; width: 60vw; height: 60vw;
-  background-color: var(--c-yellow);
+
+body.dark-mode::before {
+  background: linear-gradient(180deg, #0B101A 0%, #151C2C 55%, #301A24 100%);
 }
-body.dark-mode::before, body.dark-mode::after { opacity: 0.15; }
 
 h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; margin-top: 0; }
 strong, b { font-weight: 600; }
