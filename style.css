@@ -330,3 +330,96 @@ body.dark-mode::before, body.dark-mode::after { opacity: 0.2; }
   .year-bubble { width: 50px; height: 50px; font-size: 14px; }
   .theme-toggle { right: 16px; }
 }
+.floating-dock {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content; /* Force the dock to shrink-wrap its contents perfectly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* Expanded gap */
+  padding: 1rem; /* Significantly expanded padding for more breathing room */
+  border-radius: 999px;
+  z-index: 1000;
+  background: var(--glass-nav) !important;
+  backdrop-filter: var(--blur-amt) saturate(180%) !important;
+  -webkit-backdrop-filter: var(--blur-amt) saturate(180%) !important;
+  border: 0.0625rem solid var(--glass-nav-border) !important;
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+body.dark-mode .floating-dock { 
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08); 
+}
+
+.dock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5rem; 
+  padding: 0 1rem; /* Compact padding for mobile icons */
+  min-width: 3.5rem; /* Ensures square/pill balance on mobile */
+  border-radius: 999px;
+  color: var(--text-sub);
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.dock-btn .material-symbols-rounded { 
+  font-size: 1.875rem; 
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+  flex-shrink: 0;
+}
+
+.dock-label {
+  display: none; /* Hidden on mobile */
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* DESKTOP EXPANSION STRATEGY */
+@media (min-width: 48rem) {
+  .dock-btn {
+    width: auto; /* Shrink-wraps perfectly around icon + full text */
+    padding: 0 1.25rem; /* Balanced internal padding */
+    gap: 0.5rem; /* Precise spacing between icon and text */
+  }
+  .dock-label {
+    display: block; /* Reveals text cleanly without clipping */
+  }
+}
+
+/* --- THE GLASS-ON-GLASS ACTIVE STATE --- */
+.dock-btn.active {
+  background: color-mix(in srgb, var(--secondary-accent) 15%, transparent);
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 0.0625rem solid color-mix(in srgb, var(--secondary-accent) 30%, rgba(255, 255, 255, 0.6));
+  color: var(--secondary-accent);
+  box-shadow: 0 0.25rem 0.75rem color-mix(in srgb, var(--secondary-accent) 15%, transparent), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.dock-btn.active .material-symbols-rounded { 
+  font-variation-settings: 'FILL' 1; 
+}
+
+body.dark-mode .dock-btn.active {
+  background: color-mix(in srgb, var(--secondary-accent) 20%, rgba(0, 0, 0, 0.2));
+  border-color: color-mix(in srgb, var(--secondary-accent) 40%, rgba(255, 255, 255, 0.15));
+  color: color-mix(in srgb, var(--secondary-accent) 80%, #FFFFFF);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.3), 
+              inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dock-btn:not(.active):hover { 
+    color: var(--text-main); 
+    background: var(--toggle-bg); 
+  }
+}
