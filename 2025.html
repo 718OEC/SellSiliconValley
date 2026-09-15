@@ -16,7 +16,7 @@
   <div id="market-report-main">
     
     <div class="fab-wrapper" id="fabWrapper">
-        <ul class="fab-menu">
+        <ul class="fab-menu glass-inner">
             <li><a href="#top" onclick="toggleFab()">Top</a></li>
             <li><a href="#prices" onclick="toggleFab()">Price Trends</a></li>
             <li><a href="#speed" onclick="toggleFab()">Speed (DOM)</a></li>
@@ -33,7 +33,7 @@
 
     <div class="report-container">
       <header class="hero">
-          <button class="theme-toggle" onclick="toggleTheme()">
+          <button class="theme-toggle glass-inner" onclick="toggleTheme()">
               <span class="material-symbols-rounded">dark_mode</span>
           </button>
           <h1>2025: The AI Bubble Peak?</h1>
@@ -70,16 +70,15 @@
           <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br>(Charts are interactive)</p>
           
           <div class="legend-row">
-              <!-- UPDATED: Using CSS classes for dot colors instead of inline variables -->
-              <div class="legend-pill"><div class="dot blue"></div> Houses</div>
-              <div class="legend-pill"><div class="dot purple"></div> Condos</div>
-              <div class="legend-pill"><div class="dot teal"></div> Townhomes</div>
-          </div>
+    <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
+    <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
+    <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
+</div>
           
           <div id="price_chart" class="chart-canvas"></div>
           
           <!-- UPDATED: Using insight-block class instead of messy inline styling -->
-          <div class="insight-block">
+          <div class="insight-block glass-inner">
              <h3>History Rhymes: The AI Parallel</h3>
              <p>
                Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
@@ -142,14 +141,14 @@
               <div class="timeline-line"></div>
 
               <div class="timeline-node">
-                  <div class="year-bubble">2000</div>
+                  <div class="year-bubble glass-inner">2000</div>
                   <div class="node-content">
                       <div class="node-title">The Dot-Com Peak</div>
                       <p class="node-text">NASDAQ hit its all-time high, fueling immense wealth and home buying.</p>
                   </div>
               </div>
               <div class="timeline-node">
-                  <div class="year-bubble">2001</div>
+                  <div class="year-bubble glass-inner">2001</div>
                   <div class="node-content">
                       <div class="node-title">The Dot-Com Bust</div>
                       <p class="node-text">The tech bubble burst. Stock portfolios vanished, and home prices took a hit as the local economy contracted.</p>
@@ -157,14 +156,14 @@
               </div>
               
               <div class="timeline-node">
-                  <div class="year-bubble">2005</div>
+                  <div class="year-bubble glass-inner glass-inner">2005</div>
                   <div class="node-content">
                       <div class="node-title">Housing Bubble</div>
                       <p class="node-text">Predatory lending caused an influx of home purchases by unqualified buyers. All leading up to a bubble</p>
                   </div>
               </div>
               <div class="timeline-node">
-                  <div class="year-bubble">2008</div>
+                  <div class="year-bubble glass-inner">2008</div>
                   <div class="node-content">
                       <div class="node-title">The Great Recession</div>
                       <p class="node-text">Foreclosures spiked. Prices bottomed out in early 2009 at ~$500k.</p>
@@ -175,7 +174,7 @@
               </div>
 
               <div class="timeline-node">
-                  <div class="year-bubble">2012</div>
+                  <div class="year-bubble glass-inner">2012</div>
                   <div class="node-content">
                       <div class="node-title">Facebook IPO</div>
                       <p class="node-text">The first major "Tech IPO" of the new era minted millionaires overnight.</p>
@@ -183,7 +182,7 @@
               </div>
 
               <div class="timeline-node">
-                  <div class="year-bubble">2015</div>
+                  <div class="year-bubble glass-inner">2015</div>
                   <div class="node-content">
                       <div class="node-title">Million Dollar Floor</div>
                       <p class="node-text">March medians crossed the $1M threshold, paving way to the housing market we know today.</p>
@@ -191,28 +190,28 @@
               </div>
 
               <div class="timeline-node">
-                  <div class="year-bubble">2018</div>
+                  <div class="year-bubble glass-inner">2018</div>
                   <div class="node-content">
                       <div class="node-title">5% scare</div>
                       <p class="node-text">Mortgage rates hit 5% once more, causing fear and a market correction</p>
                   </div>
               </div>
               <div class="timeline-node">
-                  <div class="year-bubble">2020</div>
+                  <div class="year-bubble glass-inner">2020</div>
                   <div class="node-content">
                       <div class="node-title">The Great Pivot</div>
                       <p class="node-text">Remote work made the suburbs hotter than ever.</p>
                   </div>
               </div>
               <div class="timeline-node">
-                  <div class="year-bubble">2021</div>
+                  <div class="year-bubble glass-inner">2021</div>
                   <div class="node-content">
                       <div class="node-title">Free money</div>
                       <p class="node-text">Interest rates hit historic lows (sub-3%). Buyers had infinite purchasing power, driving the steepest appreciation curve in history.</p>
                   </div>
               </div>
               <div class="timeline-node">
-                  <div class="year-bubble">2022</div>
+                  <div class="year-bubble glass-inner">2022</div>
                   <div class="node-content">
                       <div class="node-title">The Rate Shock</div>
                       <p class="node-text">The Fed tripled rates. Prices corrected sharply in Q3/Q4.</p>
@@ -223,7 +222,7 @@
 
       <section id="strategy" class="glass strategy-container">
           <h2>2026 Strategy</h2>
-          <div class="ios-toggle">
+          <div class="ios-toggle glass-inner">
               <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
               <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
           </div>
