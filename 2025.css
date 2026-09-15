@@ -6,11 +6,11 @@
 
 :root {
   /* Extracted Jewel Tones (From user themes) */
-  --c-orange: #F86516; /* Index */
-  --c-green:  #71B300; /* Barter */
-  --c-yellow: #FFB60A; /* Carpool */
-  --c-navy:   #14325F; /* Club */
-  --c-purple: #5F259F; /* Transfer */
+  --c-orange: #F86516; 
+  --c-green:  #71B300; 
+  --c-yellow: #FFB60A; 
+  --c-navy:   #14325F; 
+  --c-purple: #5F259F; 
 
   /* Extracted Ambient RGBs */
   --g-blue:   183, 204, 234;
@@ -32,8 +32,8 @@
 
   /* --- LAYER 1: BASE GLASS (Cards, Charts, Containers) --- */
   --glass-base-rgb: var(--g-blue);
-  --glass-panel: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-panel: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.8);
   --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.9);
   --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
 
@@ -46,26 +46,26 @@
 
 /* --- DARK MODE SMART OVERRIDES --- */
 body.dark-mode {
-  --page-bg: #0B101A; 
+  --page-bg: #0B101A; /* Solid dark background */
   --text-main: #FFFFFF;
   --text-sub: #94A3B8; 
   --line-color: rgba(255, 255, 255, 0.12);
   
-  /* Layer 1 (Dark) */
-  --glass-panel: rgba(var(--glass-base-rgb), 0.05); 
-  --glass-border: rgba(var(--glass-base-rgb), 0.2);
-  --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  /* Layer 1 (Dark) - Increased opacity/brightness for solid background legibility */
+  --glass-panel: rgba(25, 32, 45, 0.85); 
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.05);
   --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); 
   
   /* Layer 2 (Dark) */
-  --glass-inner: rgba(var(--glass-base-rgb), 0.12);
-  --glass-inner-border: rgba(var(--glass-base-rgb), 0.35);
-  --glass-inner-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  --glass-inner: rgba(255, 255, 255, 0.08);
+  --glass-inner-border: rgba(255, 255, 255, 0.2);
+  --glass-inner-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   --glass-inner-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* ============================================================== */
-/* --- GLOBAL RESETS & HORIZON GRADIENT ENGINE --- */
+/* --- GLOBAL RESETS --- */
 /* ============================================================== */
 
 html { scroll-behavior: smooth; }
@@ -79,33 +79,10 @@ body {
   color: var(--text-main);
   line-height: 1.5;
   font-size: 1rem;
-  transition: color 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   position: relative;
-}
-
-/* 
-  Full-Screen Horizon Background Layer:
-  - Locks the horizon to the bottom edge of the screen across mobile, desktop, and resizing.
-  - Light Mode: Subtle Sunrise (soft morning light transitioning to pale warmth at the horizon).
-  - Dark Mode: Sunset (deep evening sky fading down to a warm horizon glow).
-*/
-body::before {
-  content: ''; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100vw; 
-  height: 100vh; 
-  z-index: -1;
-  pointer-events: none;
-  transition: background 0.5s ease;
-  background: linear-gradient(180deg, #E8F0FE 0%, #F4F7FB 60%, #FFF3EC 100%);
-}
-
-body.dark-mode::before {
-  background: linear-gradient(180deg, #0B101A 0%, #151C2C 55%, #301A24 100%);
 }
 
 h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; margin-top: 0; }
@@ -260,37 +237,6 @@ strong, b { font-weight: 600; }
 .sig-img { width: 7.5rem; height: 7.5rem; border-radius: 50%; object-fit: cover; box-shadow: var(--glass-shadow); border: 2px solid var(--glass-border); }
 
 /* ============================================================== */
-/* --- FAB (Solid Gem Look) --- */
-/* ============================================================== */
-
-.fab-wrapper { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; }
-
-/* The FAB is treated like a polished physical gem */
-.fab-btn {
-  width: 3.75rem; height: 3.75rem; border-radius: 50%;
-  background-color: var(--c-purple); color: #FFFFFF;
-  border: 1px solid rgba(255,255,255,0.4); 
-  box-shadow: 0 8px 24px rgba(95, 37, 159, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.fab-btn:hover { transform: scale(1.08); }
-
-.fab-menu {
-  position: absolute; bottom: 4.5rem; right: 0;
-  padding: 0.5rem; border-radius: 1.25rem;
-  list-style: none; width: 14rem; opacity: 0; pointer-events: none; margin: 0;
-  transform: translateY(1rem) scale(0.95); transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.fab-wrapper.active .fab-menu { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
-.fab-menu li a {
-  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
-  color: var(--text-main); text-decoration: none; font-size: 1rem; font-weight: 500;
-  border-radius: 0.75rem; transition: background 0.2s, color 0.2s;
-}
-.fab-menu li a:hover { background: color-mix(in srgb, var(--c-purple) 15%, transparent); color: var(--c-purple); }
-
-/* ============================================================== */
 /* --- INTERACTIVE HOVER STATES --- */
 /* ============================================================== */
 
@@ -317,5 +263,4 @@ strong, b { font-weight: 600; }
   .timeline-line { left: 2.625rem; }
   .year-bubble { width: 3rem; height: 3rem; font-size: 0.875rem; }
   .theme-toggle { right: 1rem; }
-  .fab-wrapper { bottom: 1.5rem; right: 1.5rem; }
 }
