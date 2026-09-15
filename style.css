@@ -21,58 +21,6 @@
   --glass-panel: rgba(255, 255, 255, 0.45);
   --glass-border: rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  --glass-inset: inset 0 1px 1px rgba(255, 255, 255, 0.4);
-  --blur-amt: blur(40px) saturate(150%); 
-      
-  /* UI Elements */
-  --toggle-bg: rgba(255, 255, 255, 0.25);
-  --toggle-thumb: #FFFFFF;
-  --line-color: rgba(0, 0, 0, 0.1);
-
-  /* Engine Variables (Bridging Index & Report styles) */
-  --primary-accent: var(--text-main);
-  --secondary-accent: var(--a-blue); 
-  --accent-text: #FFFFFF;
-}
-
-/* ============================================================== */
-/* --- DARK MODE LEGIBILITY --- */
-/* ============================================================== */
-
-body.dark-mode {
-  --page-bg: #000000; 
-  --text-main: #FFFFFF; 
-  --text-sub: #98989D;  
-      
-  --glass-panel: rgba(28, 28, 30, 0.45); 
-  --glass-border: rgba(255, 255, 255, 0.15); 
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --glass-inset: inset 0 1Here is the updated CSS. All gradients have been removed (the background blobs now use solid colors that blur to create ambient light), and I have applied the liquid glass properties—including semi-transparent backgrounds, backdrop-filters, and glass borders—to all cards, buttons, toggles, and UI panels.
-
-```css
-@import url('[https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lexend:wght@300;400;600;700&display=swap](https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lexend:wght@300;400;600;700&display=swap)');
-
-/* ============================================================== */
-/* --- CUSTOM PROPERTIES (Apple HIG Liquid Glass) --- */
-/* ============================================================== */
-
-:root {
-  /* Apple Brand Palette */
-  --a-blue: #007AFF;      
-  --a-purple: #AF52DE;    
-  --a-teal: #30B0C7;      
-  --a-green: #34C759;
-  --a-red: #FF3B30;
-      
-  /* Light Mode Default */
-  --page-bg: #F5F5F7;
-  --text-main: #1D1D1F;
-  --text-sub: #86868B;
-      
-  /* True iOS Glass Effect - Opacity lowered slightly for better glass transparency */
-  --glass-panel: rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --blur-amt: blur(40px) saturate(150%); 
       
   /* UI Elements */
@@ -244,6 +192,7 @@ body.dark-mode::before, body.dark-mode::after { opacity: 0.2; }
 .chart-canvas { width: 100%; height: 360px; min-height: 360px; }
   
 .legend-row { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+
 /* Legend Pills (Converted to Glass) */
 .legend-pill { 
   display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; 
