@@ -5,7 +5,7 @@
 /* ============================================================== */
 
 :root {
-  /* Extracted Jewel Tones (From user themes) */
+  /* Extracted Jewel Tones */
   --c-orange: #F86516; 
   --c-green:  #71B300; 
   --c-yellow: #FFB60A; 
@@ -17,7 +17,7 @@
   --g-pink:   228, 160, 183;
   --g-yellow: 253, 224, 139;
 
-  /* Global Defaults */
+  /* Global Defaults (Solid Backgrounds) */
   --page-bg: #F4F7FB; 
   --text-main: #1D1D1F;
   --text-sub: #5A6A85;
@@ -29,11 +29,12 @@
   /* Shared Glass Properties */
   --blur-amt: blur(24px) saturate(180%); 
   --line-color: rgba(0, 0, 0, 0.08);
+  --toggle-bg: rgba(0, 0, 0, 0.04);
 
   /* --- LAYER 1: BASE GLASS (Cards, Charts, Containers) --- */
   --glass-base-rgb: var(--g-blue);
-  --glass-panel: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.8);
+  --glass-panel: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.7);
   --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.9);
   --glass-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
 
@@ -50,17 +51,18 @@ body.dark-mode {
   --text-main: #FFFFFF;
   --text-sub: #94A3B8; 
   --line-color: rgba(255, 255, 255, 0.12);
+  --toggle-bg: rgba(255, 255, 255, 0.08); 
   
-  /* Layer 1 (Dark) - Increased opacity/brightness for solid background legibility */
-  --glass-panel: rgba(25, 32, 45, 0.85); 
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  /* Layer 1 (Dark) - Dimmed Ghostly Glass for solid backgrounds */
+  --glass-panel: rgba(var(--glass-base-rgb), 0.08); 
+  --glass-border: rgba(var(--glass-base-rgb), 0.25);
+  --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); 
   
-  /* Layer 2 (Dark) */
-  --glass-inner: rgba(255, 255, 255, 0.08);
-  --glass-inner-border: rgba(255, 255, 255, 0.2);
-  --glass-inner-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  /* Layer 2 (Dark) - Elevated Glass on Glass */
+  --glass-inner: rgba(var(--glass-base-rgb), 0.15);
+  --glass-inner-border: rgba(var(--glass-base-rgb), 0.4);
+  --glass-inner-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.2);
   --glass-inner-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
@@ -121,6 +123,16 @@ strong, b { font-weight: 600; }
 .hero { text-align: center; margin-bottom: 4rem; padding: 2.5rem 0; position: relative; display: flex; flex-direction: column; align-items: center; }
 .hero h1 { font-size: clamp(2rem, 6vw, 4rem); color: var(--text-main); margin: 0 0 1rem; letter-spacing: -0.02em; line-height: 1.1; }
 .hero p { font-size: 1.125rem; font-weight: 400; color: var(--text-sub); max-width: 600px; margin: 0 auto; }
+
+/* Theme Toggle (Inner Glass) */
+.theme-toggle {
+  position: absolute; top: 0; right: 0;
+  color: var(--text-main);
+  width: 3rem; height: 3rem; border-radius: 50%; 
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.theme-toggle:hover { transform: scale(1.1); }
 
 /* ============================================================== */
 /* --- FLEX GRID ENGINE (For Stats & Cards) --- */
@@ -227,6 +239,37 @@ strong, b { font-weight: 600; }
 .sig-img { width: 7.5rem; height: 7.5rem; border-radius: 50%; object-fit: cover; box-shadow: var(--glass-shadow); border: 2px solid var(--glass-border); }
 
 /* ============================================================== */
+/* --- FAB (Solid Gem Look) --- */
+/* ============================================================== */
+
+.fab-wrapper { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; }
+
+/* The FAB is treated like a polished physical gem */
+.fab-btn {
+  width: 3.75rem; height: 3.75rem; border-radius: 50%;
+  background-color: var(--c-purple); color: #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.4); 
+  box-shadow: 0 8px 24px rgba(95, 37, 159, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fab-btn:hover { transform: scale(1.08); }
+
+.fab-menu {
+  position: absolute; bottom: 4.5rem; right: 0;
+  padding: 0.5rem; border-radius: 1.25rem;
+  list-style: none; width: 14rem; opacity: 0; pointer-events: none; margin: 0;
+  transform: translateY(1rem) scale(0.95); transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.fab-wrapper.active .fab-menu { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
+.fab-menu li a {
+  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+  color: var(--text-main); text-decoration: none; font-size: 1rem; font-weight: 500;
+  border-radius: 0.75rem; transition: background 0.2s, color 0.2s;
+}
+.fab-menu li a:hover { background: color-mix(in srgb, var(--c-purple) 15%, transparent); color: var(--c-purple); }
+
+/* ============================================================== */
 /* --- INTERACTIVE HOVER STATES --- */
 /* ============================================================== */
 
@@ -252,4 +295,6 @@ strong, b { font-weight: 600; }
   .timeline-container { padding-left: 0.75rem; }
   .timeline-line { left: 2.625rem; }
   .year-bubble { width: 3rem; height: 3rem; font-size: 0.875rem; }
+  .theme-toggle { right: 1rem; }
+  .fab-wrapper { bottom: 1.5rem; right: 1.5rem; }
 }
