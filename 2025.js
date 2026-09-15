@@ -345,19 +345,6 @@ function setStrategy(type, btn) {
     document.getElementById('strat-' + type).classList.add('active');
 }
 
-// --- 3. FAB & THEME ---
-function toggleFab() {
-    const wrap = document.getElementById('fabWrapper');
-    const icon = document.getElementById('fabIcon');
-    wrap.classList.toggle('active');
-    icon.textContent = wrap.classList.contains('active') ? 'close' : 'map';
-}
-
-function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    drawCharts();
-}
-  
 // Auto-detect system dark mode
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
