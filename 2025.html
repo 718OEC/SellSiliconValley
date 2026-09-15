@@ -40,7 +40,8 @@
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
 
-      <div class="stats-row">
+      <!-- UPDATED: Replaced stats-row with flex-grid -->
+      <div class="flex-grid">
           <div class="glass stat-box">
               <div class="stat-label">House Median</div>
               <div class="stat-val">$2.0M</div>
@@ -69,16 +70,18 @@
           <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br>(Charts are interactive)</p>
           
           <div class="legend-row">
-              <div class="legend-pill"><div class="dot" style="background:var(--a-blue)"></div> Houses</div>
-              <div class="legend-pill"><div class="dot" style="background:var(--a-purple)"></div> Condos</div>
-              <div class="legend-pill"><div class="dot" style="background:var(--a-teal)"></div> Townhomes</div>
+              <!-- UPDATED: Using CSS classes for dot colors instead of inline variables -->
+              <div class="legend-pill"><div class="dot blue"></div> Houses</div>
+              <div class="legend-pill"><div class="dot purple"></div> Condos</div>
+              <div class="legend-pill"><div class="dot teal"></div> Townhomes</div>
           </div>
           
           <div id="price_chart" class="chart-canvas"></div>
           
-          <div style="padding: 24px; background: var(--toggle-bg); border-radius: 12px; border-left: 5px solid var(--a-blue); margin-top:20px;">
-             <h3 style="margin:0 0 12px 0; font-size:20px;">History Rhymes: The AI Parallel</h3>
-             <p style="margin:0; font-size:15px; color: var(--text-main);">
+          <!-- UPDATED: Using insight-block class instead of messy inline styling -->
+          <div class="insight-block">
+             <h3>History Rhymes: The AI Parallel</h3>
+             <p>
                Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
                <br><br>
                <strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty.
@@ -91,9 +94,9 @@
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
           
           <div class="legend-row">
-              <div class="legend-pill"><div class="dot" style="background:var(--a-blue)"></div> Houses</div>
-              <div class="legend-pill"><div class="dot" style="background:var(--a-purple)"></div> Condos</div>
-              <div class="legend-pill"><div class="dot" style="background:var(--a-teal)"></div> Townhomes</div>
+              <div class="legend-pill"><div class="dot blue"></div> Houses</div>
+              <div class="legend-pill"><div class="dot purple"></div> Condos</div>
+              <div class="legend-pill"><div class="dot teal"></div> Townhomes</div>
           </div>
           
           <div id="dom_chart" class="chart-canvas"></div>
@@ -107,21 +110,28 @@
 
       <section id="forecast">
           <h2 style="margin-left: 20px; margin-bottom: 20px; font-weight: 600;">2026 Forecast</h2>
-          <div class="grid-3">
-              <div class="card-small">
-                  <div class="card-label">Interest Rates</div>
-                  <h3>The Pivot Point</h3>
-                  <p style="font-size:16px; color:var(--text-sub)">Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
+          <!-- UPDATED: Replaced grid-3 with flex-grid -->
+          <div class="flex-grid">
+              <div class="glass card-small">
+                  <div>
+                      <div class="card-label">Interest Rates</div>
+                      <h3>The Pivot Point</h3>
+                  </div>
+                  <p>Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
               </div>
-              <div class="card-small">
-                  <div class="card-label">Inventory</div>
-                  <h3>Golden Handcuffs</h3>
-                  <p style="font-size:16px; color:var(--text-sub)">Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
+              <div class="glass card-small">
+                  <div>
+                      <div class="card-label">Inventory</div>
+                      <h3>Golden Handcuffs</h3>
+                  </div>
+                  <p>Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
               </div>
-              <div class="card-small">
-                  <div class="card-label">Prices</div>
-                  <h3>4-8% Growth</h3>
-                  <p style="font-size:16px; color:var(--text-sub)">If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
+              <div class="glass card-small">
+                  <div>
+                      <div class="card-label">Prices</div>
+                      <h3>4-8% Growth</h3>
+                  </div>
+                  <p>If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
               </div>
           </div>
       </section>
@@ -219,15 +229,17 @@
           </div>
 
           <div id="strat-buy" class="strat-content active">
-              <h3 style="color:var(--a-green)">The "Winter Floor" Trade</h3>
-              <p style="font-size:20px; color:var(--text-sub)">
+              <!-- UPDATED: Replaced removed inline apple colors with dynamic status colors -->
+              <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
+              <p style="font-size:1.25rem; color:var(--text-sub)">
                   Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".
               </p>
           </div>
 
           <div id="strat-sell" class="strat-content">
-              <h3 style="color:var(--a-blue)">Prep for Peak</h3>
-              <p style="font-size:20px; color:var(--text-sub)">
+              <!-- UPDATED: Replaced removed inline apple colors with dynamic status colors -->
+              <h3 style="color:var(--secondary-accent)">Prep for Peak</h3>
+              <p style="font-size:1.25rem; color:var(--text-sub)">
                   Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.
               </p>
           </div>
