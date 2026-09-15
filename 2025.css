@@ -239,37 +239,6 @@ strong, b { font-weight: 600; }
 .sig-img { width: 7.5rem; height: 7.5rem; border-radius: 50%; object-fit: cover; box-shadow: var(--glass-shadow); border: 2px solid var(--glass-border); }
 
 /* ============================================================== */
-/* --- FAB (Solid Gem Look) --- */
-/* ============================================================== */
-
-.fab-wrapper { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; }
-
-/* The FAB is treated like a polished physical gem */
-.fab-btn {
-  width: 3.75rem; height: 3.75rem; border-radius: 50%;
-  background-color: var(--c-purple); color: #FFFFFF;
-  border: 1px solid rgba(255,255,255,0.4); 
-  box-shadow: 0 8px 24px rgba(95, 37, 159, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.fab-btn:hover { transform: scale(1.08); }
-
-.fab-menu {
-  position: absolute; bottom: 4.5rem; right: 0;
-  padding: 0.5rem; border-radius: 1.25rem;
-  list-style: none; width: 14rem; opacity: 0; pointer-events: none; margin: 0;
-  transform: translateY(1rem) scale(0.95); transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.fab-wrapper.active .fab-menu { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
-.fab-menu li a {
-  display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
-  color: var(--text-main); text-decoration: none; font-size: 1rem; font-weight: 500;
-  border-radius: 0.75rem; transition: background 0.2s, color 0.2s;
-}
-.fab-menu li a:hover { background: color-mix(in srgb, var(--c-purple) 15%, transparent); color: var(--c-purple); }
-
-/* ============================================================== */
 /* --- INTERACTIVE HOVER STATES --- */
 /* ============================================================== */
 
