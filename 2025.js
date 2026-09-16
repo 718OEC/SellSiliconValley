@@ -374,27 +374,9 @@ function drawCharts() {
     const cOrange = isDark ? '#FFCAB3' : '#F86516'; // Condos
     const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
 
-    const commonOptions = {
-        backgroundColor: 'transparent',
-        legend: { position: 'none' },
-        chartArea: { width: '85%', height: '82%' }, // Room for the Y-Axis labels
-        hAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
-            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        vAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, 
-            gridlines: { color: gridC }, 
-            baselineColor: gridC         
-        },
-        lineWidth: 3, // slightly thinner for HIG elegance
-        curveType: 'function',
-        animation: { startup: true, duration: 1000, easing: 'out' }
-    };
-
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
 
-   // --- 2. Price Chart ---
+    // --- 2. Price Chart ---
     const dataP = new google.visualization.DataTable();
     dataP.addColumn('date', 'Date');
     dataP.addColumn('number', 'Houses');
@@ -405,12 +387,27 @@ function drawCharts() {
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
     
-    // Safely apply the Millions format without using the "..." spread operator
-    const priceOptions = Object.assign({}, commonOptions, {
-        colors: [cPurple, cOrange, cGreen],
-        vAxis: Object.assign({}, commonOptions.vAxis, { format: '$#,##0.0,,"M"' }) 
+    // PRICE CHART OPTIONS (Millions format applies ONLY here)
+    chartP.draw(dataP, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC,
+            // FIXED: Using single quotes for the 'M' so Google Charts doesn't crash
+            format: "$#,##0.0,,'M'" 
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple, cOrange, cGreen]
     });
-    chartP.draw(dataP, priceOptions);
 
     // --- 3. DOM Chart ---
     const dataD = new google.visualization.DataTable();
@@ -423,9 +420,25 @@ function drawCharts() {
 
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
     
-    // Safely merge options
-    const domOptions = Object.assign({}, commonOptions, { colors: [cPurple, cOrange, cGreen] });
-    chartD.draw(dataD, domOptions);
+    // STANDARD OPTIONS (No millions formatting for days on market)
+    chartD.draw(dataD, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple, cOrange, cGreen]
+    });
 
     // --- 4. Volume Chart ---
     const dataV = new google.visualization.DataTable();
@@ -436,9 +449,26 @@ function drawCharts() {
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
     
-    // Safely merge options
-    const volOptions = Object.assign({}, commonOptions, { colors: [cPurple], areaOpacity: 0.1 });
-    chartV.draw(dataV, volOptions);
+    // VOLUME OPTIONS
+    chartV.draw(dataV, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple], 
+        areaOpacity: 0.1
+    });
 }
 
 window.addEventListener('resize', drawCharts);
