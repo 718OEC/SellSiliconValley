@@ -375,6 +375,9 @@ function drawCharts() {
     const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
+    
+    // NEW: Native Google formatter ensures tooltips get the $ sign and shorthand (e.g. $1.3M)
+    const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
 
     // --- 2. Price Chart ---
     const dataP = new google.visualization.DataTable();
@@ -384,10 +387,15 @@ function drawCharts() {
     dataP.addColumn('number', 'Townhomes');
     dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
     dateFmt.format(dataP, 0);
+    
+    // Format columns so the hover tooltips show clean currency strings
+    currencyFmt.format(dataP, 1);
+    currencyFmt.format(dataP, 2);
+    currencyFmt.format(dataP, 3);
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
     
-    // PRICE CHART OPTIONS (Millions format applies ONLY here)
+    // PRICE CHART OPTIONS
     chartP.draw(dataP, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
@@ -400,7 +408,7 @@ function drawCharts() {
             textStyle: { color: textC, fontSize: 11 }, 
             gridlines: { color: gridC }, 
             baselineColor: gridC,
-
+            format: 'short' // FIXED: Native parameter safely auto-abbreviates to 1M, 500K, etc.
         },
         lineWidth: 3, 
         curveType: 'function',
