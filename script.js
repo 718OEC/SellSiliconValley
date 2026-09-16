@@ -1,19 +1,4 @@
-// --- 1. TOGGLE LOGIC ---
-function setStrategy(type, btn) {
-    document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.strat-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('strat-' + type).classList.add('active');
-}
-
-// --- 2. FAB & THEME ---
-function toggleFab() {
-    const wrap = document.getElementById('fabWrapper');
-    const icon = document.getElementById('fabIcon');
-    wrap.classList.toggle('active');
-    icon.textContent = wrap.classList.contains('active') ? 'close' : 'map';
-}
-
+// --- THEME ---
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
     drawCharts(); // Redraw charts to update text colors
@@ -24,7 +9,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     document.body.classList.add('dark-mode');
 }
 
-// --- 3. CHARTS ---
+// --- CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
