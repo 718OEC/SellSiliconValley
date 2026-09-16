@@ -400,8 +400,7 @@ function drawCharts() {
             textStyle: { color: textC, fontSize: 11 }, 
             gridlines: { color: gridC }, 
             baselineColor: gridC,
-            // FIXED: Using single quotes for the 'M' so Google Charts doesn't crash
-            format: "$#,##0.0,,'M'" 
+
         },
         lineWidth: 3, 
         curveType: 'function',
