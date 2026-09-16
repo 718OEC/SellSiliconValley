@@ -353,25 +353,27 @@ function drawCharts() {
 
     const isDark = document.body.classList.contains('dark-mode');
       
-    // FIXED: Lighter text color for charts in Dark Mode (#A1A1A6 is standard HIG)
+    // Text and gridline colors adapt to dark mode
     const textC = isDark ? '#A1A1A6' : '#86868B';
-      
-    const cPurple = '#5F259F'; // Houses
-    const cOrange = '#F86516'; // Condos
-    const cGreen  = '#71B300'; // Townhomes
-
+    const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    // DYNAMIC CHART COLORS
+    const cPurple = isDark ? '#C3A7D6' : '#5F259F'; // Houses
+    const cOrange = isDark ? '#FFCAB3' : '#F86516'; // Condos
+    const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
     const commonOptions = {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
-        chartArea: { width: '100%', height: '85%' },
+        chartArea: { width: '85%', height: '85%' }, // Shrunk width to make room for Y-axis labels
         hAxis: { 
             textStyle: { color: textC }, format: 'yyyy', 
             gridlines: { color: 'transparent' }, baselineColor: 'transparent'
         },
         vAxis: { 
-            textPosition: 'none', gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+            textStyle: { color: textC }, // Brought the text back
+            gridlines: { color: gridC }, // Added subtle gridlines
+            baselineColor: gridC         // Added a subtle baseline
         },
-        lineWidth: 4, // Slightly thicker line to look richer
+        lineWidth: 4, 
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' }
     };
