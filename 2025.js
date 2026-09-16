@@ -394,7 +394,7 @@ function drawCharts() {
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
 
-    // --- 2. Price Chart ---
+   // --- 2. Price Chart ---
     const dataP = new google.visualization.DataTable();
     dataP.addColumn('date', 'Date');
     dataP.addColumn('number', 'Houses');
@@ -405,16 +405,11 @@ function drawCharts() {
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
     
-    // Applying the Millions format ONLY to the price chart 
-    // The double comma (,,) divides the raw number by 1,000,000
-    const priceOptions = {
-        ...commonOptions,
+    // Safely apply the Millions format without using the "..." spread operator
+    const priceOptions = Object.assign({}, commonOptions, {
         colors: [cPurple, cOrange, cGreen],
-        vAxis: {
-            ...commonOptions.vAxis,
-            format: '$#,##0.0,,"M"' 
-        }
-    };
+        vAxis: Object.assign({}, commonOptions.vAxis, { format: '$#,##0.0,,"M"' }) 
+    });
     chartP.draw(dataP, priceOptions);
 
     // --- 3. DOM Chart ---
@@ -427,7 +422,10 @@ function drawCharts() {
     dateFmt.format(dataD, 0);
 
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
-    chartD.draw(dataD, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
+    
+    // Safely merge options
+    const domOptions = Object.assign({}, commonOptions, { colors: [cPurple, cOrange, cGreen] });
+    chartD.draw(dataD, domOptions);
 
     // --- 4. Volume Chart ---
     const dataV = new google.visualization.DataTable();
@@ -437,7 +435,10 @@ function drawCharts() {
     dateFmt.format(dataV, 0);
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
-    chartV.draw(dataV, { ...commonOptions, colors: [cPurple], areaOpacity: 0.1 });
+    
+    // Safely merge options
+    const volOptions = Object.assign({}, commonOptions, { colors: [cPurple], areaOpacity: 0.1 });
+    chartV.draw(dataV, volOptions);
 }
 
 window.addEventListener('resize', drawCharts);
