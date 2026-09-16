@@ -165,13 +165,49 @@ h2 { font-family: 'Lexend', sans-serif; font-weight: 600; letter-spacing: -0.02e
 .dot.orange { background-color: var(--c-orange); }
 .dot.green { background-color: var(--c-green); }
 
+/* Insight Blocks (True Liquid Glass) */
 .insight-block, .insight-box { 
-  border-radius: 1.25rem; border-left: 0.25rem solid var(--c-purple); 
-  padding: 1.5rem 2rem; margin-top: 2rem; 
+  border-radius: 1.25rem; 
+  padding: 1.5rem 2rem; 
+  margin-top: 2rem; 
+  position: relative;
+  overflow: hidden; /* Keeps the glow contained inside the glass */
 }
-.insight-block h3 { margin-bottom: 0.75rem; font-size: 1.25rem; color: var(--c-purple); font-weight: 600; font-family: 'Lexend', sans-serif; letter-spacing: -0.02em; }
-.insight-block p, .insight-box { font-size: 0.9375rem; color: var(--text-main); line-height: 1.6; }
-.insight-box { padding: 1rem 1.25rem; margin-top: 1rem; border-radius: 1rem; }
+
+/* Creates a soft, ambient purple glow on the left side instead of a harsh flat border */
+.insight-block::before, .insight-box::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rem;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--c-purple) 20%, transparent), transparent);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.insight-block h3 { 
+  margin-bottom: 0.75rem; 
+  font-size: 1.25rem; 
+  color: var(--c-purple); 
+  font-weight: 600; 
+  font-family: 'Lexend', sans-serif; 
+  letter-spacing: -0.02em; 
+}
+
+.insight-block p, .insight-box { 
+  font-size: 0.9375rem; 
+  color: var(--text-main); 
+  line-height: 1.6; 
+  margin: 0;
+}
+
+.insight-box { 
+  padding: 1rem 1.25rem; 
+  margin-top: 1rem; 
+  border-radius: 1rem; 
+}
 
 /* ============================================================== */
 /* --- NATIVE HIG SEGMENTED CONTROL (Strategy Toggles) --- */
