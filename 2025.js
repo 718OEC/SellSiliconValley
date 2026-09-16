@@ -337,51 +337,64 @@
   [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
+// --- 2. TOGGLE LOGIC ---
+function setStrategy(type, btn) {
+    document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.strat-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('strat-' + type).classList.add('active');
+}
 
+// --- 3. THEME ---
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    drawCharts();
+}
+  
 // Auto-detect system dark mode
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
 }
 
-// --- CHARTS ---
+// --- 4. CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
 function drawCharts() {
-    // Requires decadeData to be defined prior to this function
     if (typeof decadeData === 'undefined' || !decadeData || decadeData.length === 0) return;
 
     const isDark = document.body.classList.contains('dark-mode');
       
     // Text and gridline colors adapt to dark mode
     const textC = isDark ? '#A1A1A6' : '#86868B';
-    const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+    const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
+      
     // DYNAMIC CHART COLORS
     const cPurple = isDark ? '#C3A7D6' : '#5F259F'; // Houses
     const cOrange = isDark ? '#FFCAB3' : '#F86516'; // Condos
     const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
+
     const commonOptions = {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
-        chartArea: { width: '85%', height: '85%' }, // Shrunk width to make room for Y-axis labels
+        chartArea: { width: '85%', height: '82%' }, // Room for the Y-Axis labels
         hAxis: { 
-            textStyle: { color: textC }, format: 'yyyy', 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
             gridlines: { color: 'transparent' }, baselineColor: 'transparent'
         },
         vAxis: { 
-            textStyle: { color: textC }, // Brought the text back
-            gridlines: { color: gridC }, // Added subtle gridlines
-            baselineColor: gridC         // Added a subtle baseline
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC         
         },
-        lineWidth: 4, 
+        lineWidth: 3, // slightly thinner for HIG elegance
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' }
     };
 
-    // --- I. DEFINE FORMATTER ---
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
 
-    // --- II. Price Chart ---
+    // --- 2. Price Chart ---
     const dataP = new google.visualization.DataTable();
     dataP.addColumn('date', 'Date');
     dataP.addColumn('number', 'Houses');
@@ -391,9 +404,20 @@ function drawCharts() {
     dateFmt.format(dataP, 0);
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
-    chartP.draw(dataP, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
+    
+    // Applying the Millions format ONLY to the price chart 
+    // The double comma (,,) divides the raw number by 1,000,000
+    const priceOptions = {
+        ...commonOptions,
+        colors: [cPurple, cOrange, cGreen],
+        vAxis: {
+            ...commonOptions.vAxis,
+            format: '$#,##0.0,,"M"' 
+        }
+    };
+    chartP.draw(dataP, priceOptions);
 
-    // --- III. DOM Chart ---
+    // --- 3. DOM Chart ---
     const dataD = new google.visualization.DataTable();
     dataD.addColumn('date', 'Date');
     dataD.addColumn('number', 'Houses');
@@ -405,7 +429,7 @@ function drawCharts() {
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
     chartD.draw(dataD, { ...commonOptions, colors: [cPurple, cOrange, cGreen] });
 
-    // --- IV. Volume Chart ---
+    // --- 4. Volume Chart ---
     const dataV = new google.visualization.DataTable();
     dataV.addColumn('date', 'Date');
     dataV.addColumn('number', 'Volume');
@@ -414,7 +438,6 @@ function drawCharts() {
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
     chartV.draw(dataV, { ...commonOptions, colors: [cPurple], areaOpacity: 0.1 });
-    
-} // <--- THIS BRACE MATTERS
+}
 
 window.addEventListener('resize', drawCharts);
