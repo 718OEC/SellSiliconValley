@@ -341,7 +341,7 @@
 
 // --- 1. HISTORICAL TIMELINE DATA ---
 const historicalInsights = {
-    1997: { 
+    1998: { 
         title: "1997: The Taxpayer Relief Act", 
         text: "The government exempted up to $500,000 in capital gains on home sales. Paired with the dawn of the internet age, Silicon Valley real estate became a hyper-lucrative investment vehicle overnight." 
     },
