@@ -337,8 +337,6 @@
   [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
-
-
 // --- 1. HISTORICAL TIMELINE DATA ---
 const historicalInsights = {
     1998: { 
@@ -427,7 +425,6 @@ const historicalInsights = {
     }
 };
 
-// The default story it reverts to for empty years
 const defaultInsight = {
     title: "History Rhymes: The AI Parallel",
     text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
@@ -447,7 +444,6 @@ function toggleTheme() {
     drawCharts();
 }
   
-// Auto-detect system dark mode
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
 }
@@ -461,19 +457,19 @@ function drawCharts() {
 
     const isDark = document.body.classList.contains('dark-mode');
       
-    // Text and gridline colors adapt to dark mode
     const textC = isDark ? '#A1A1A6' : '#86868B';
     const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
       
-    // DYNAMIC CHART COLORS
-    const cPurple = isDark ? '#C3A7D6' : '#5F259F'; // Houses
-    const cOrange = isDark ? '#FFCAB3' : '#F86516'; // Condos
-    const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
+    // DYNAMIC CHART COLORS (Injected directly into the graph to match CSS)
+    const cRed    = isDark ? '#FF453A' : '#FF3B30'; // Houses
+    const cBlue   = isDark ? '#0A84FF' : '#007AFF'; // Condos
+    const cGreen  = isDark ? '#32D74B' : '#34C759'; // Townhomes
+    const cYellow = isDark ? '#FFD60A' : '#FFCC00'; // Volume
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
     const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
 
-    // --- 2. Price Chart ---
+    // --- Price Chart ---
     const dataP = new google.visualization.DataTable();
     dataP.addColumn('date', 'Date');
     dataP.addColumn('number', 'Houses');
@@ -505,27 +501,23 @@ function drawCharts() {
         lineWidth: 3, 
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' },
-        colors: [cPurple, cOrange, cGreen]
+        // Assigned Apple System Colors: [Red, Blue, Green]
+        colors: [cRed, cBlue, cGreen]
     });
 
-    // --- NEW: SCRUBBABLE CHART SYNC ENGINE ---
-    // Listens for a mouse hover (or finger tap) over the data points on the price chart
+    // SCRUBBABLE CHART SYNC
     google.visualization.events.addListener(chartP, 'onmouseover', function(e) {
         if (e.row != null) {
-            // Get the exact year the user is hovering over
             const hoveredDate = dataP.getValue(e.row, 0);
             const year = hoveredDate.getFullYear();
-
-            // Look up the year in our dictionary. If it doesn't exist, use the default AI story.
             const insight = historicalInsights[year] || defaultInsight;
             
-            // Inject the matching story directly into the icy glass box
             document.getElementById('insight-title').innerHTML = insight.title;
             document.getElementById('insight-text').innerHTML = insight.text;
         }
     });
 
-    // --- 3. DOM Chart ---
+    // --- DOM Chart ---
     const dataD = new google.visualization.DataTable();
     dataD.addColumn('date', 'Date');
     dataD.addColumn('number', 'Houses');
@@ -552,10 +544,11 @@ function drawCharts() {
         lineWidth: 3, 
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' },
-        colors: [cPurple, cOrange, cGreen]
+        // Assigned Apple System Colors: [Red, Blue, Green]
+        colors: [cRed, cBlue, cGreen]
     });
 
-    // --- 4. Volume Chart ---
+    // --- Volume Chart ---
     const dataV = new google.visualization.DataTable();
     dataV.addColumn('date', 'Date');
     dataV.addColumn('number', 'Volume');
@@ -580,8 +573,9 @@ function drawCharts() {
         lineWidth: 3, 
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' },
-        colors: [cPurple], 
-        areaOpacity: 0.1
+        // Assigned Apple System Color: [Yellow]
+        colors: [cYellow], 
+        areaOpacity: 0.15
     });
 }
 
