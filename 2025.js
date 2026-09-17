@@ -430,11 +430,6 @@ const defaultInsight = {
     text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
 };
 
-const defaultInsight = {
-    title: "History Rhymes: The AI Parallel",
-    text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
-};
-
 // --- 2. GLOBAL CHART FILTER STATE ---
 let currentPropertyFilter = 'All';
 
