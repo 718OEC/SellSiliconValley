@@ -25,11 +25,14 @@
   <div id="market-report-main">
 
     <div class="report-container">
+      
+      <!-- HERO (No Glass) -->
       <header class="hero">
           <h1>2025: The AI Bubble Peak?</h1>
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
 
+      <!-- STATS (Individual Glass Cards) -->
       <div class="flex-grid">
           <div class="glass stat-box">
               <div class="stat-label">House Median</div>
@@ -54,6 +57,7 @@
           </div>
       </div>
 
+      <!-- PRICE CHART SECTION (Master Glass) -->
       <section id="prices" class="glass chart-section">
           <h2>Price History & Retrospective</h2>
           <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br><strong>(Scrub the chart below to reveal historical events).</strong></p>
@@ -64,10 +68,8 @@
             <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
           </div>
           
-          <!-- The Interactive Chart -->
           <div id="price_chart" class="chart-canvas"></div>
           
-          <!-- NEW: The Dynamic Icy Glass Insight Box (Syncs with the chart) -->
           <div id="dynamic-insight" class="insight-block glass-inner">
              <h3 id="insight-title">History Rhymes: The AI Parallel</h3>
              <p id="insight-text">
@@ -78,6 +80,7 @@
           </div>
       </section>
 
+      <!-- SPEED CHART SECTION (Master Glass) -->
       <section id="speed" class="glass chart-section">
           <h2>Market Speed</h2>
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
@@ -91,30 +94,32 @@
           <div id="dom_chart" class="chart-canvas"></div>
       </section>
 
+      <!-- VOLUME CHART SECTION (Master Glass) -->
       <section id="volume" class="glass chart-section">
           <h2>Sales Volume</h2>
           <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability.</p>
           <div id="volume_chart" class="chart-canvas"></div>
       </section>
 
-      <section id="forecast">
-          <h2 style="margin-left: 20px; margin-bottom: 20px; font-weight: 600;">2026 Forecast</h2>
-          <div class="flex-grid">
-              <div class="glass card-small">
+      <!-- FORECAST SECTION (NEW: Master Glass Container with floating inner cards) -->
+      <section id="forecast" class="glass chart-section">
+          <h2 style="margin-bottom: 20px;">2026 Forecast</h2>
+          <div class="flex-grid" style="margin-bottom: 0;">
+              <div class="glass-inner card-small">
                   <div>
                       <div class="card-label">Interest Rates</div>
                       <h3>The Pivot Point</h3>
                   </div>
                   <p>Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
               </div>
-              <div class="glass card-small">
+              <div class="glass-inner card-small">
                   <div>
                       <div class="card-label">Inventory</div>
                       <h3>Golden Handcuffs</h3>
                   </div>
                   <p>Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
               </div>
-              <div class="glass card-small">
+              <div class="glass-inner card-small">
                   <div>
                       <div class="card-label">Prices</div>
                       <h3>4-8% Growth</h3>
@@ -124,6 +129,7 @@
           </div>
       </section>
 
+      <!-- STRATEGY SECTION (Master Glass) -->
       <section id="strategy" class="glass strategy-container">
           <h2>2026 Strategy</h2>
           <div class="ios-toggle glass-inner">
@@ -139,7 +145,6 @@
           </div>
 
           <div id="strat-sell" class="strat-content">
-              <!-- Reusing the new icy blue color variable we just created in CSS for strategy highlights -->
               <h3 style="color:#5683BA">Prep for Peak</h3>
               <p style="font-size:1.25rem; color:var(--text-sub)">
                   Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.
@@ -147,6 +152,7 @@
           </div>
       </section>
 
+      <!-- CONTACT SECTION (Master Glass) -->
       <div id="contact" class="glass sig-block">
           <div class="sig-info">
               <h3>Oscar Deion Espinosa</h3>
@@ -156,7 +162,6 @@
                   <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
               </div>
           </div>
-          <!-- Explicit dimensions to prevent jank -->
           <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion" width="120" height="120">
       </div>
 
