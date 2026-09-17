@@ -338,48 +338,92 @@
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
 
+
 // --- 1. HISTORICAL TIMELINE DATA ---
-// This dictionary stores all the timeline stories. You can easily add or edit years here!
 const historicalInsights = {
+    1997: { 
+        title: "1997: The Taxpayer Relief Act", 
+        text: "The government exempted up to $500,000 in capital gains on home sales. Paired with the dawn of the internet age, Silicon Valley real estate became a hyper-lucrative investment vehicle overnight." 
+    },
+    1999: { 
+        title: "1999: Dot-Com Mania", 
+        text: "The NASDAQ doubled in a single year. Pre-revenue internet startups minted paper millionaires daily, pouring unprecedented cash into local housing." 
+    },
     2000: { 
-        title: "The Dot-Com Peak", 
-        text: "NASDAQ hit its all-time high, fueling immense wealth and home buying." 
+        title: "2000: The Dot-Com Peak", 
+        text: "NASDAQ hit its all-time high in March, fueling immense wealth and peak home buying before the eventual collapse." 
     },
     2001: { 
-        title: "The Dot-Com Bust", 
-        text: "The tech bubble burst. Stock portfolios vanished, and home prices took a hit as the local economy contracted." 
+        title: "2001: The Dot-Com Bust", 
+        text: "The tech bubble burst. Stock portfolios vanished, layoffs swept the Valley, and home prices took a hit as the local economy contracted." 
+    },
+    2003: { 
+        title: "2003: The 1% Fix", 
+        text: "To stimulate the post-bust economy, the Fed slashed interest rates to 1%. Cheap debt flooded the market, planting the seeds for the subprime housing bubble." 
     },
     2005: { 
-        title: "Housing Bubble", 
-        text: "Predatory lending caused an influx of home purchases by unqualified buyers. All leading up to a bubble." 
+        title: "2005: The Housing Bubble", 
+        text: "Predatory lending caused an influx of home purchases by unqualified buyers. Silicon Valley saw aggressive speculation and flipping." 
+    },
+    2007: { 
+        title: "2007: Subprime Cracks", 
+        text: "Major subprime lenders began filing for bankruptcy. Liquidity dried up, and Silicon Valley felt the initial shockwaves of the looming global financial crisis." 
     },
     2008: { 
-        title: "The Great Recession", 
-        text: "Foreclosures spiked. Prices bottomed out in early 2009 at ~$500k.<br><br><em>Insight: This $500k bottom cleared the deck for the massive 2012 recovery.</em>" 
+        title: "2008: The Great Recession", 
+        text: "Lehman Brothers collapsed and foreclosures spiked. Prices would eventually bottom out in 2009/2010 at ~$500k.<br><br><em>Insight: This $500k bottom cleared the deck for the massive 2012 recovery.</em>" 
+    },
+    2010: { 
+        title: "2010: Web 2.0 Recovery", 
+        text: "While national real estate floundered, Silicon Valley began its recovery early. Apple released the iPad, and companies like Netflix and Google ignited the Web 2.0 hiring boom." 
     },
     2012: { 
-        title: "Facebook IPO", 
-        text: "The first major \"Tech IPO\" of the new era minted millionaires overnight." 
+        title: "2012: Facebook IPO", 
+        text: "The first major 'Tech IPO' of the new era minted millionaires overnight. When employee lock-up periods expired, cash flooded the housing market." 
+    },
+    2014: { 
+        title: "2014: Tech Boom 2.0", 
+        text: "Tech hardware and software converged. Construction on the $5B Apple Park was in full swing, driving massive job growth and heavy double-digit home appreciation." 
     },
     2015: { 
-        title: "Million Dollar Floor", 
-        text: "March medians crossed the $1M threshold, paving way to the housing market we know today." 
+        title: "2015: Million Dollar Floor", 
+        text: "March median home prices crossed the $1M threshold, officially paving the way to the ultra-luxury housing market we know today." 
+    },
+    2016: { 
+        title: "2016: Election & IPO Lull", 
+        text: "Global uncertainty and a stalling tech IPO market caused a brief pause in Silicon Valley real estate, with inventory sitting slightly longer than usual." 
     },
     2018: { 
-        title: "5% Scare", 
-        text: "Mortgage rates hit 5% once more, causing fear and a market correction." 
+        title: "2018: The 5% Scare", 
+        text: "Mortgage rates hit 5% once more, causing fear, a dip in tech stocks, and a sharp localized market correction." 
+    },
+    2019: { 
+        title: "2019: The IPO Dud", 
+        text: "Highly anticipated mega-IPOs like Uber and Lyft went public but underperformed. The expected 'millionaire housing boom' never materialized, but low rates kept the market strong." 
     },
     2020: { 
-        title: "The Great Pivot", 
-        text: "Remote work made the suburbs hotter than ever." 
+        title: "2020: The Great Pivot", 
+        text: "The pandemic forced a shift to remote work. Space became the ultimate premium, making the suburbs hotter than ever." 
     },
     2021: { 
-        title: "Free Money", 
-        text: "Interest rates hit historic lows (sub-3%). Buyers had infinite purchasing power, driving the steepest appreciation curve in history." 
+        title: "2021: Free Money", 
+        text: "Interest rates hit historic lows (sub-3%). Tech stocks soared, giving buyers near-infinite purchasing power and driving the steepest appreciation curve in history." 
     },
     2022: { 
-        title: "The Rate Shock", 
-        text: "The Fed tripled rates. Prices corrected sharply in Q3/Q4." 
+        title: "2022: The Rate Shock", 
+        text: "Inflation forced the Fed to aggressively hike rates. Tech companies began mass layoffs, and home prices corrected sharply in Q3/Q4." 
+    },
+    2023: { 
+        title: "2023: The AI Renaissance", 
+        text: "The launch of ChatGPT sparked an AI gold rush. Tech stocks—led by Nvidia—ballooned, reviving buyer purchasing power despite 7% mortgage rates." 
+    },
+    2024: { 
+        title: "2024: Golden Handcuffs", 
+        text: "Inventory hit record lows because homeowners refused to trade their pandemic-era 3% mortgages for new 7% rates, keeping prices artificially high." 
+    },
+    2025: { 
+        title: "2025: The AI Bubble Peak?", 
+        text: "2025 set new records for median prices as AI valuations hit unprecedented highs, despite growing fears of a market bubble." 
     }
 };
 
