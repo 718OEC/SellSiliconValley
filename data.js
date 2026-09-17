@@ -336,3 +336,251 @@ const masterData = [
 [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
 [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416]
   ];
+
+// --- 1. HISTORICAL TIMELINE DATA ---
+const historicalInsights = {
+    1997: { 
+        title: "1997: The Taxpayer Relief Act", 
+        text: "The government exempted up to $500,000 in capital gains on home sales. Paired with the dawn of the internet age, Silicon Valley real estate became a hyper-lucrative investment vehicle overnight." 
+    },
+    1999: { 
+        title: "1999: Dot-Com Mania", 
+        text: "The NASDAQ doubled in a single year. Pre-revenue internet startups minted paper millionaires daily, pouring unprecedented cash into local housing." 
+    },
+    2000: { 
+        title: "2000: The Dot-Com Peak", 
+        text: "NASDAQ hit its all-time high in March, fueling immense wealth and peak home buying before the eventual collapse." 
+    },
+    2001: { 
+        title: "2001: The Dot-Com Bust", 
+        text: "The tech bubble burst. Stock portfolios vanished, layoffs swept the Valley, and home prices took a hit as the local economy contracted." 
+    },
+    2003: { 
+        title: "2003: The 1% Fix", 
+        text: "To stimulate the post-bust economy, the Fed slashed interest rates to 1%. Cheap debt flooded the market, planting the seeds for the subprime housing bubble." 
+    },
+    2005: { 
+        title: "2005: The Housing Bubble", 
+        text: "Predatory lending caused an influx of home purchases by unqualified buyers. Silicon Valley saw aggressive speculation and flipping." 
+    },
+    2007: { 
+        title: "2007: Subprime Cracks", 
+        text: "Major subprime lenders began filing for bankruptcy. Liquidity dried up, and Silicon Valley felt the initial shockwaves of the looming global financial crisis." 
+    },
+    2008: { 
+        title: "2008: The Great Recession", 
+        text: "Lehman Brothers collapsed and foreclosures spiked. Single-family house prices would eventually bottom out in 2009/2010 at $455k.<br><br><em>Insight: This bottom cleared the deck for the massive 2012 recovery.</em>" 
+    },
+    2010: { 
+        title: "2010: Web 2.0 Recovery", 
+        text: "While national real estate floundered, Silicon Valley began its recovery early. Apple released the iPad, and companies like Netflix and Google ignited the Web 2.0 hiring boom." 
+    },
+    2012: { 
+        title: "2012: Facebook IPO", 
+        text: "The first major 'Tech IPO' of the new era minted millionaires overnight. When employee lock-up periods expired, cash flooded the housing market." 
+    },
+    2014: { 
+        title: "2014: Tech Boom 2.0", 
+        text: "Tech hardware and software converged. Construction on the $5B Apple Park was in full swing, driving massive job growth and heavy double-digit home appreciation." 
+    },
+    2015: { 
+        title: "2015: Million Dollar Floor", 
+        text: "March median home prices crossed the $1M threshold, officially paving the way to the ultra-luxury housing market we know today." 
+    },
+    2016: { 
+        title: "2016: Election & IPO Lull", 
+        text: "Global uncertainty and a stalling tech IPO market caused a brief pause in Silicon Valley real estate, with inventory sitting slightly longer than usual." 
+    },
+    2018: { 
+        title: "2018: The 5% Scare", 
+        text: "Mortgage rates hit 5% once more, causing fear, a dip in tech stocks, and a sharp localized market correction." 
+    },
+    2019: { 
+        title: "2019: The IPO Dud", 
+        text: "Highly anticipated mega-IPOs like Uber and Lyft went public but underperformed. The expected 'millionaire housing boom' never materialized, but low rates kept the market strong." 
+    },
+    2020: { 
+        title: "2020: The Pandemic", 
+        text: "The pandemic forced a shift to remote work. Space became the ultimate premium, making the suburbs hotter than ever." 
+    },
+    2021: { 
+        title: "2021: Free Money", 
+        text: "Interest rates hit historic lows (sub-3%). Tech stocks soared, giving buyers near-infinite purchasing power and driving the steepest appreciation curve in history." 
+    },
+    2022: { 
+        title: "2022: The Rate Shock", 
+        text: "Inflation forced the Fed to aggressively hike rates. Tech companies began mass layoffs, and home prices corrected sharply in Q3/Q4." 
+    },
+    2023: { 
+        title: "2023: The AI Renaissance", 
+        text: "The launch of ChatGPT sparked an AI gold rush. Tech stocks—led by Nvidia—ballooned, reviving buyer purchasing power despite 7% mortgage rates." 
+    },
+    2024: { 
+        title: "2024: Golden Handcuffs", 
+        text: "Inventory hit record lows because homeowners refused to trade their pandemic-era 3% mortgages for new 7% rates, keeping prices artificially high." 
+    },
+    2025: { 
+        title: "2025: The AI Bubble Peak?", 
+        text: "2025 set new records for median prices as AI valuations hit unprecedented highs, despite growing fears of a market bubble." 
+    }
+};
+
+// The default story it reverts to for empty years
+const defaultInsight = {
+    title: "History Rhymes: The AI Parallel",
+    text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
+};
+
+// --- 2. TOGGLE LOGIC ---
+function setStrategy(type, btn) {
+    document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.strat-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('strat-' + type).classList.add('active');
+}
+
+// --- 3. THEME ---
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    drawCharts();
+}
+  
+// Auto-detect system dark mode
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+}
+
+// --- 4. CHARTS ---
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawCharts);
+
+function drawCharts() {
+    if (typeof decadeData === 'undefined' || !decadeData || decadeData.length === 0) return;
+
+    const isDark = document.body.classList.contains('dark-mode');
+      
+    // Text and gridline colors adapt to dark mode
+    const textC = isDark ? '#A1A1A6' : '#86868B';
+    const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
+      
+    // DYNAMIC CHART COLORS
+    const cPurple = isDark ? '#C3A7D6' : '#5F259F'; // Houses
+    const cOrange = isDark ? '#FFCAB3' : '#F86516'; // Condos
+    const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
+
+    const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
+    const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
+
+    // --- 2. Price Chart ---
+    const dataP = new google.visualization.DataTable();
+    dataP.addColumn('date', 'Date');
+    dataP.addColumn('number', 'Houses');
+    dataP.addColumn('number', 'Condos');
+    dataP.addColumn('number', 'Townhomes');
+    dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
+    dateFmt.format(dataP, 0);
+    
+    currencyFmt.format(dataP, 1);
+    currencyFmt.format(dataP, 2);
+    currencyFmt.format(dataP, 3);
+
+    const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
+    
+    chartP.draw(dataP, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC,
+            format: 'short' 
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple, cOrange, cGreen]
+    });
+
+    // --- NEW: SCRUBBABLE CHART SYNC ENGINE ---
+    // Listens for a mouse hover (or finger tap) over the data points on the price chart
+    google.visualization.events.addListener(chartP, 'onmouseover', function(e) {
+        if (e.row != null) {
+            // Get the exact year the user is hovering over
+            const hoveredDate = dataP.getValue(e.row, 0);
+            const year = hoveredDate.getFullYear();
+
+            // Look up the year in our dictionary. If it doesn't exist, use the default AI story.
+            const insight = historicalInsights[year] || defaultInsight;
+            
+            // Inject the matching story directly into the icy glass box
+            document.getElementById('insight-title').innerHTML = insight.title;
+            document.getElementById('insight-text').innerHTML = insight.text;
+        }
+    });
+
+    // --- 3. DOM Chart ---
+    const dataD = new google.visualization.DataTable();
+    dataD.addColumn('date', 'Date');
+    dataD.addColumn('number', 'Houses');
+    dataD.addColumn('number', 'Condos');
+    dataD.addColumn('number', 'Townhomes');
+    dataD.addRows(decadeData.map(r => [r[0], r[4], r[5], r[6]]));
+    dateFmt.format(dataD, 0);
+
+    const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
+    
+    chartD.draw(dataD, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple, cOrange, cGreen]
+    });
+
+    // --- 4. Volume Chart ---
+    const dataV = new google.visualization.DataTable();
+    dataV.addColumn('date', 'Date');
+    dataV.addColumn('number', 'Volume');
+    dataV.addRows(decadeData.map(r => [r[0], r[10]])); 
+    dateFmt.format(dataV, 0);
+
+    const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
+    
+    chartV.draw(dataV, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
+            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
+        },
+        vAxis: { 
+            textStyle: { color: textC, fontSize: 11 }, 
+            gridlines: { color: gridC }, 
+            baselineColor: gridC
+        },
+        lineWidth: 3, 
+        curveType: 'function',
+        animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cPurple], 
+        areaOpacity: 0.1
+    });
+}
+
+window.addEventListener('resize', drawCharts);
