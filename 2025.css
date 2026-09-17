@@ -5,28 +5,28 @@
 /* ============================================================== */
 
 :root {
-  /* Extracted Pastel Tones (Targeted Data Colors) */
-  --c-houses:    #E4A0B7; /* rgb: 228, 160, 183 */
-  --c-condos:    #B7CCEA; /* rgb: 183, 204, 234 */
-  --c-townhomes: #CBE58E; /* rgb: 203, 229, 142 */
-  --c-volume:    #FDE08B; /* rgb: 253, 224, 139 */
+  /* Official Apple System Colors (Light Mode) */
+  --c-houses:    #FF3B30; /* Apple Red */
+  --c-condos:    #007AFF; /* Apple Blue */
+  --c-townhomes: #34C759; /* Apple Green */
+  --c-volume:    #FFCC00; /* Apple Yellow */
 
   /* Ambient RGBs */
-  --g-blue: 183, 204, 234;
+  --g-blue:   183, 204, 234;
 
   /* Global Defaults */
   --page-bg: #F4F7FB; 
-  --text-main: #1D1D1F; /* True Apple Black */
-  --text-sub: #86868B;  /* HIG Secondary Text */
+  --text-main: #1D1D1F; 
+  --text-sub: #86868B;  
   
-  /* Apple Standard Status Colors (Light Mode) */
+  /* Status Colors */
   --status-pos: #34C759; 
   --status-neg: #FF3B30; 
   
   /* Apple-Style Glass Properties */
   --blur-amt: blur(40px) saturate(200%); 
   --line-color: rgba(0, 0, 0, 0.08);
-  --segmented-bg: rgba(118, 118, 128, 0.12);
+  --segmented-bg: rgba(118, 118, 128, 0.12); 
 
   /* --- LAYER 1: BASE GLASS (Cards, Containers) --- */
   --glass-panel: rgba(255, 255, 255, 0.6);
@@ -49,7 +49,12 @@ body.dark-mode {
   --line-color: rgba(255, 255, 255, 0.15);
   --segmented-bg: rgba(118, 118, 128, 0.24); 
   
-  /* Apple Standard Status Colors (Dark Mode) */
+  /* Official Apple System Colors (Dark Mode) */
+  --c-houses:    #FF453A; 
+  --c-condos:    #0A84FF; 
+  --c-townhomes: #32D74B; 
+  --c-volume:    #FFD60A; 
+  
   --status-pos: #32D74B; 
   --status-neg: #FF453A; 
 
@@ -164,7 +169,7 @@ h2 { font-family: 'Lexend', sans-serif; font-weight: 600; letter-spacing: -0.02e
 }
 .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; box-shadow: inset 0 1px 1px rgba(255,255,255,0.6); }
 
-/* Mapped to your HTML class names but using the newly requested colors */
+/* Mapped to HTML classes using the new Apple variables */
 .dot.purple { background-color: var(--c-houses); }
 .dot.orange { background-color: var(--c-condos); }
 .dot.green { background-color: var(--c-townhomes); }
@@ -179,15 +184,15 @@ h2 { font-family: 'Lexend', sans-serif; font-weight: 600; letter-spacing: -0.02e
   margin-top: 2rem; 
   position: relative;
   
-  /* 1. Icy frosted background (PMS: 658) */
+  /* Icy frosted background (PMS: 658) */
   background: color-mix(in srgb, #B7CCEA 40%, transparent) !important;
   backdrop-filter: var(--blur-amt);
   -webkit-backdrop-filter: var(--blur-amt);
   
-  /* 2. Distinct icy edge (PMS: 660) */
+  /* Distinct icy edge (PMS: 660) */
   border: 1px solid color-mix(in srgb, #5683BA 50%, transparent) !important;
   
-  /* 3. HIG rim highlight and diffuse shadow */
+  /* HIG rim highlight and diffuse shadow */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
 }
 
@@ -237,7 +242,7 @@ body.dark-mode .insight-box {
   top: 0.25rem;
   bottom: 0.25rem;
   left: 0.25rem;
-  width: calc(50% - 0.25rem); /* Covers exactly one button */
+  width: calc(50% - 0.25rem); 
   background: var(--glass-panel);
   backdrop-filter: var(--blur-amt);
   -webkit-backdrop-filter: var(--blur-amt);
@@ -245,7 +250,7 @@ body.dark-mode .insight-box {
   box-shadow: var(--glass-inner-shadow), var(--glass-inner-highlight);
   border-radius: 0.75rem;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: -1; /* Sits behind the text */
+  z-index: -1; 
 }
 
 /* Glides to the right when the second button is active */
@@ -268,7 +273,7 @@ body.dark-mode .insight-box {
 
 .toggle-opt.active { 
   color: var(--text-main);
-  background: transparent; /* Background styling is now handled by the sliding thumb */
+  background: transparent; 
   border: none; 
   box-shadow: none; 
 }
