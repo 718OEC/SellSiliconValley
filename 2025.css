@@ -169,10 +169,11 @@ h2 { font-family: 'Lexend', sans-serif; font-weight: 600; letter-spacing: -0.02e
 }
 .dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; box-shadow: inset 0 1px 1px rgba(255,255,255,0.6); }
 
-/* Mapped to HTML classes using the new Apple variables */
-.dot.purple { background-color: var(--c-houses); }
-.dot.orange { background-color: var(--c-condos); }
-.dot.green { background-color: var(--c-townhomes); }
+/* Mapped to HTML classes using the Apple variables */
+.dot.red    { background-color: var(--c-houses); }
+.dot.blue   { background-color: var(--c-condos); }
+.dot.green  { background-color: var(--c-townhomes); }
+.dot.yellow { background-color: var(--c-volume); }
 
 /* ============================================================== */
 /* --- INSIGHT BLOCKS (Icy Glass-on-Glass) --- */
