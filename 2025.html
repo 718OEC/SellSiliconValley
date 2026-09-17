@@ -32,42 +32,56 @@
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
 
-      <!-- STATS (Individual Glass Cards) -->
-      <div class="flex-grid">
-          <div class="glass stat-box">
-              <div class="stat-label">House Median</div>
-              <div class="stat-val">$2.0M</div>
-              <div class="stat-delta pos">
-                  <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.50% YoY
-              </div>
-          </div>
-          <div class="glass stat-box">
-              <div class="stat-label">Condo Median</div>
-              <div class="stat-val">$760k</div>
-              <div class="stat-delta neg">
-                  <span class="material-symbols-rounded" style="font-size:16px">arrow_downward</span> 2.72% YoY
-              </div>
-          </div>
-          <div class="glass stat-box">
-              <div class="stat-label">Townhouse</div>
-              <div class="stat-val">$1.3M</div>
-              <div class="stat-delta pos">
-                  <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.19% YoY
-              </div>
-          </div>
-      </div>
-
-      <!-- PRICE CHART SECTION (Master Glass) -->
+      <!-- PRICE CHART SECTION (Master Glass with Integrated 2025 Medians Key) -->
       <section id="prices" class="glass chart-section">
-          <h2>Price History & Retrospective</h2>
-          <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br><strong>(Scrub the chart below to reveal historical events).</strong></p>
           
-          <div class="legend-row">
-            <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
-            <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
-            <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
+          <!-- Consolidated Header -->
+          <div style="text-align: center; margin-bottom: 2rem;">
+              <h2 style="margin-bottom: 0.25rem;">2025 Medians & Price History</h2>
+              <p class="chart-desc" style="margin: 0 auto;">2025 set new records. Scrub the chart below to reveal historical events.</p>
           </div>
           
+          <!-- The Massive "Stupid-Proof" Global Key -->
+          <div class="flex-grid" style="margin-bottom: 2rem;">
+              
+              <!-- Houses Key -->
+              <div class="glass-inner stat-box" style="padding: 1.25rem;">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                      <div class="dot red" style="width: 0.875rem; height: 0.875rem;"></div>
+                      <span class="stat-label" style="margin: 0; color: var(--text-main); font-size: 0.875rem;">Houses</span>
+                  </div>
+                  <div class="stat-val" style="font-size: 2rem;">$2.0M</div>
+                  <div class="stat-delta pos" style="margin-top: 0.5rem;">
+                      <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.50% YoY
+                  </div>
+              </div>
+
+              <!-- Condos Key -->
+              <div class="glass-inner stat-box" style="padding: 1.25rem;">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                      <div class="dot blue" style="width: 0.875rem; height: 0.875rem;"></div>
+                      <span class="stat-label" style="margin: 0; color: var(--text-main); font-size: 0.875rem;">Condos</span>
+                  </div>
+                  <div class="stat-val" style="font-size: 2rem;">$760k</div>
+                  <div class="stat-delta neg" style="margin-top: 0.5rem;">
+                      <span class="material-symbols-rounded" style="font-size:16px">arrow_downward</span> 2.72% YoY
+                  </div>
+              </div>
+
+              <!-- Townhomes Key -->
+              <div class="glass-inner stat-box" style="padding: 1.25rem;">
+                  <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                      <div class="dot green" style="width: 0.875rem; height: 0.875rem;"></div>
+                      <span class="stat-label" style="margin: 0; color: var(--text-main); font-size: 0.875rem;">Townhomes</span>
+                  </div>
+                  <div class="stat-val" style="font-size: 2rem;">$1.3M</div>
+                  <div class="stat-delta pos" style="margin-top: 0.5rem;">
+                      <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 0.19% YoY
+                  </div>
+              </div>
+          </div>
+          
+          <!-- The Interactive Chart -->
           <div id="price_chart" class="chart-canvas"></div>
           
           <div id="dynamic-insight" class="insight-block glass-inner">
@@ -80,28 +94,33 @@
           </div>
       </section>
 
-      <!-- SPEED CHART SECTION (Master Glass) -->
+      <!-- SPEED CHART SECTION -->
       <section id="speed" class="glass chart-section">
           <h2>Market Speed</h2>
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
           
           <div class="legend-row">
-              <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
-              <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
+              <div class="legend-pill glass-inner"><div class="dot red"></div> Houses</div>
+              <div class="legend-pill glass-inner"><div class="dot blue"></div> Condos</div>
               <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
           </div>
           
           <div id="dom_chart" class="chart-canvas"></div>
       </section>
 
-      <!-- VOLUME CHART SECTION (Master Glass) -->
+      <!-- VOLUME CHART SECTION -->
       <section id="volume" class="glass chart-section">
           <h2>Sales Volume</h2>
           <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
+          
+          <div class="legend-row">
+              <div class="legend-pill glass-inner"><div class="dot yellow"></div> Total Volume</div>
+          </div>
+          
           <div id="volume_chart" class="chart-canvas"></div>
       </section>
 
-      <!-- CONSOLIDATED FORECAST & STRATEGY SECTION (Master Glass) -->
+      <!-- CONSOLIDATED FORECAST & STRATEGY SECTION -->
       <section id="forecast-strategy" class="glass chart-section">
           
           <h2 style="margin-bottom: 20px;">2026 Forecast</h2>
@@ -137,7 +156,6 @@
               </div>
           </div>
 
-          <!-- Wrapped Strategy Content in our icy insight blocks! -->
           <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
               <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
               <p style="font-size:1.125rem;">
@@ -152,8 +170,8 @@
               </p>
           </div>
       </section>
-     
-      <!-- CONTACT SECTION (Master Glass) -->
+      
+      <!-- CONTACT SECTION -->
       <div id="contact" class="glass sig-block">
           <div class="sig-info">
               <h3>Oscar Deion Espinosa</h3>
@@ -173,7 +191,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   
   <!-- Link to external JS -->
-  <script src="2025.js"></script>
+  <script src="2025.js?v=3"></script>
   
   <!-- INSTANT.PAGE Hover Prefetching -->
   <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
