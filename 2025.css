@@ -165,26 +165,39 @@ h2 { font-family: 'Lexend', sans-serif; font-weight: 600; letter-spacing: -0.02e
 .dot.orange { background-color: var(--c-orange); }
 .dot.green { background-color: var(--c-green); }
 
-/* Insight Blocks (True Liquid Glass) */
+/* ============================================================== */
+/* --- INSIGHT BLOCKS (Icy Glass-on-Glass) --- */
+/* ============================================================== */
+
 .insight-block, .insight-box { 
   border-radius: 1.25rem; 
   padding: 1.5rem 2rem; 
   margin-top: 2rem; 
   position: relative;
-  overflow: hidden; /* Keeps the glow contained inside the glass */
+  
+  /* 1. Icy frosted background (PMS: 658) */
+  background: color-mix(in srgb, #B7CCEA 40%, transparent) !important;
+  backdrop-filter: var(--blur-amt);
+  -webkit-backdrop-filter: var(--blur-amt);
+  
+  /* 2. Distinct icy edge (PMS: 660) */
+  border: 1px solid color-mix(in srgb, #5683BA 50%, transparent) !important;
+  
+  /* 3. HIG rim highlight and diffuse shadow */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Creates a soft, ambient purple glow on the left side instead of a harsh flat border */
+/* Dark Mode Adjustment for Icy Glass */
+body.dark-mode .insight-block, 
+body.dark-mode .insight-box {
+  background: color-mix(in srgb, #B7CCEA 12%, transparent) !important;
+  border: 1px solid color-mix(in srgb, #5683BA 40%, transparent) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* (If you added the gradient ::before pseudo-element from the last step, this forces it to hide) */
 .insight-block::before, .insight-box::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 6rem;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--c-purple) 20%, transparent), transparent);
-  z-index: -1;
-  pointer-events: none;
+  display: none !important; 
 }
 
 .insight-block h3 { 
