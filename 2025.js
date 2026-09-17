@@ -337,6 +337,58 @@
   [new Date(2025, 10, 1), 2000000, 735000, 1380000, 12, 23, 20, 474, 94, 91, 659],
   [new Date(2025, 11, 1), 1900000, 737500, 1055500, 10, 29, 32, 287, 80, 49, 416],
   ];
+
+// --- 1. HISTORICAL TIMELINE DATA ---
+// This dictionary stores all the timeline stories. You can easily add or edit years here!
+const historicalInsights = {
+    2000: { 
+        title: "The Dot-Com Peak", 
+        text: "NASDAQ hit its all-time high, fueling immense wealth and home buying." 
+    },
+    2001: { 
+        title: "The Dot-Com Bust", 
+        text: "The tech bubble burst. Stock portfolios vanished, and home prices took a hit as the local economy contracted." 
+    },
+    2005: { 
+        title: "Housing Bubble", 
+        text: "Predatory lending caused an influx of home purchases by unqualified buyers. All leading up to a bubble." 
+    },
+    2008: { 
+        title: "The Great Recession", 
+        text: "Foreclosures spiked. Prices bottomed out in early 2009 at ~$500k.<br><br><em>Insight: This $500k bottom cleared the deck for the massive 2012 recovery.</em>" 
+    },
+    2012: { 
+        title: "Facebook IPO", 
+        text: "The first major \"Tech IPO\" of the new era minted millionaires overnight." 
+    },
+    2015: { 
+        title: "Million Dollar Floor", 
+        text: "March medians crossed the $1M threshold, paving way to the housing market we know today." 
+    },
+    2018: { 
+        title: "5% Scare", 
+        text: "Mortgage rates hit 5% once more, causing fear and a market correction." 
+    },
+    2020: { 
+        title: "The Great Pivot", 
+        text: "Remote work made the suburbs hotter than ever." 
+    },
+    2021: { 
+        title: "Free Money", 
+        text: "Interest rates hit historic lows (sub-3%). Buyers had infinite purchasing power, driving the steepest appreciation curve in history." 
+    },
+    2022: { 
+        title: "The Rate Shock", 
+        text: "The Fed tripled rates. Prices corrected sharply in Q3/Q4." 
+    }
+};
+
+// The default story it reverts to for empty years
+const defaultInsight = {
+    title: "History Rhymes: The AI Parallel",
+    text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
+};
+
 // --- 2. TOGGLE LOGIC ---
 function setStrategy(type, btn) {
     document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
@@ -375,8 +427,6 @@ function drawCharts() {
     const cGreen  = isDark ? '#CBE58E' : '#71B300'; // Townhomes
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
-    
-    // NEW: Native Google formatter ensures tooltips get the $ sign and shorthand (e.g. $1.3M)
     const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
 
     // --- 2. Price Chart ---
@@ -388,14 +438,12 @@ function drawCharts() {
     dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
     dateFmt.format(dataP, 0);
     
-    // Format columns so the hover tooltips show clean currency strings
     currencyFmt.format(dataP, 1);
     currencyFmt.format(dataP, 2);
     currencyFmt.format(dataP, 3);
 
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
     
-    // PRICE CHART OPTIONS
     chartP.draw(dataP, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
@@ -408,12 +456,29 @@ function drawCharts() {
             textStyle: { color: textC, fontSize: 11 }, 
             gridlines: { color: gridC }, 
             baselineColor: gridC,
-            format: 'short' // FIXED: Native parameter safely auto-abbreviates to 1M, 500K, etc.
+            format: 'short' 
         },
         lineWidth: 3, 
         curveType: 'function',
         animation: { startup: true, duration: 1000, easing: 'out' },
         colors: [cPurple, cOrange, cGreen]
+    });
+
+    // --- NEW: SCRUBBABLE CHART SYNC ENGINE ---
+    // Listens for a mouse hover (or finger tap) over the data points on the price chart
+    google.visualization.events.addListener(chartP, 'onmouseover', function(e) {
+        if (e.row != null) {
+            // Get the exact year the user is hovering over
+            const hoveredDate = dataP.getValue(e.row, 0);
+            const year = hoveredDate.getFullYear();
+
+            // Look up the year in our dictionary. If it doesn't exist, use the default AI story.
+            const insight = historicalInsights[year] || defaultInsight;
+            
+            // Inject the matching story directly into the icy glass box
+            document.getElementById('insight-title').innerHTML = insight.title;
+            document.getElementById('insight-text').innerHTML = insight.text;
+        }
     });
 
     // --- 3. DOM Chart ---
@@ -427,7 +492,6 @@ function drawCharts() {
 
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
     
-    // STANDARD OPTIONS (No millions formatting for days on market)
     chartD.draw(dataD, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
@@ -456,7 +520,6 @@ function drawCharts() {
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
     
-    // VOLUME OPTIONS
     chartV.draw(dataV, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
