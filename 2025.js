@@ -430,7 +430,39 @@ const defaultInsight = {
     text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
 };
 
-// --- 2. TOGGLE LOGIC ---
+const defaultInsight = {
+    title: "History Rhymes: The AI Parallel",
+    text: "Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
+};
+
+// --- 2. GLOBAL CHART FILTER STATE ---
+let currentPropertyFilter = 'All';
+
+function setChartFilter(type, btn) {
+    currentPropertyFilter = type;
+    const pills = document.querySelectorAll('.filter-pill');
+
+    pills.forEach(p => {
+        p.classList.remove('active', 'passive');
+        
+        if (type === 'All') {
+            // When 'All' is selected, make 'All' active, and return others to normal default state
+            if(p.innerText.includes('All')) p.classList.add('active');
+        } else {
+            // When a specific property is selected, make it active, turn the rest passive
+            if (p === btn) {
+                p.classList.add('active');
+            } else {
+                p.classList.add('passive');
+            }
+        }
+    });
+
+    // Instantly redraw the charts with the new filter
+    drawCharts();
+}
+
+// --- 3. TOGGLE LOGIC ---
 function setStrategy(type, btn) {
     document.querySelectorAll('.toggle-opt').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -438,7 +470,7 @@ function setStrategy(type, btn) {
     document.getElementById('strat-' + type).classList.add('active');
 }
 
-// --- 3. THEME ---
+// --- 4. THEME ---
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
     drawCharts();
@@ -448,7 +480,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
     document.body.classList.add('dark-mode');
 }
 
-// --- 4. CHARTS ---
+// --- 5. CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawCharts);
 
@@ -456,11 +488,10 @@ function drawCharts() {
     if (typeof decadeData === 'undefined' || !decadeData || decadeData.length === 0) return;
 
     const isDark = document.body.classList.contains('dark-mode');
-      
     const textC = isDark ? '#A1A1A6' : '#86868B';
     const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
       
-    // DYNAMIC CHART COLORS (Injected directly into the graph to match CSS)
+    // Apple System Colors
     const cRed    = isDark ? '#FF453A' : '#FF3B30'; // Houses
     const cBlue   = isDark ? '#0A84FF' : '#007AFF'; // Condos
     const cGreen  = isDark ? '#32D74B' : '#34C759'; // Townhomes
@@ -468,6 +499,18 @@ function drawCharts() {
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
     const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
+
+    // --- Dynamic Filter Logic Arrays ---
+    let activeColumns = [0, 1, 2, 3]; // Default: Date, Houses, Condos, Townhomes
+    let activeColors = [cRed, cBlue, cGreen];
+    
+    if (currentPropertyFilter === 'Houses') { 
+        activeColumns = [0, 1]; activeColors = [cRed]; 
+    } else if (currentPropertyFilter === 'Condos') { 
+        activeColumns = [0, 2]; activeColors = [cBlue]; 
+    } else if (currentPropertyFilter === 'Townhomes') { 
+        activeColumns = [0, 3]; activeColors = [cGreen]; 
+    }
 
     // --- Price Chart ---
     const dataP = new google.visualization.DataTable();
@@ -477,32 +520,23 @@ function drawCharts() {
     dataP.addColumn('number', 'Townhomes');
     dataP.addRows(decadeData.map(r => [r[0], r[1], r[2], r[3]]));
     dateFmt.format(dataP, 0);
-    
     currencyFmt.format(dataP, 1);
     currencyFmt.format(dataP, 2);
     currencyFmt.format(dataP, 3);
 
+    // Apply the DataView filter before drawing
+    const viewP = new google.visualization.DataView(dataP);
+    viewP.setColumns(activeColumns);
+
     const chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
-    
-    chartP.draw(dataP, {
+    chartP.draw(viewP, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
         chartArea: { width: '85%', height: '82%' },
-        hAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
-            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        vAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, 
-            gridlines: { color: gridC }, 
-            baselineColor: gridC,
-            format: 'short' 
-        },
-        lineWidth: 3, 
-        curveType: 'function',
-        animation: { startup: true, duration: 1000, easing: 'out' },
-        // Assigned Apple System Colors: [Red, Blue, Green]
-        colors: [cRed, cBlue, cGreen]
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC, format: 'short' },
+        lineWidth: 3, curveType: 'function', animation: { startup: true, duration: 800, easing: 'out' },
+        colors: activeColors
     });
 
     // SCRUBBABLE CHART SYNC
@@ -511,7 +545,6 @@ function drawCharts() {
             const hoveredDate = dataP.getValue(e.row, 0);
             const year = hoveredDate.getFullYear();
             const insight = historicalInsights[year] || defaultInsight;
-            
             document.getElementById('insight-title').innerHTML = insight.title;
             document.getElementById('insight-text').innerHTML = insight.text;
         }
@@ -526,26 +559,19 @@ function drawCharts() {
     dataD.addRows(decadeData.map(r => [r[0], r[4], r[5], r[6]]));
     dateFmt.format(dataD, 0);
 
+    // Apply the same DataView filter to the DOM chart!
+    const viewD = new google.visualization.DataView(dataD);
+    viewD.setColumns(activeColumns);
+
     const chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
-    
-    chartD.draw(dataD, {
+    chartD.draw(viewD, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
         chartArea: { width: '85%', height: '82%' },
-        hAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
-            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        vAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, 
-            gridlines: { color: gridC }, 
-            baselineColor: gridC
-        },
-        lineWidth: 3, 
-        curveType: 'function',
-        animation: { startup: true, duration: 1000, easing: 'out' },
-        // Assigned Apple System Colors: [Red, Blue, Green]
-        colors: [cRed, cBlue, cGreen]
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC },
+        lineWidth: 3, curveType: 'function', animation: { startup: true, duration: 800, easing: 'out' },
+        colors: activeColors
     });
 
     // --- Volume Chart ---
@@ -556,26 +582,14 @@ function drawCharts() {
     dateFmt.format(dataV, 0);
 
     const chartV = new google.visualization.AreaChart(document.getElementById('volume_chart'));
-    
     chartV.draw(dataV, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
         chartArea: { width: '85%', height: '82%' },
-        hAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', 
-            gridlines: { color: 'transparent' }, baselineColor: 'transparent'
-        },
-        vAxis: { 
-            textStyle: { color: textC, fontSize: 11 }, 
-            gridlines: { color: gridC }, 
-            baselineColor: gridC
-        },
-        lineWidth: 3, 
-        curveType: 'function',
-        animation: { startup: true, duration: 1000, easing: 'out' },
-        // Assigned Apple System Color: [Yellow]
-        colors: [cYellow], 
-        areaOpacity: 0.15
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC },
+        lineWidth: 3, curveType: 'function', animation: { startup: true, duration: 1000, easing: 'out' },
+        colors: [cYellow], areaOpacity: 0.15
     });
 }
 
