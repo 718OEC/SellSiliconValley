@@ -97,14 +97,15 @@
       <!-- VOLUME CHART SECTION (Master Glass) -->
       <section id="volume" class="glass chart-section">
           <h2>Sales Volume</h2>
-          <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability.</p>
+          <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
           <div id="volume_chart" class="chart-canvas"></div>
       </section>
 
-      <!-- FORECAST SECTION (NEW: Master Glass Container with floating inner cards) -->
-      <section id="forecast" class="glass chart-section">
+      <!-- CONSOLIDATED FORECAST & STRATEGY SECTION (Master Glass) -->
+      <section id="forecast-strategy" class="glass chart-section">
+          
           <h2 style="margin-bottom: 20px;">2026 Forecast</h2>
-          <div class="flex-grid" style="margin-bottom: 0;">
+          <div class="flex-grid" style="margin-bottom: 2.5rem;">
               <div class="glass-inner card-small">
                   <div>
                       <div class="card-label">Interest Rates</div>
@@ -127,31 +128,31 @@
                   <p>If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
               </div>
           </div>
-      </section>
 
-      <!-- STRATEGY SECTION (Master Glass) -->
-      <section id="strategy" class="glass strategy-container">
-          <h2>2026 Strategy</h2>
-          <div class="ios-toggle glass-inner">
-              <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
-              <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
+          <h2 style="margin-bottom: 20px;">2026 Strategy</h2>
+          <div style="text-align: center;">
+              <div class="ios-toggle glass-inner">
+                  <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
+                  <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
+              </div>
           </div>
 
-          <div id="strat-buy" class="strat-content active">
+          <!-- Wrapped Strategy Content in our icy insight blocks! -->
+          <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
               <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
-              <p style="font-size:1.25rem; color:var(--text-sub)">
+              <p style="font-size:1.125rem;">
                   Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".
               </p>
           </div>
 
-          <div id="strat-sell" class="strat-content">
+          <div id="strat-sell" class="strat-content insight-block glass-inner" style="margin-top: 0;">
               <h3 style="color:#5683BA">Prep for Peak</h3>
-              <p style="font-size:1.25rem; color:var(--text-sub)">
+              <p style="font-size:1.125rem;">
                   Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.
               </p>
           </div>
       </section>
-
+     
       <!-- CONTACT SECTION (Master Glass) -->
       <div id="contact" class="glass sig-block">
           <div class="sig-info">
