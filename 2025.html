@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Real Estate Market Report</title>
   
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="2025.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" as="style">
+  
   <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   
@@ -21,7 +30,6 @@
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
 
-      <!-- UPDATED: Replaced stats-row with flex-grid -->
       <div class="flex-grid">
           <div class="glass stat-box">
               <div class="stat-label">House Median</div>
@@ -47,21 +55,22 @@
       </div>
 
       <section id="prices" class="glass chart-section">
-          <h2>Price History</h2>
-          <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br>(Charts are interactive)</p>
+          <h2>Price History & Retrospective</h2>
+          <p class="chart-desc">2025 set new records for median prices, despite fears of a bubble. <br><strong>(Scrub the chart below to reveal historical events).</strong></p>
           
           <div class="legend-row">
-    <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
-    <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
-    <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
-</div>
+            <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
+            <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
+            <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
+          </div>
           
+          <!-- The Interactive Chart -->
           <div id="price_chart" class="chart-canvas"></div>
           
-          <!-- UPDATED: Using insight-block class instead of messy inline styling -->
-          <div class="insight-block glass-inner">
-             <h3>History Rhymes: The AI Parallel</h3>
-             <p>
+          <!-- NEW: The Dynamic Icy Glass Insight Box (Syncs with the chart) -->
+          <div id="dynamic-insight" class="insight-block glass-inner">
+             <h3 id="insight-title">History Rhymes: The AI Parallel</h3>
+             <p id="insight-text">
                Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
                <br><br>
                <strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty.
@@ -74,9 +83,9 @@
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
           
           <div class="legend-row">
-              <div class="legend-pill"><div class="dot blue"></div> Houses</div>
-              <div class="legend-pill"><div class="dot purple"></div> Condos</div>
-              <div class="legend-pill"><div class="dot teal"></div> Townhomes</div>
+              <div class="legend-pill glass-inner"><div class="dot purple"></div> Houses</div>
+              <div class="legend-pill glass-inner"><div class="dot orange"></div> Condos</div>
+              <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
           </div>
           
           <div id="dom_chart" class="chart-canvas"></div>
@@ -90,7 +99,6 @@
 
       <section id="forecast">
           <h2 style="margin-left: 20px; margin-bottom: 20px; font-weight: 600;">2026 Forecast</h2>
-          <!-- UPDATED: Replaced grid-3 with flex-grid -->
           <div class="flex-grid">
               <div class="glass card-small">
                   <div>
@@ -116,91 +124,6 @@
           </div>
       </section>
 
-      <section id="timeline" class="glass chart-section">
-          <h2>Market Retrospective</h2>
-          <div class="timeline-container">
-              <div class="timeline-line"></div>
-
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2000</div>
-                  <div class="node-content">
-                      <div class="node-title">The Dot-Com Peak</div>
-                      <p class="node-text">NASDAQ hit its all-time high, fueling immense wealth and home buying.</p>
-                  </div>
-              </div>
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2001</div>
-                  <div class="node-content">
-                      <div class="node-title">The Dot-Com Bust</div>
-                      <p class="node-text">The tech bubble burst. Stock portfolios vanished, and home prices took a hit as the local economy contracted.</p>
-                  </div>
-              </div>
-              
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner glass-inner">2005</div>
-                  <div class="node-content">
-                      <div class="node-title">Housing Bubble</div>
-                      <p class="node-text">Predatory lending caused an influx of home purchases by unqualified buyers. All leading up to a bubble</p>
-                  </div>
-              </div>
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2008</div>
-                  <div class="node-content">
-                      <div class="node-title">The Great Recession</div>
-                      <p class="node-text">Foreclosures spiked. Prices bottomed out in early 2009 at ~$500k.</p>
-                      <div class="insight-box">
-                          This $500k bottom cleared the deck for the massive 2012 recovery.
-                      </div>
-                  </div>
-              </div>
-
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2012</div>
-                  <div class="node-content">
-                      <div class="node-title">Facebook IPO</div>
-                      <p class="node-text">The first major "Tech IPO" of the new era minted millionaires overnight.</p>
-                  </div>
-              </div>
-
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2015</div>
-                  <div class="node-content">
-                      <div class="node-title">Million Dollar Floor</div>
-                      <p class="node-text">March medians crossed the $1M threshold, paving way to the housing market we know today.</p>
-                  </div>
-              </div>
-
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2018</div>
-                  <div class="node-content">
-                      <div class="node-title">5% scare</div>
-                      <p class="node-text">Mortgage rates hit 5% once more, causing fear and a market correction</p>
-                  </div>
-              </div>
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2020</div>
-                  <div class="node-content">
-                      <div class="node-title">The Great Pivot</div>
-                      <p class="node-text">Remote work made the suburbs hotter than ever.</p>
-                  </div>
-              </div>
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2021</div>
-                  <div class="node-content">
-                      <div class="node-title">Free money</div>
-                      <p class="node-text">Interest rates hit historic lows (sub-3%). Buyers had infinite purchasing power, driving the steepest appreciation curve in history.</p>
-                  </div>
-              </div>
-              <div class="timeline-node">
-                  <div class="year-bubble glass-inner">2022</div>
-                  <div class="node-content">
-                      <div class="node-title">The Rate Shock</div>
-                      <p class="node-text">The Fed tripled rates. Prices corrected sharply in Q3/Q4.</p>
-                  </div>
-              </div>
-          </div>
-      </section>
-
       <section id="strategy" class="glass strategy-container">
           <h2>2026 Strategy</h2>
           <div class="ios-toggle glass-inner">
@@ -209,7 +132,6 @@
           </div>
 
           <div id="strat-buy" class="strat-content active">
-              <!-- UPDATED: Replaced removed inline apple colors with dynamic status colors -->
               <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
               <p style="font-size:1.25rem; color:var(--text-sub)">
                   Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".
@@ -217,8 +139,8 @@
           </div>
 
           <div id="strat-sell" class="strat-content">
-              <!-- UPDATED: Replaced removed inline apple colors with dynamic status colors -->
-              <h3 style="color:var(--secondary-accent)">Prep for Peak</h3>
+              <!-- Reusing the new icy blue color variable we just created in CSS for strategy highlights -->
+              <h3 style="color:#5683BA">Prep for Peak</h3>
               <p style="font-size:1.25rem; color:var(--text-sub)">
                   Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.
               </p>
@@ -234,7 +156,8 @@
                   <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
               </div>
           </div>
-          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion">
+          <!-- Explicit dimensions to prevent jank -->
+          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion" width="120" height="120">
       </div>
 
     </div>
@@ -245,5 +168,8 @@
   
   <!-- Link to external JS -->
   <script src="2025.js"></script>
-  </body>
+  
+  <!-- INSTANT.PAGE Hover Prefetching -->
+  <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
+</body>
 </html>
