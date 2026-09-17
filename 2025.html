@@ -32,48 +32,26 @@
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
 
-      <!-- PRICE CHART SECTION (Master Glass with Integrated 2025 Medians Key) -->
+      <!-- PRICE CHART SECTION (Interactive Filtering) -->
       <section id="prices" class="glass chart-section">
           
-          <!-- Consolidated Header -->
-          <div style="text-align: center; margin-bottom: 2rem;">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
               <h2 style="margin-bottom: 0.25rem;">2025 Medians & Price History</h2>
-              <p class="chart-desc" style="margin: 0 auto;">2025 set new records. Scrub the chart below to reveal historical events.</p>
+              <p class="chart-desc" style="margin: 0 auto;">Scrub the chart to reveal history. <strong>Tap a pill to filter by property type.</strong></p>
           </div>
           
-          <!-- The Massive "Stupid-Proof" Global Key -->
-          <div class="flex-grid" style="margin-bottom: 2rem;">
-
-            <!-- The Compact iOS Widget Key -->
-          <div class="glass-inner key-metrics-bar">
-              
-              <!-- Houses Key -->
-              <div class="metric-col">
-                  <div class="metric-header"><div class="dot red"></div> Houses</div>
-                  <div class="metric-val">$2.0M</div>
-                  <div class="metric-delta pos">
-                      <span class="material-symbols-rounded">arrow_upward</span> 0.50%
-                  </div>
-              </div>
-
-              <!-- Condos Key -->
-              <div class="metric-col">
-                  <div class="metric-header"><div class="dot blue"></div> Condos</div>
-                  <div class="metric-val">$760k</div>
-                  <div class="metric-delta neg">
-                      <span class="material-symbols-rounded">arrow_downward</span> 2.72%
-                  </div>
-              </div>
-
-              <!-- Townhomes Key -->
-              <div class="metric-col">
-                  <div class="metric-header"><div class="dot green"></div> T-Homes</div>
-                  <div class="metric-val">$1.3M</div>
-                  <div class="metric-delta pos">
-                      <span class="material-symbols-rounded">arrow_upward</span> 0.19%
-                  </div>
-              </div>
-              
+          <!-- NEW: Interactive Tinted Glass Filter Pills -->
+          <div class="legend-row filter-row">
+              <button class="filter-pill neutral active" onclick="setChartFilter('All', this)">All</button>
+              <button class="filter-pill red" onclick="setChartFilter('Houses', this)">
+                  <div class="dot red"></div> Houses <span class="pill-price">$2.0M</span>
+              </button>
+              <button class="filter-pill blue" onclick="setChartFilter('Condos', this)">
+                  <div class="dot blue"></div> Condos <span class="pill-price">$760k</span>
+              </button>
+              <button class="filter-pill green" onclick="setChartFilter('Townhomes', this)">
+                  <div class="dot green"></div> T-Homes <span class="pill-price">$1.3M</span>
+              </button>
           </div>
           
           <!-- The Interactive Chart -->
