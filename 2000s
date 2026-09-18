@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Market Report</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preload" href="style.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="market-report-main">
+    <div class="report-container">
+      
+      <header class="hero">
+          <h1>The 2000s: The Double Bubble</h1>
+          <p>Silicon Valley Real Estate Rewind ⏪</p>
+      </header>
+      <!-- COLLAPSIBLE DISCLAIMER PILL (Apple Purple) -->
+      <div class="disclaimer-container">
+          <details class="disclaimer-dropdown glass-inner">
+              <summary>
+                  <span class="material-symbols-rounded pill-icon">info</span>
+                  Market Data Disclaimer
+                  <span class="material-symbols-rounded dropdown-icon">expand_more</span>
+              </summary>
+              <div class="disclaimer-content">
+              Source: MLSListings. Information is deemed reliable but not guaranteed. Data discrepancies may occur, and pending properties may influence final figures. Market area includes: Atherton, Campbell, Cupertino, East Palo Alto, Los Altos, Los Gatos, Menlo Park, Mountain View, Palo Alto, Redwood City, San Jose, Santa Clara, and Sunnyvale.    
+              <br>
+              <br>Median ≠ Average ≠ Mode. Outliers exist. Obviously.
+              </div>
+          </details>
+      </div>
+
+     <!-- CONSOLIDATED RETROSPECTIVE & STRATEGY SECTION -->
+      <section id="forecast-strategy" class="glass chart-section">
+          <h2 style="margin-bottom: 20px;">2000s Market Drivers</h2>
+          <div class="flex-grid" style="margin-bottom: 2.5rem;">
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Interest Rates</div><h3>The 1% Stimulus</h3></div>
+                  <p>To combat the 2001 Dot-Com bust, the Fed slashed rates to 1%. This era of unprecedented cheap debt planted the initial seeds for the subprime housing bubble.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Demand</div><h3>Speculative Frenzy</h3></div>
+                  <p>Predatory lending and relaxed qualifications caused an influx of purchases. The market was temporarily driven by speculative flippers rather than grounded homeowners.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Prices</div><h3>The Double Correction</h3></div>
+                  <p>Silicon Valley faced two distinct shocks: the localized evaporation of Dot-Com paper wealth, followed years later by the global liquidity freeze of the Great Recession.</p>
+              </div>
+          </div>
+
+          <h2 style="margin-bottom: 20px;">Timeless Market Lessons</h2>
+          <div style="text-align: center;">
+              <div class="ios-toggle glass-inner">
+                  <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
+                  <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
+              </div>
+          </div>
+
+          <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
+              <h3 style="color:var(--status-pos)">Fundamentals Over Frenzy</h3>
+              <p style="font-size:1.125rem;">
+                  The 2000s proved that trying to perfectly time a bubble is dangerous. However, purchasing real estate with long-term fundamentals—rather than speculative hype—always wins out. Navigating economic uncertainty requires a strategic planning partner to help you identify true underlying value.
+              </p>
+          </div>
+
+          <div id="strat-sell" class="strat-content insight-block glass-inner" style="margin-top: 0;">
+              <h3 style="color:#5683BA">Protecting Your Equity</h3>
+              <p style="font-size:1.125rem;">
+                  When liquidity dried up in 2008, over-leveraged sellers were caught off guard. The lasting lesson is that proactive equity management and positioning your property ahead of macroeconomic shifts is critical. Maximizing ROI in any decade requires foresight and preparation, not just a 'For Sale' sign.
+              </p>
+          </div>
+      </section>
+
+    <!-- CONSOLIDATED FORECAST & STRATEGY SECTION -->
+      <section id="forecast-strategy" class="glass chart-section">
+          <h2 style="margin-bottom: 20px;">2026 Forecast</h2>
+          <div class="flex-grid" style="margin-bottom: 2.5rem;">
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Interest Rates</div><h3>The Pivot Point</h3></div>
+                  <p>Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Inventory</div><h3>Golden Handcuffs</h3></div>
+                  <p>Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div><div class="card-label">Prices</div><h3>4-8% Growth</h3></div>
+                  <p>If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
+              </div>
+          </div>
+
+          <h2 style="margin-bottom: 20px;">2026 Strategy</h2>
+          <div style="text-align: center;">
+              <div class="ios-toggle glass-inner">
+                  <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
+                  <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
+              </div>
+          </div>
+
+          <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
+              <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
+              <p style="font-size:1.125rem;">Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".</p>
+          </div>
+
+          <div id="strat-sell" class="strat-content insight-block glass-inner" style="margin-top: 0;">
+              <h3 style="color:#5683BA">Prep for Peak</h3>
+              <p style="font-size:1.125rem;">Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.</p>
+          </div>
+      </section>
+      
+      <!-- CONTACT SECTION -->
+      <div id="contact" class="glass sig-block">
+          <div class="sig-info">
+              <h3>Oscar Deion Espinosa</h3>
+              <div class="sig-role">SellSiliconValley</div>
+              <div class="sig-links">
+                  <a href="tel:iPhone">(718)781-9942</a>
+                  <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
+              </div>
+          </div>
+          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion" width="120" height="120">
+      </div>
+
+    </div>
+  </div> 
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="script.js"></script>
+  <!-- Data Interceptor: Filters for 2000-2009 before the chart draws -->
+  <script>
+      if (typeof decadeData !== 'undefined') {
+          decadeData = decadeData.filter(row => {
+              const year = row[0].getFullYear();
+              return year >= 2000 && year <= 2009;
+          });
+      }
+  </script>
+  <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
+</body>
+</html>
