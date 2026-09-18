@@ -10,6 +10,7 @@
   --c-condos:    #007AFF; /* Apple Blue */
   --c-townhomes: #34C759; /* Apple Green */
   --c-volume:    #FFCC00; /* Apple Yellow */
+  --c-purple:    #AF52DE; /* Apple Purple (NEW) */
 
   /* Ambient RGBs */
   --g-blue:   183, 204, 234;
@@ -53,7 +54,8 @@ body.dark-mode {
   --c-houses:    #FF453A; 
   --c-condos:    #0A84FF; 
   --c-townhomes: #32D74B; 
-  --c-volume:    #FFD60A; 
+  --c-volume:    #FFD60A;
+  --c-purple:    #BF5AF2; /* Apple Purple */
   
   --status-pos: #32D74B; 
   --status-neg: #FF453A; 
@@ -361,4 +363,81 @@ body.dark-mode .insight-box {
   .report-container { padding: 2.5rem 1rem 6rem; }
   .chart-section, .sig-block { padding: 1.5rem; }
   .sig-block { flex-direction: column-reverse; text-align: center; gap: 1.5rem; }
+}
+/* ============================================================== */
+/* --- DISCLAIMER DROPDOWN (Purple Liquid Glass Pill) --- */
+/* ============================================================== */
+
+.disclaimer-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+details.disclaimer-dropdown {
+  /* Purple tint injected directly into the frosted glass base */
+  background: color-mix(in srgb, var(--c-purple) 15%, var(--glass-inner)) !important;
+  border: 1px solid color-mix(in srgb, var(--c-purple) 40%, transparent) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.6) !important;
+  border-radius: 999px; /* Pill shape when closed */
+  width: 100%;
+  max-width: 28rem;
+  transition: border-radius 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.dark-mode details.disclaimer-dropdown {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* When opened, snap from pill to an iOS panel radius */
+details.disclaimer-dropdown[open] {
+  border-radius: 1.25rem;
+}
+
+details.disclaimer-dropdown summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+  user-select: none;
+}
+
+details.disclaimer-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclaimer-dropdown .pill-icon {
+  color: var(--c-purple);
+  font-size: 1.125rem !important;
+}
+
+.disclaimer-dropdown .dropdown-icon {
+  color: var(--text-sub);
+  font-size: 1.125rem !important;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+details.disclaimer-dropdown[open] .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+details.disclaimer-dropdown[open] summary {
+  border-bottom: 1px solid color-mix(in srgb, var(--c-purple) 20%, transparent);
+}
+
+.disclaimer-content {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.8125rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+  text-align: center;
+  animation: fadeUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
