@@ -433,7 +433,7 @@ const defaultInsight = {
 // --- 2. GLOBAL CHART STATE & FILTER LOGIC ---
 let currentPropertyFilter = 'All';
 
-// DECLARE GLOBAL INSTANCES: Prevents memory leaks and internal crashes
+// DECLARE GLOBAL INSTANCES
 let chartP = null, chartD = null, chartV = null;
 let dataP = null, dataD = null, dataV = null;
 
@@ -451,7 +451,6 @@ function setChartFilter(type, btn) {
         }
     });
 
-    // Reset insight box to default when filter changes
     document.getElementById('insight-title').innerHTML = defaultInsight.title;
     document.getElementById('insight-text').innerHTML = defaultInsight.text;
 
@@ -494,6 +493,7 @@ function drawCharts() {
     const dateFmt = new google.visualization.DateFormat({ pattern: 'MMMM yyyy' });
     const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
 
+    // --- Dynamic Filter Logic Arrays (Only applies to Price Chart now) ---
     let activeColumns = [0, 1, 2, 3]; 
     let activeColors = [cRed, cBlue, cGreen];
     
@@ -532,7 +532,6 @@ function drawCharts() {
         });
     }
 
-    // FIXED: Animation removed so the SVG engine does not crash when lines are deleted!
     chartP.draw(viewP, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
@@ -555,14 +554,12 @@ function drawCharts() {
         dateFmt.format(dataD, 0);
     }
 
-    const viewD = new google.visualization.DataView(dataD);
-    viewD.setColumns(activeColumns);
-
     if (!chartD) {
         chartD = new google.visualization.LineChart(document.getElementById('dom_chart'));
     }
 
-    chartD.draw(viewD, {
+    // Notice we pass dataD directly here, completely bypassing the viewP filter
+    chartD.draw(dataD, {
         backgroundColor: 'transparent',
         legend: { position: 'none' },
         chartArea: { width: '85%', height: '82%' },
@@ -570,7 +567,8 @@ function drawCharts() {
         vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC },
         lineWidth: 3, 
         curveType: 'function', 
-        colors: activeColors
+        // Force the DOM chart to always render all three static colors
+        colors: [cRed, cBlue, cGreen] 
     });
 
     // --- Volume Chart ---
