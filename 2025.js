@@ -475,14 +475,26 @@ function setStrategy(type, btn) {
     document.getElementById('strat-' + type).classList.add('active');
 }
 
-function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    drawCharts();
-}
-  
+// --- 3.1 AUTOMATIC DEVICE THEME DETECTION ---
+
+// 1. Initial check when the page loads
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
 }
+
+// 2. Listen for live changes (if the user switches their device theme while the page is open)
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (event.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    
+    // Redraw the charts so text and gridlines update to the new theme colors
+    if (typeof drawCharts === "function") {
+        drawCharts(); 
+    }
+});
 
 // --- 4. CHARTS ---
 google.charts.load('current', {'packages':['corechart']});
