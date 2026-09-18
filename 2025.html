@@ -40,17 +40,17 @@
               <p class="chart-desc" style="margin: 0 auto;">Scrub the chart to reveal history. <strong>Tap a pill to filter by property type.</strong></p>
           </div>
           
-          <!-- NEW: Interactive Tinted Glass Filter Pills -->
+          <!-- Interactive Liquid Glass Filter Pills with Icons -->
           <div class="legend-row filter-row">
-              <button class="filter-pill neutral active" onclick="setChartFilter('All', this)">All</button>
-              <button class="filter-pill red" onclick="setChartFilter('Houses', this)">
-                  <div class="dot red"></div> Houses <span class="pill-price">$2.0M</span>
+              <button class="filter-pill glass-inner all-pill active" onclick="setChartFilter('All', this)">All</button>
+              <button class="filter-pill glass-inner house-pill" onclick="setChartFilter('Houses', this)">
+                  <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses <span class="pill-price">$2.0M</span>
               </button>
-              <button class="filter-pill blue" onclick="setChartFilter('Condos', this)">
-                  <div class="dot blue"></div> Condos <span class="pill-price">$760k</span>
+              <button class="filter-pill glass-inner condo-pill" onclick="setChartFilter('Condos', this)">
+                  <span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos <span class="pill-price">$760k</span>
               </button>
-              <button class="filter-pill green" onclick="setChartFilter('Townhomes', this)">
-                  <div class="dot green"></div> T-Homes <span class="pill-price">$1.3M</span>
+              <button class="filter-pill glass-inner town-pill" onclick="setChartFilter('Townhomes', this)">
+                  <span class="material-symbols-rounded pill-icon icon-green">location_city</span> T-Homes <span class="pill-price">$1.3M</span>
               </button>
           </div>
           
@@ -72,10 +72,11 @@
           <h2>Market Speed</h2>
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
           
+          <!-- Unified Static Legend Pills -->
           <div class="legend-row">
-              <div class="legend-pill glass-inner"><div class="dot red"></div> Houses</div>
-              <div class="legend-pill glass-inner"><div class="dot blue"></div> Condos</div>
-              <div class="legend-pill glass-inner"><div class="dot green"></div> Townhomes</div>
+              <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses</div>
+              <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos</div>
+              <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-green">location_city</span> Townhomes</div>
           </div>
           
           <div id="dom_chart" class="chart-canvas"></div>
@@ -87,7 +88,8 @@
           <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
           
           <div class="legend-row">
-              <div class="legend-pill glass-inner"><div class="dot yellow"></div> Total Volume</div>
+              <!-- Using the analytics chart icon for Volume -->
+              <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-yellow">analytics</span> Total Volume</div>
           </div>
           
           <div id="volume_chart" class="chart-canvas"></div>
@@ -164,7 +166,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   
   <!-- Link to external JS -->
-  <script src="2025.js?v=3"></script>
+  <script src="2025.js"></script>
   
   <!-- INSTANT.PAGE Hover Prefetching -->
   <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
