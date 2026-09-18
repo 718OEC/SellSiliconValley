@@ -40,9 +40,11 @@
               <p class="chart-desc" style="margin: 0 auto;">Scrub the chart to reveal history. <strong>Tap a pill to filter by property type.</strong></p>
           </div>
           
-          <!-- Interactive Liquid Glass Filter Pills with Icons -->
+          <!-- NEW: Interactive Tinted Glass Filter Pills -->
           <div class="legend-row filter-row">
-              <button class="filter-pill glass-inner all-pill active" onclick="setChartFilter('All', this)">All</button>
+              <button class="filter-pill glass-inner all-pill active" onclick="setChartFilter('All', this)">
+                  <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
+              </button>
               <button class="filter-pill glass-inner house-pill" onclick="setChartFilter('Houses', this)">
                   <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses <span class="pill-price">$2.0M</span>
               </button>
@@ -72,7 +74,6 @@
           <h2>Market Speed</h2>
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price.</p>
           
-          <!-- Unified Static Legend Pills -->
           <div class="legend-row">
               <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses</div>
               <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos</div>
@@ -88,7 +89,6 @@
           <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
           
           <div class="legend-row">
-              <!-- Using the analytics chart icon for Volume -->
               <div class="legend-pill glass-inner"><span class="material-symbols-rounded pill-icon icon-yellow">analytics</span> Total Volume</div>
           </div>
           
@@ -166,7 +166,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   
   <!-- Link to external JS -->
-  <script src="2025.js"></script>
+  <script src="2025.js?v=8"></script>
   
   <!-- INSTANT.PAGE Hover Prefetching -->
   <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
