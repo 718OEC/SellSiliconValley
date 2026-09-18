@@ -369,7 +369,7 @@ const historicalInsights = {
     },
     2008: { 
         title: "2008: The Great Recession", 
-        text: "Lehman Brothers collapsed and foreclosures spiked. Prices would eventually bottom out in 2009/2010 at ~$500k.<br><br><em>Insight: This $500k bottom cleared the deck for the massive 2012 recovery.</em>" 
+        text: "Lehman Brothers collapsed and foreclosures spiked. Prices would eventually bottom out in 2009/2010 at ~$445k." 
     },
     2010: { 
         title: "2010: Web 2.0 Recovery", 
