@@ -309,11 +309,23 @@ body.dark-mode .insight-box {
 .icon-green  { color: var(--c-townhomes); }
 .icon-yellow { color: var(--c-volume); }
 
-/* --- TINTED BACKGROUNDS FOR PILLS --- */
-.filter-pill.house-pill { background: color-mix(in srgb, var(--c-houses) 15%, transparent); border-color: color-mix(in srgb, var(--c-houses) 30%, transparent); }
-.filter-pill.condo-pill { background: color-mix(in srgb, var(--c-condos) 15%, transparent); border-color: color-mix(in srgb, var(--c-condos) 30%, transparent); }
-.filter-pill.town-pill  { background: color-mix(in srgb, var(--c-townhomes) 15%, transparent); border-color: color-mix(in srgb, var(--c-townhomes) 30%, transparent); }
-.filter-pill.all-pill   { background: color-mix(in srgb, var(--c-volume) 15%, transparent); border-color: color-mix(in srgb, var(--c-volume) 30%, transparent); }
+/* --- TINTED BACKGROUNDS FOR PILLS (True Liquid Glass Composite) --- */
+.filter-pill.house-pill, .legend-pill.house-pill { 
+  background: color-mix(in srgb, var(--c-houses) 15%, var(--glass-inner)) !important; 
+  border-color: color-mix(in srgb, var(--c-houses) 40%, transparent) !important; 
+}
+.filter-pill.condo-pill, .legend-pill.condo-pill { 
+  background: color-mix(in srgb, var(--c-condos) 15%, var(--glass-inner)) !important; 
+  border-color: color-mix(in srgb, var(--c-condos) 40%, transparent) !important; 
+}
+.filter-pill.town-pill, .legend-pill.town-pill  { 
+  background: color-mix(in srgb, var(--c-townhomes) 15%, var(--glass-inner)) !important; 
+  border-color: color-mix(in srgb, var(--c-townhomes) 40%, transparent) !important; 
+}
+.filter-pill.all-pill, .legend-pill.volume-pill   { 
+  background: color-mix(in srgb, var(--c-volume) 15%, var(--glass-inner)) !important; 
+  border-color: color-mix(in srgb, var(--c-volume) 40%, transparent) !important; 
+}
 
 /* --- ACTIVE FILTER STATES --- */
 .filter-pill.active {
@@ -321,18 +333,10 @@ body.dark-mode .insight-box {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1), var(--glass-inner-highlight);
 }
 
-.filter-pill.house-pill.active { border-color: var(--c-houses); }
-.filter-pill.condo-pill.active { border-color: var(--c-condos); }
-.filter-pill.town-pill.active  { border-color: var(--c-townhomes); }
-.filter-pill.all-pill.active   { border-color: var(--c-volume); }
-
-/* PASSIVE STATE */
-.filter-pill.passive {
-  opacity: 0.4;
-  filter: grayscale(80%);
-  transform: scale(0.95);
-  box-shadow: none;
-}
+.filter-pill.house-pill.active { border-color: var(--c-houses) !important; }
+.filter-pill.condo-pill.active { border-color: var(--c-condos) !important; }
+.filter-pill.town-pill.active  { border-color: var(--c-townhomes) !important; }
+.filter-pill.all-pill.active   { border-color: var(--c-volume) !important; }
 
 /* ============================================================== */
 /* --- INTERACTIVE HOVER STATES --- */
