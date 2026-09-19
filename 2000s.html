@@ -125,6 +125,133 @@
     </div>
   </div> 
 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate Market Report</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preload" href="style.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" as="style">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="market-report-main">
+    <div class="report-container">
+      
+      <header class="hero">
+          <h1>The 2000s: The Double Bubble</h1>
+          <p>Silicon Valley Real Estate Rewind ⏪</p>
+      </header>
+      <!-- COLLAPSIBLE DISCLAIMER PILL (Apple Purple) -->
+      <div class="disclaimer-container">
+          <details class="disclaimer-dropdown glass-inner">
+              <summary>
+                  <span class="material-symbols-rounded pill-icon">info</span>
+                  Market Data Disclaimer
+                  <span class="material-symbols-rounded dropdown-icon">expand_more</span>
+              </summary>
+              <div class="disclaimer-content">
+              Source: MLSListings. Information is deemed reliable but not guaranteed. Data discrepancies may occur, and pending properties may influence final figures. Market area includes: Atherton, Campbell, Cupertino, East Palo Alto, Los Altos, Los Gatos, Menlo Park, Mountain View, Palo Alto, Redwood City, San Jose, Santa Clara, and Sunnyvale.    
+              <br>
+              <br>Median ≠ Average ≠ Mode. Outliers exist. Obviously.
+              </div>
+          </details>
+      </div>
+<!-- PRICE CHART SECTION -->
+      <section id="prices" class="glass chart-section">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+              <h2 style="margin-bottom: 0.25rem;">2025 Medians & Price History</h2>
+              <p class="chart-desc" style="margin: 0 auto;">Scrub the chart to reveal history. <strong>Tap a pill to filter by property type.</strong></p>
+          </div>
+          
+          <!-- Price Chart Filters -->
+          <div class="legend-row filter-row">
+              <button class="filter-pill glass-inner all-pill active" onclick="setFilter('price', 'All', this)">
+                  <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
+              </button>
+              <button class="filter-pill glass-inner house-pill" onclick="setFilter('price', 'Houses', this)">
+                  <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses <span class="pill-price">$894K</span>
+              </button>
+              <button class="filter-pill glass-inner condo-pill" onclick="setFilter('price', 'Condos', this)">
+                  <span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos <span class="pill-price">$470K</span>
+              </button>
+              <button class="filter-pill glass-inner town-pill" onclick="setFilter('price', 'Townhomes', this)">
+                  <span class="material-symbols-rounded pill-icon icon-green">location_city</span> T-Homes <span class="pill-price">$660K</span>
+              </button>
+          </div>
+          
+          <div id="price_chart" class="chart-canvas"></div>
+          
+          <div id="dynamic-insight" class="insight-block glass-inner">
+             <h3 id="insight-title">History Rhymes: The AI Parallel</h3>
+             <p id="insight-text">
+               Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
+               <br><br>
+               <strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty.
+             </p>
+          </div>
+      </section>
+
+      <!-- SPEED CHART SECTION -->
+      <section id="speed" class="glass chart-section">
+          <h2>Market Speed</h2>
+          <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price. <strong>Tap a pill to filter.</strong></p>
+          
+          <!-- NEW: DOM Chart Filters -->
+          <div class="legend-row filter-row">
+              <button class="filter-pill glass-inner all-pill active" onclick="setFilter('dom', 'All', this)">
+                  <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
+              </button>
+              <button class="filter-pill glass-inner house-pill" onclick="setFilter('dom', 'Houses', this)">
+                  <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses
+              </button>
+              <button class="filter-pill glass-inner condo-pill" onclick="setFilter('dom', 'Condos', this)">
+                  <span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos
+              </button>
+              <button class="filter-pill glass-inner town-pill" onclick="setFilter('dom', 'Townhomes', this)">
+                  <span class="material-symbols-rounded pill-icon icon-green">location_city</span> T-Homes
+              </button>
+          </div>
+          
+          <div id="dom_chart" class="chart-canvas"></div>
+      </section>
+
+      <!-- VOLUME CHART SECTION -->
+      <section id="volume" class="glass chart-section">
+          <h2>Sales Volume</h2>
+          <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
+          
+          <div class="legend-row">
+              <!-- Added volume-pill class to catch the yellow tint styling -->
+              <div class="legend-pill glass-inner volume-pill"><span class="material-symbols-rounded pill-icon icon-yellow">analytics</span> Total Volume</div>
+          </div>
+          
+          <div id="volume_chart" class="chart-canvas"></div>
+      </section>
+      
+      <!-- CONTACT SECTION -->
+      <div id="contact" class="glass sig-block">
+          <div class="sig-info">
+              <h3>Oscar Deion Espinosa</h3>
+              <div class="sig-role">SellSiliconValley</div>
+              <div class="sig-links">
+                  <a href="tel:iPhone">(718)781-9942</a>
+                  <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
+              </div>
+          </div>
+          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion" width="120" height="120">
+      </div>
+
+    </div>
+  </div> 
+
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="script.js"></script>
   <!-- Data Interceptor: Filters for 2000-2009 before the chart draws -->
