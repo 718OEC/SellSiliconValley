@@ -37,84 +37,77 @@
               </div>
           </details>
       </div>
-
-     <!-- CONSOLIDATED RETROSPECTIVE & STRATEGY SECTION -->
-      <section id="forecast-strategy" class="glass chart-section">
-          <h2 style="margin-bottom: 20px;">2000s Market Drivers</h2>
-          <div class="flex-grid" style="margin-bottom: 2.5rem;">
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Interest Rates</div><h3>The 1% Stimulus</h3></div>
-                  <p>To combat the 2001 Dot-Com bust, the Fed slashed rates to 1%. This era of unprecedented cheap debt planted the initial seeds for the subprime housing bubble.</p>
-              </div>
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Demand</div><h3>Speculative Frenzy</h3></div>
-                  <p>Predatory lending and relaxed qualifications caused an influx of purchases. The market was temporarily driven by speculative flippers rather than grounded homeowners.</p>
-              </div>
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Prices</div><h3>The Double Correction</h3></div>
-                  <p>Silicon Valley faced two distinct shocks: the localized evaporation of Dot-Com paper wealth, followed years later by the global liquidity freeze of the Great Recession.</p>
-              </div>
+<!-- PRICE CHART SECTION -->
+      <section id="prices" class="glass chart-section">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+              <h2 style="margin-bottom: 0.25rem;">2025 Medians & Price History</h2>
+              <p class="chart-desc" style="margin: 0 auto;">Scrub the chart to reveal history. <strong>Tap a pill to filter by property type.</strong></p>
           </div>
-
-          <h2 style="margin-bottom: 20px;">Timeless Market Lessons</h2>
-          <div style="text-align: center;">
-              <div class="ios-toggle glass-inner">
-                  <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
-                  <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
-              </div>
+          
+          <!-- Price Chart Filters -->
+          <div class="legend-row filter-row">
+              <button class="filter-pill glass-inner all-pill active" onclick="setFilter('price', 'All', this)">
+                  <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
+              </button>
+              <button class="filter-pill glass-inner house-pill" onclick="setFilter('price', 'Houses', this)">
+                  <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses <span class="pill-price">$2.0M</span>
+              </button>
+              <button class="filter-pill glass-inner condo-pill" onclick="setFilter('price', 'Condos', this)">
+                  <span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos <span class="pill-price">$760k</span>
+              </button>
+              <button class="filter-pill glass-inner town-pill" onclick="setFilter('price', 'Townhomes', this)">
+                  <span class="material-symbols-rounded pill-icon icon-green">location_city</span> T-Homes <span class="pill-price">$1.3M</span>
+              </button>
           </div>
-
-          <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
-              <h3 style="color:var(--status-pos)">Fundamentals Over Frenzy</h3>
-              <p style="font-size:1.125rem;">
-                  The 2000s proved that trying to perfectly time a bubble is dangerous. However, purchasing real estate with long-term fundamentals—rather than speculative hype—always wins out. Navigating economic uncertainty requires a strategic planning partner to help you identify true underlying value.
-              </p>
-          </div>
-
-          <div id="strat-sell" class="strat-content insight-block glass-inner" style="margin-top: 0;">
-              <h3 style="color:#5683BA">Protecting Your Equity</h3>
-              <p style="font-size:1.125rem;">
-                  When liquidity dried up in 2008, over-leveraged sellers were caught off guard. The lasting lesson is that proactive equity management and positioning your property ahead of macroeconomic shifts is critical. Maximizing ROI in any decade requires foresight and preparation, not just a 'For Sale' sign.
-              </p>
+          
+          <div id="price_chart" class="chart-canvas"></div>
+          
+          <div id="dynamic-insight" class="insight-block glass-inner">
+             <h3 id="insight-title">History Rhymes: The AI Parallel</h3>
+             <p id="insight-text">
+               Today's AI boom (or bubble) feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble and crisis years later.
+               <br><br>
+               <strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty.
+             </p>
           </div>
       </section>
 
-    <!-- CONSOLIDATED FORECAST & STRATEGY SECTION -->
-      <section id="forecast-strategy" class="glass chart-section">
-          <h2 style="margin-bottom: 20px;">2026 Forecast</h2>
-          <div class="flex-grid" style="margin-bottom: 2.5rem;">
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Interest Rates</div><h3>The Pivot Point</h3></div>
-                  <p>Expect stable rates through Q2. A forecasted policy pivot in May could trigger a rate cut, fueling the summer market.</p>
-              </div>
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Inventory</div><h3>Golden Handcuffs</h3></div>
-                  <p>Inventory is structurally low. If rates drop mid-year, this shortage will collide with unleashed demand.</p>
-              </div>
-              <div class="glass-inner card-small">
-                  <div><div class="card-label">Prices</div><h3>4-8% Growth</h3></div>
-                  <p>If the AI bubble is actually a boom, tech stock valuations will allow buyers to push prices even higher.</p>
-              </div>
-          </div>
+      <!-- SPEED CHART SECTION -->
+      <section id="speed" class="glass chart-section">
+          <h2>Market Speed</h2>
+          <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price. <strong>Tap a pill to filter.</strong></p>
+          
+          <!-- NEW: DOM Chart Filters -->
+          <div class="legend-row filter-row">
+              <button class="filter-pill glass-inner all-pill active" onclick="setFilter('dom', 'All', this)">
+                  <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
+              </button>
+              <button class="filter-pill glass-inner house-pill" onclick="setFilter('dom', 'Houses', this)">
+                  <span class="material-symbols-rounded pill-icon icon-red">cottage</span> Houses
+              </button>
+              <button class="filter-pill glass-inner condo-pill" onclick="setFilter('dom', 'Condos', this)">
+                  <span class="material-symbols-rounded pill-icon icon-blue">apartment</span> Condos
+              </button>
+              <button class="filter-pill glass-inner town-pill" onclick="setFilter('dom', 'Townhomes', this)">
+                  <span class="material-symbols-rounded pill-icon icon-green">location_city</span> T-Homes
+              </button>
+          </div>
+          
+          <div id="dom_chart" class="chart-canvas"></div>
+      </section>
 
-          <h2 style="margin-bottom: 20px;">2026 Strategy</h2>
-          <div style="text-align: center;">
-              <div class="ios-toggle glass-inner">
-                  <button class="toggle-opt active" onclick="setStrategy('buy', this)">For Buyers</button>
-                  <button class="toggle-opt" onclick="setStrategy('sell', this)">For Sellers</button>
-              </div>
-          </div>
-
-          <div id="strat-buy" class="strat-content active insight-block glass-inner" style="margin-top: 0;">
-              <h3 style="color:var(--status-pos)">The "Winter Floor" Trade</h3>
-              <p style="font-size:1.125rem;">Prices are lowest right now. Buying now means fewer choices, but a better price. You are trading "choice" for "value".</p>
-          </div>
-
-          <div id="strat-sell" class="strat-content insight-block glass-inner" style="margin-top: 0;">
-              <h3 style="color:#5683BA">Prep for Peak</h3>
-              <p style="font-size:1.125rem;">Do not list in January. Use this month to paint and stage. Hit the market in the spring for maximum ROI.</p>
-          </div>
-      </section>
+      <!-- VOLUME CHART SECTION -->
+      <section id="volume" class="glass chart-section">
+          <h2>Sales Volume</h2>
+          <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
+          
+          <div class="legend-row">
+              <!-- Added volume-pill class to catch the yellow tint styling -->
+              <div class="legend-pill glass-inner volume-pill"><span class="material-symbols-rounded pill-icon icon-yellow">analytics</span> Total Volume</div>
+          </div>
+          
+          <div id="volume_chart" class="chart-canvas"></div>
+      </section>
       
       <!-- CONTACT SECTION -->
       <div id="contact" class="glass sig-block">
