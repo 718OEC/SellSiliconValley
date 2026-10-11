@@ -498,3 +498,60 @@ body.dark-mode .floating-dock {
     flex: 1;
   }
 }
+/* ============================================================== */
+/* --- DOCK ACTION SHEET (Timeline Drawer) --- */
+/* ============================================================== */
+
+.dock-drawer-container {
+  position: relative;
+  display: flex;
+}
+
+.era-drawer {
+  position: absolute;
+  bottom: calc(100% + 1rem); /* Pops up exactly above the dock */
+  left: 50%;
+  
+  /* Hidden state: scaled down slightly and invisible */
+  transform: translateX(-50%) translateY(10px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  
+  display: flex;
+  flex-direction: column;
+  min-width: 12rem;
+  padding: 0.5rem;
+  
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-origin: bottom center;
+}
+
+/* Open state: snaps to full size */
+.era-drawer.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.drawer-item {
+  padding: 0.875rem 1rem;
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: 0.75rem;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .drawer-item:hover {
+    background: var(--segmented-bg);
+  }
+}
+
+/* Highlight the current page they are on */
+.drawer-item.active-era {
+  color: var(--a-blue);
+  background: color-mix(in srgb, var(--a-blue) 15%, transparent);
+}
