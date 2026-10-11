@@ -543,15 +543,29 @@ body.dark-mode .floating-dock {
   transition: background 0.2s;
   text-align: center;
 }
+/* Strip ugly native browser styles from the toggle button */
+button.dock-btn {
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
+/* Beautiful iOS Hover State */
 @media (hover: hover) and (pointer: fine) {
   .drawer-item:hover {
-    background: var(--segmented-bg);
+    background: color-mix(in srgb, var(--a-blue) 10%, transparent);
+    color: var(--a-blue);
   }
 }
 
-/* Highlight the current page they are on */
+/* The New Apple HIG Active State (Solid Blue Pill) */
 .drawer-item.active-era {
-  color: var(--a-blue);
-  background: color-mix(in srgb, var(--a-blue) 15%, transparent);
+  background: var(--a-blue);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--a-blue) 40%, transparent);
+  font-weight: 600;
 }
