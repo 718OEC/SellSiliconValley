@@ -223,3 +223,22 @@ function drawCharts() {
 window.addEventListener('resize', () => {
     if (chartData.length > 0) drawCharts();
 });
+// --- 5. DOCK DRAWER MENU LOGIC ---
+function toggleDrawer(e) {
+    if (e) e.stopPropagation(); // Prevents the click from immediately closing the menu
+    const drawer = document.getElementById('era-drawer');
+    drawer.classList.toggle('open');
+}
+
+// Close the drawer if the user clicks anywhere else on the screen
+document.addEventListener('click', (e) => {
+    const drawer = document.getElementById('era-drawer');
+    const toggleBtn = document.getElementById('era-toggle');
+    
+    // If the drawer is open, and the click was NOT inside the drawer or on the button
+    if (drawer && drawer.classList.contains('open')) {
+        if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+            drawer.classList.remove('open');
+        }
+    }
+});
