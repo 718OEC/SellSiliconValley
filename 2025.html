@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<!-- NEW: The data-era attribute tells script.js what data to load -->
+<body data-era="2025">
 
   <div id="market-report-main">
     <div class="report-container">
@@ -22,6 +24,7 @@
           <h1>2025: The AI Bubble Peak?</h1>
           <p>Silicon Valley Real Estate Rewind ⏪</p>
       </header>
+      
       <!-- COLLAPSIBLE DISCLAIMER PILL (Apple Purple) -->
       <div class="disclaimer-container">
           <details class="disclaimer-dropdown glass-inner">
@@ -32,8 +35,8 @@
               </summary>
               <div class="disclaimer-content">
               Source: MLSListings. Information is deemed reliable but not guaranteed. Data discrepancies may occur, and pending properties may influence final figures. Market area includes: Atherton, Campbell, Cupertino, East Palo Alto, Los Altos, Los Gatos, Menlo Park, Mountain View, Palo Alto, Redwood City, San Jose, Santa Clara, and Sunnyvale.    
-              <br>
-              <br>Median ≠ Average ≠ Mode. Many homes and neighborhoods do not have a median price of 2 million dollars, however, the overall data will point to a typical price of $2M in the area.
+              <br><br>
+              Median ≠ Average ≠ Mode. Many homes and neighborhoods do not have a median price of 2 million dollars, however, the overall data will point to a typical price of $2M in the area.
               </div>
           </details>
       </div>
@@ -78,7 +81,7 @@
           <h2>Market Speed</h2>
           <p class="chart-desc">Days on Market (DOM) tracks how quickly homes go into contract. Low numbers mean high competition & higher sales price. <strong>Tap a pill to filter.</strong></p>
           
-          <!-- NEW: DOM Chart Filters -->
+          <!-- DOM Chart Filters -->
           <div class="legend-row filter-row">
               <button class="filter-pill glass-inner all-pill active" onclick="setFilter('dom', 'All', this)">
                   <span class="material-symbols-rounded pill-icon icon-yellow">layers</span> All
@@ -103,7 +106,6 @@
           <p class="chart-desc">The total number of closed sales has trended downward due to low inventory & extreme unaffordability. Data includes houses, condos and townhouses</p>
           
           <div class="legend-row">
-              <!-- Added volume-pill class to catch the yellow tint styling -->
               <div class="legend-pill glass-inner volume-pill"><span class="material-symbols-rounded pill-icon icon-yellow">analytics</span> Total Volume</div>
           </div>
           
@@ -162,6 +164,25 @@
 
     </div>
   </div> 
+
+  <!-- THE FLOATING APP DOCK -->
+  <nav class="floating-dock">
+      <!-- 1. Hub Home -->
+      <a href="index.html" class="dock-btn" aria-label="Archives">
+          <span class="material-symbols-rounded">folder_open</span>
+          <span class="dock-label">Archives</span>
+      </a>
+      <!-- 2. Current 2025 Report -->
+      <a href="2025.html" class="dock-btn active" aria-label="2025 Report">
+          <span class="material-symbols-rounded">monitoring</span>
+          <span class="dock-label">2025</span>
+      </a>
+      <!-- 3. Investing Guide -->
+      <a href="investing.html" class="dock-btn" aria-label="Investing Guide">
+          <span class="material-symbols-rounded">real_estate_agent</span>
+          <span class="dock-label">Investing</span>
+      </a>
+  </nav>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="script.js"></script>
