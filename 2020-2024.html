@@ -128,17 +128,31 @@
   </div> 
 
   <!-- THE FLOATING APP DOCK -->
+  <!-- THE FLOATING APP DOCK -->
   <nav class="floating-dock">
       <!-- 1. Hub Home -->
       <a href="index.html" class="dock-btn" aria-label="Archives">
           <span class="material-symbols-rounded">folder_open</span>
           <span class="dock-label">Archives</span>
       </a>
-      <!-- 2. Current 2025 Report -->
-      <a href="2025.html" class="dock-btn active" aria-label="2025 Report">
-          <span class="material-symbols-rounded">monitoring</span>
-          <span class="dock-label">2025</span>
-      </a>
+      
+      <!-- 2. The Timeline Drawer Menu -->
+      <div class="dock-drawer-container">
+          <button class="dock-btn active" id="era-toggle" aria-label="Timeline" onclick="toggleDrawer(event)">
+              <span class="material-symbols-rounded">history</span>
+              <span class="dock-label">Timeline</span>
+          </button>
+          
+          <!-- The Liquid Glass Popup -->
+          <div class="glass-inner era-drawer" id="era-drawer">
+              <!-- Change the active-era class depending on which HTML file this is in -->
+              <a href="2025.html" class="drawer-item">2025: The Peak?</a>
+              <a href="2020-2024.html" class="drawer-item active-era">2020–2024</a>
+              <a href="2010s.html" class="drawer-item">2010s: Web 2.0</a>
+              <a href="2000s.html" class="drawer-item">2000s: Double Bubble</a>
+          </div>
+      </div>
+
       <!-- 3. Investing Guide -->
       <a href="investing.html" class="dock-btn" aria-label="Investing Guide">
           <span class="material-symbols-rounded">real_estate_agent</span>
