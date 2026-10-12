@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-  
-  <!-- Hooked to your new dedicated CSS -->
   <link rel="stylesheet" href="investing.css">
 </head>
 
@@ -21,19 +19,21 @@
         <h1>The Capital Guide</h1>
         <p>Mastering the mechanics of real estate capital. No fluff, just the math that builds wealth.</p>
     </header>
-<!-- COLLAPSIBLE DISCLAIMER PILL (Apple Purple) -->
-      <div class="disclaimer-container">
-          <details class="disclaimer-dropdown glass-inner">
-              <summary>
-                  <span class="material-symbols-rounded pill-icon">info</span>
-                  Financial Disclaimer
-                  <span class="material-symbols-rounded dropdown-icon">expand_more</span>
-              </summary>
-              <div class="disclaimer-content">
-             This guide is for educational purposes only. Real estate investing carries inherent risks, market fluctuations, and liquidity constraints. Talk to a licensed CPA or financial advisor before deploying your capital.
-              </div>
-          </details>
-      </div>
+    
+    <!-- COLLAPSIBLE DISCLAIMER PILL -->
+    <div class="disclaimer-container">
+        <details class="disclaimer-dropdown">
+            <summary>
+                <span class="material-symbols-rounded pill-icon">info</span>
+                Financial Disclaimer
+                <span class="material-symbols-rounded dropdown-icon">expand_more</span>
+            </summary>
+            <div class="disclaimer-content">
+            This guide is for educational purposes only. Real estate investing carries inherent risks, market fluctuations, and liquidity constraints. Talk to a licensed CPA or financial advisor before deploying your capital.
+            </div>
+        </details>
+    </div>
+
     <!-- 1. PREFACE -->
     <h2>1. Preface: Why Real Estate?</h2>
     <p>Why even bother with real estate? Simple: leverage, cash flow, tax write-offs, and massive upside. Sitting on cash in a bank is a guaranteed loss to inflation, and the stock market is a rollercoaster. Real estate is a tangible asset you can touch, and banks love it enough to lend you millions to buy it.</p>
@@ -45,52 +45,52 @@
     
     <div class="bento-grid">
         <!-- Residential -->
-        <div class="glass-card tint-red">
+        <div class="glass-card tint-barter">
             <h3>Residential (1-4 Units)</h3>
             <p>Single-family homes, duplexes, and fourplexes are easy to get into, but they lack the operational scale to absorb economic hits.</p>
             <ul>
-                <li><span class="upside">Upside:</span> Easy to finance with low down payments, highly liquid, and simple to sell to a standard home-buyer.</li>
-                <li><span class="downside">Downside:</span> Zero scale. If your one tenant leaves, you hit 100% vacancy and have to pay the mortgage out of pocket. It’s a massive time sink.</li>
+                <li><strong>Upside:</strong> Easy to finance with low down payments, highly liquid, and simple to sell to a standard home-buyer.</li>
+                <li><strong>Downside:</strong> Zero scale. If your one tenant leaves, you hit 100% vacancy and have to pay the mortgage out of pocket. It’s a massive time sink.</li>
             </ul>
         </div>
 
         <!-- Commercial Multifamily -->
-        <div class="glass-card tint-green">
+        <div class="glass-card tint-club">
             <h3>Commercial (5+ Units)</h3>
             <p>This is where the real money is. Large apartment buildings are fully insulated businesses. Multiple streams of rent mean you easily survive routine tenant turnover.</p>
             <ul>
-                <li><span class="upside">Upside:</span> Massive revenue covers full-time property management. Valuation is tied directly to Net Operating Income (NOI), meaning you force the value up just by raising rents.</li>
-                <li><span class="downside">Downside:</span> High barrier to entry. You need serious capital and have to compete against institutional money.</li>
+                <li><strong>Upside:</strong> Massive revenue covers full-time property management. Valuation is tied directly to Net Operating Income (NOI), meaning you force the value up just by raising rents.</li>
+                <li><strong>Downside:</strong> High barrier to entry. You need serious capital and have to compete against institutional money.</li>
             </ul>
         </div>
 
         <!-- Commercial Retail -->
-        <div class="glass-card tint-orange">
+        <div class="glass-card tint-carpool">
             <h3>Retail & Office</h3>
             <p>Leasing space to business operators. Think anchor-tenant retail centers (like CVS), massive warehouses, and high-rise office buildings.</p>
             <ul>
-                <li><span class="upside">Upside:</span> Long-term leases (5 to 10 years) provide highly predictable income. Tenants often pay the property taxes and insurance.</li>
-                <li><span class="downside">Downside:</span> Highly exposed to the broader economy and tech shifts (remote work killing offices). Tenant build-outs to secure a lease are insanely expensive.</li>
+                <li><strong>Upside:</strong> Long-term leases (5 to 10 years) provide highly predictable income. Tenants often pay the property taxes and insurance.</li>
+                <li><strong>Downside:</strong> Highly exposed to the broader economy and tech shifts (remote work killing offices). Tenant build-outs to secure a lease are insanely expensive.</li>
             </ul>
         </div>
         
         <!-- Syndications -->
-        <div class="glass-card tint-blue">
+        <div class="glass-card tint-transfer">
             <h3>Syndications</h3>
             <p>Pooling your capital alongside a pro operator who actually finds, underwrites, and manages the asset for you.</p>
             <ul>
-                <li><span class="upside">Upside:</span> Gets everyday people into institutional-grade complexes. You get real cash flow and tax benefits without the 3 AM plumbing calls.</li>
-                <li><span class="downside">Downside:</span> You give up operational control. Funds may have strict end dates, forcing a sale even if the market is down.</li>
+                <li><strong>Upside:</strong> Gets everyday people into institutional-grade complexes. You get real cash flow and tax benefits without the 3 AM plumbing calls.</li>
+                <li><strong>Downside:</strong> You give up operational control. Funds may have strict end dates, forcing a sale even if the market is down.</li>
             </ul>
         </div>
         
         <!-- REITs -->
-        <div class="glass-card tint-purple" style="grid-column: 1 / -1;">
+        <div class="glass-card tint-barter" style="grid-column: 1 / -1;">
             <h3>REITs (Paper Assets)</h3>
             <p>Buying shares in a massive corporation that owns real estate. They trade on the stock market, functioning strictly as a paper asset.</p>
             <ul>
-                <li><span class="upside">Upside:</span> Highly liquid. Buy and sell from your brokerage app instantly and collect passive dividends.</li>
-                <li><span class="downside">Downside:</span> It's just paper. The IRS strips away the massive physical depreciation write-offs and tax advantages you'd get from actually owning the dirt.</li>
+                <li><strong>Upside:</strong> Highly liquid. Buy and sell from your brokerage app instantly and collect passive dividends.</li>
+                <li><strong>Downside:</strong> It's just paper. The IRS strips away the massive physical depreciation write-offs and tax advantages you'd get from actually owning the dirt.</li>
             </ul>
         </div>
     </div>
@@ -100,19 +100,19 @@
     <p>The industry uses a tier system to quickly communicate a building's age, physical quality, and demographic.</p>
     
     <div class="bento-grid compact">
-        <div class="glass-card tint-blue">
+        <div class="glass-card tint-club">
             <h3>Class A</h3>
             <p>The brand-new, premium stuff. Under 15 years old, loaded with amenities, and catering to white-collar tenants. Lowest cap rates (2% to 4%) but the absolute best for preserving wealth.</p>
         </div>
-        <div class="glass-card tint-green">
+        <div class="glass-card tint-transfer">
             <h3>Class B</h3>
             <p>Built in the last 15-20 years. A solid mix of white and blue-collar tenants. Offers the best balance of steady cash flow (5% to 7%) and appreciation potential.</p>
         </div>
-        <div class="glass-card tint-orange">
+        <div class="glass-card tint-carpool">
             <h3>Class C</h3>
             <p>Older buildings (25+ years) that need real work like new roofs. They look great on paper with high cash flow yields (8%+), but they are a massive headache to manage.</p>
         </div>
-        <div class="glass-card tint-red">
+        <div class="glass-card tint-barter">
             <h3>Class D</h3>
             <p>War zones or dead economies. They look insanely cheap and always tempt rookies, but actually collecting the rent is a nightmare. Skip it.</p>
         </div>
@@ -123,19 +123,19 @@
     <p>Commercial real estate isn't priced on emotions or neighborhood comps. It's priced purely on the math.</p>
     
     <div class="bento-grid">
-        <div class="glass-card">
+        <div class="glass-card tint-transfer">
             <h3>Internal Rate of Return (IRR)</h3>
             <p>The big picture. IRR calculates the total annualized return of the deal over the entire time you hold it. It tracks every dollar in and out: your down payment, all the monthly cash flow you collected, and the massive lump sum payout you get when you finally sell.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-club">
             <h3>Capitalization Rate (Cap Rate)</h3>
             <p>A property's unleveraged yield. Divide the Net Operating Income (NOI) by the purchase price. A 6.5% cap rate means the property yields 6.5% if you bought it in pure cash. Perfect for quickly comparing the profitability of different properties.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-barter">
             <h3>Cash-on-Cash Return (CoC)</h3>
             <p>The survival metric. How fast is your liquid cash moving? Take your pre-tax free cash flow and divide it by your actual out-of-pocket down payment. High cash flow keeps you alive during market dips.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-carpool">
             <h3>Discounted Cash Flow (DCF)</h3>
             <p>Forecasting future cash flows and discounting them back to today's value. Incredibly precise for long-term holds, but it’s a "garbage-in, garbage-out" model—if your rent growth assumptions are wrong, your valuation will be dangerously inflated.</p>
         </div>
@@ -145,15 +145,15 @@
     <h2>5. Strategy & Execution</h2>
     
     <div class="bento-grid">
-        <div class="glass-card tint-purple">
+        <div class="glass-card tint-barter">
             <h3>Pro Forma Underwriting</h3>
             <p>Never trust a seller's Pro Forma. They always assume perfect rent growth and zero issues. You have to rebuild the model using worst-case scenarios: assume zero immediate rent bumps, budget 40%+ for operating expenses, and underwrite heavy cash reserves for physical repairs.</p>
         </div>
-        <div class="glass-card tint-blue">
+        <div class="glass-card tint-club">
             <h3>The Exit Strategy</h3>
             <p>Amateurs get so blinded by the cash flow they forget to calculate how to get out. To capture the real upside, you must be able to calculate a future sale price where the <em>next</em> buyer can still hit a stable 8% return on their money.</p>
         </div>
-        <div class="glass-card tint-red" style="grid-column: 1 / -1;">
+        <div class="glass-card tint-carpool" style="grid-column: 1 / -1;">
             <h3>Critical Traps to Avoid</h3>
             <p>People don't lose money because real estate is flawed; they lose money because their approach is flawed.</p>
             <ul>
@@ -167,19 +167,19 @@
     <!-- 6. GLOSSARY -->
     <h2>6. Quick Reference Glossary</h2>
     <div class="bento-grid compact">
-        <div class="glass-card">
+        <div class="glass-card tint-transfer">
             <h3>NOI</h3>
             <p><strong>Net Operating Income:</strong> Total rental income collected minus all daily operating expenses, calculated <em>before</em> you pay the mortgage.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-club">
             <h3>EGI</h3>
             <p><strong>Effective Gross Income:</strong> The money you actually collected. Not the fantasy "100% occupancy" number on the marketing brochure.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-barter">
             <h3>P&I</h3>
             <p><strong>Principal & Interest:</strong> Your monthly mortgage payment. You pay interest to borrow, and tenants pay down your principal.</p>
         </div>
-        <div class="glass-card">
+        <div class="glass-card tint-carpool">
             <h3>DCR</h3>
             <p><strong>Debt Coverage Ratio:</strong> The bank's safety net. A 1.25 DCR means you make 25% more NOI than needed to cover your debt.</p>
         </div>
