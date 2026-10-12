@@ -1,61 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lexend:wght@300;400;500;600;700&display=swap');
 
 /* ============================================================== */
-/* --- LIQUID GLASS & APPLE HIG COLORS (No Gradients) --- */
+/* --- LIQUID GLASS ENGINE & BASE VARIABLES --- */
 /* ============================================================== */
 
 :root {
-  /* Apple System Colors */
-  --a-blue:   #007AFF;      
-  --a-purple: #AF52DE;    
-  --a-teal:   #30B0C7;      
-  --a-green:  #34C759;
-  --a-red:    #FF3B30;
-  --a-orange: #FF9500;
-
-  /* Global Defaults */
+  /* Global Defaults (Light Mode) */
   --page-bg: #F4F7FB; 
   --text-main: #1D1D1F; 
   --text-sub: #86868B;  
   
-  /* Status Colors */
-  --status-pos: #34C759; 
-  --status-neg: #FF3B30; 
-  
-  /* Single-Layer Glass Properties */
+  /* Base Glass Properties */
   --blur-amt: blur(40px) saturate(200%); 
   --glass-panel: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(255, 255, 255, 0.9);
   --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 1);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0,0,0,0.02);
 
+  /* Inner Glass (Dropdowns) */
+  --glass-inner: rgba(255, 255, 255, 0.7);
+  --glass-inner-border: rgba(255, 255, 255, 1);
+
   /* Dock / UI Specific */
   --glass-nav: rgba(255, 255, 255, 0.5);
   --glass-nav-border: rgba(255, 255, 255, 0.7);
+  
+  /* Fallback Action Color */
+  --a-blue: #007AFF;
 }
 
-body.dark-mode {
-  --page-bg: #000000; 
-  --text-main: #F5F5F7;
-  --text-sub: #A1A1A6; 
-  
-  /* Dark Semantic */
-  --a-blue:   #0A84FF; 
-  --a-purple: #BF5AF2; 
-  --a-teal:   #64D2FF;
-  --a-green:  #32D74B; 
-  --a-red:    #FF453A; 
-  --a-orange: #FF9F0A;
-  
-  --status-pos: #32D74B; 
-  --status-neg: #FF453A; 
+/* ============================================================== */
+/* --- NATIVE AUTO DARK MODE --- */
+/* ============================================================== */
 
-  /* Dark Glass */
-  --glass-panel: rgba(30, 30, 32, 0.75); 
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.15);
-  --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); 
-  --glass-nav: rgba(28, 28, 30, 0.5);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #000000; 
+    --text-main: #F5F5F7;
+    --text-sub: #A1A1A6; 
+
+    /* Dark Glass */
+    --glass-panel: rgba(30, 30, 32, 0.75); 
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); 
+    
+    --glass-inner: rgba(50, 50, 55, 0.6);
+    --glass-inner-border: rgba(255, 255, 255, 0.15);
+
+    --glass-nav: rgba(28, 28, 30, 0.5);
+    --glass-nav-border: rgba(255, 255, 255, 0.15);
+    
+    --a-blue: #0A84FF;
+  }
 }
 
 /* ============================================================== */
@@ -67,9 +64,9 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--page-bg) !important;
+  background-color: var(--page-bg);
   color: var(--text-main);
-  line-height: 1.7; /* Increased for reading */
+  line-height: 1.7; 
   font-size: 1.0625rem;
   font-weight: 300;
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -101,10 +98,9 @@ li { margin-bottom: 0.75rem; }
 /* --- LAYOUT: THE READING CANVAS --- */
 /* ============================================================== */
 
-/* Constrains text to a perfect reading width, lets grids expand slightly */
 .reading-canvas {
   width: 100%;
-  max-width: 48rem; /* ~768px for optimal character count */
+  max-width: 48rem; 
   margin: 0 auto;
   padding: 4rem 1.5rem 8rem;
 }
@@ -114,10 +110,46 @@ li { margin-bottom: 0.75rem; }
 .hero p { font-size: 1.25rem; color: var(--text-sub); }
 
 /* ============================================================== */
+/* --- DISCLAIMER DROPDOWN (Liquid Glass Pill) --- */
+/* ============================================================== */
+
+.disclaimer-container { display: flex; justify-content: center; margin-bottom: 2.5rem; }
+details.disclaimer-dropdown {
+  background: var(--glass-inner);
+  backdrop-filter: var(--blur-amt);
+  -webkit-backdrop-filter: var(--blur-amt);
+  border: 1px solid var(--glass-inner-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  border-radius: 999px; 
+  width: 100%; 
+  transition: border-radius 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  details.disclaimer-dropdown {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  }
+}
+
+details.disclaimer-dropdown[open] { border-radius: 1.25rem; }
+
+details.disclaimer-dropdown summary {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem; height: 3rem; padding: 0 1.5rem;
+  font-size: 0.8125rem; font-weight: 600; color: var(--text-main); cursor: pointer; list-style: none; outline: none; user-select: none;
+}
+details.disclaimer-dropdown summary::-webkit-details-marker { display: none; }
+.disclaimer-dropdown .pill-icon { color: var(--a-blue); font-size: 1.125rem !important; }
+.disclaimer-dropdown .dropdown-icon { color: var(--text-sub); font-size: 1.125rem !important; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+details.disclaimer-dropdown[open] .dropdown-icon { transform: rotate(180deg); }
+details.disclaimer-dropdown[open] summary { border-bottom: 1px solid color-mix(in srgb, var(--text-main) 10%, transparent); }
+.disclaimer-content { padding: 1.25rem 1.5rem; font-size: 0.8125rem; color: var(--text-sub); line-height: 1.6; text-align: center; animation: fadeUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(0.5rem); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================== */
 /* --- SINGLE-LAYER BENTO CARDS --- */
 /* ============================================================== */
 
-/* The Grid System */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -129,7 +161,6 @@ li { margin-bottom: 0.75rem; }
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-/* The Base Glass Card (No Nesting) */
 .glass-card {
   background: var(--glass-panel);
   backdrop-filter: var(--blur-amt);
@@ -159,64 +190,63 @@ li { margin-bottom: 0.75rem; }
 .glass-card ul { margin-bottom: 0; }
 
 /* ============================================================== */
-/* --- COLORFUL TINTED GLASS (Solid Mixes, No Gradients) --- */
+/* --- THEME TINTS (Accessible Custom Color Palette) --- */
 /* ============================================================== */
 
-.tint-red {
-  background: color-mix(in srgb, var(--a-red) 6%, var(--glass-panel));
-  border-color: color-mix(in srgb, var(--a-red) 20%, var(--glass-border));
+/* 1. Barter Bazaar Tint (Plum/Rose & Green) */
+.tint-barter {
+  background: rgba(228, 160, 183, 0.15);
+  border-color: rgba(228, 160, 183, 0.3);
 }
-.tint-red h3 { color: var(--a-red); }
+.tint-barter h3 { color: #71B300; }
 
-.tint-blue {
-  background: color-mix(in srgb, var(--a-blue) 6%, var(--glass-panel));
-  border-color: color-mix(in srgb, var(--a-blue) 20%, var(--glass-border));
+/* 2. Carpool Tool Tint (Violet & Gold) */
+.tint-carpool {
+  background: rgba(195, 167, 214, 0.15);
+  border-color: rgba(195, 167, 214, 0.3);
 }
-.tint-blue h3 { color: var(--a-blue); }
+.tint-carpool h3 { color: #D49600; } /* Slightly darkened gold for light mode legibility */
 
-.tint-green {
-  background: color-mix(in srgb, var(--a-green) 6%, var(--glass-panel));
-  border-color: color-mix(in srgb, var(--a-green) 20%, var(--glass-border));
+/* 3. Club Hub Tint (Gold & Navy) */
+.tint-club {
+  background: rgba(253, 224, 139, 0.25);
+  border-color: rgba(253, 224, 139, 0.5);
 }
-.tint-green h3 { color: var(--a-green); }
+.tint-club h3 { color: #14325F; }
 
-.tint-purple {
-  background: color-mix(in srgb, var(--a-purple) 6%, var(--glass-panel));
-  border-color: color-mix(in srgb, var(--a-purple) 20%, var(--glass-border));
+/* 4. Transfer Tools Tint (Green & Purple) */
+.tint-transfer {
+  background: rgba(203, 229, 142, 0.2);
+  border-color: rgba(203, 229, 142, 0.4);
 }
-.tint-purple h3 { color: var(--a-purple); }
+.tint-transfer h3 { color: #5F259F; }
 
-.tint-orange {
-  background: color-mix(in srgb, var(--a-orange) 6%, var(--glass-panel));
-  border-color: color-mix(in srgb, var(--a-orange) 20%, var(--glass-border));
+/* --- DARK MODE TINTS --- */
+@media (prefers-color-scheme: dark) {
+  .tint-barter {
+    background: rgba(228, 160, 183, 0.1);
+    border-color: rgba(228, 160, 183, 0.15);
+  }
+  .tint-barter h3 { color: #CBE58E; }
+
+  .tint-carpool {
+    background: rgba(195, 167, 214, 0.1);
+    border-color: rgba(195, 167, 214, 0.15);
+  }
+  .tint-carpool h3 { color: #FDE08B; }
+
+  .tint-club {
+    background: rgba(253, 224, 139, 0.1);
+    border-color: rgba(253, 224, 139, 0.15);
+  }
+  .tint-club h3 { color: #B7CCEA; }
+
+  .tint-transfer {
+    background: rgba(203, 229, 142, 0.1);
+    border-color: rgba(203, 229, 142, 0.15);
+  }
+  .tint-transfer h3 { color: #C3A7D6; }
 }
-.tint-orange h3 { color: var(--a-orange); }
-
-/* ============================================================== */
-/* --- CALLOUT BLOCKS (For Text Flow) --- */
-/* ============================================================== */
-
-.callout {
-  padding: 1.5rem;
-  border-radius: 1rem;
-  margin-bottom: 2rem;
-  font-size: 0.9375rem;
-  border-left: 4px solid var(--text-sub);
-  background: var(--glass-panel);
-  backdrop-filter: var(--blur-amt);
-  -webkit-backdrop-filter: var(--blur-amt);
-}
-
-.callout.info {
-  border-left-color: var(--a-blue);
-  background: color-mix(in srgb, var(--a-blue) 6%, var(--glass-panel));
-}
-
-.callout p:last-child { margin-bottom: 0; }
-
-/* Status Text */
-.upside { color: var(--status-pos); font-weight: 600; }
-.downside { color: var(--status-neg); font-weight: 600; }
 
 /* ============================================================== */
 /* --- HOVER STATES --- */
@@ -227,13 +257,15 @@ li { margin-bottom: 0.75rem; }
     transform: translateY(-4px); 
     box-shadow: 0 16px 40px rgba(0,0,0,0.08), var(--glass-highlight); 
   }
-  body.dark-mode .glass-card:hover { 
-    box-shadow: 0 20px 48px rgba(0,0,0, 0.7), var(--glass-highlight); 
+  @media (prefers-color-scheme: dark) {
+    .glass-card:hover { 
+      box-shadow: 0 20px 48px rgba(0,0,0, 0.7), var(--glass-highlight); 
+    }
   }
 }
 
 /* ============================================================== */
-/* --- FLOATING DOCK (Copied from base style) --- */
+/* --- FLOATING DOCK --- */
 /* ============================================================== */
 
 .floating-dock {
