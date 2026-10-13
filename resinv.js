@@ -28,3 +28,239 @@ const resinvData = [
   [new Date(2024, 0, 1), 1997500, 1600000, 1650000, 2080000, 60000, 87358, 111104, 2.91, 3.88, 3.94, 23.17, 18.75, 16.78],
   [new Date(2025, 0, 1), 2007500, 1490000, 1835832, 1800000, 64800, 88493, 114654, 3.22, 3.4, 4.25, 21.4, 21.87, 15.79],
   ];
+let filters = { price: 'All', cap: 'All', grm: 'All' };
+let chartP = null, chartC = null, chartG = null;
+let dataP = null, dataC = null, dataG = null;
+
+// Initialize Google Charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawCharts);
+
+// --- 1. HISTORICAL TIMELINE INSIGHTS ---
+const historicalInsights = {
+    1997: { title: "1997: The Taxpayer Relief Act", text: "The government exempted up to $500,000 in capital gains on home sales. Paired with the dawn of the internet age, Silicon Valley real estate became a hyper-lucrative investment vehicle overnight." },
+    1999: { title: "1999: Dot-Com Mania", text: "The NASDAQ doubled in a single year. Pre-revenue internet startups minted paper millionaires daily, pouring unprecedented cash into local housing." },
+    2000: { title: "2000: The Dot-Com Peak", text: "NASDAQ hit its all-time high in March, fueling immense wealth and peak home buying before the eventual collapse." },
+    2001: { title: "2001: The Dot-Com Bust", text: "The tech bubble burst. Stock portfolios vanished, layoffs swept the Valley, and home prices took a hit as the local economy contracted." },
+    2003: { title: "2003: The 1% Fix", text: "To stimulate the post-bust economy, the Fed slashed interest rates to 1%. Cheap debt flooded the market, planting the seeds for the subprime housing bubble." },
+    2005: { title: "2005: The Housing Bubble", text: "Predatory lending caused an influx of home purchases by unqualified buyers. Silicon Valley saw aggressive speculation and flipping." },
+    2007: { title: "2007: Subprime Cracks", text: "Major subprime lenders began filing for bankruptcy. Liquidity dried up, and Silicon Valley felt the initial shockwaves of the looming global financial crisis." },
+    2008: { title: "2008: The Great Recession", text: "Lehman Brothers collapsed and foreclosures spiked. Prices would eventually bottom out in 2009/2010." },
+    2010: { title: "2010: Web 2.0 Recovery", text: "While national real estate floundered, Silicon Valley began its recovery early. Apple released the iPad, and companies like Netflix and Google ignited the Web 2.0 hiring boom." },
+    2012: { title: "2012: Facebook IPO", text: "The first major 'Tech IPO' of the new era minted millionaires overnight. When employee lock-up periods expired, cash flooded the housing market." },
+    2014: { title: "2014: Tech Boom 2.0", text: "Tech hardware and software converged. Construction on the $5B Apple Park was in full swing, driving massive job growth and heavy double-digit home appreciation." },
+    2015: { title: "2015: Million Dollar Floor", text: "March median home prices crossed the $1M threshold, officially paving the way to the ultra-luxury housing market we know today." },
+    2016: { title: "2016: Election & IPO Lull", text: "Global uncertainty and a stalling tech IPO market caused a brief pause in Silicon Valley real estate, with inventory sitting slightly longer than usual." },
+    2018: { title: "2018: The 5% Scare", text: "Mortgage rates hit 5% once more, causing fear, a dip in tech stocks, and a sharp localized market correction." },
+    2019: { title: "2019: The IPO Dud", text: "Highly anticipated mega-IPOs like Uber and Lyft went public but underperformed. The expected 'millionaire housing boom' never materialized, but low rates kept the market strong." },
+    2020: { title: "2020: The Great Pivot", text: "The pandemic forced a shift to remote work. Space became the ultimate premium, making the suburbs hotter than ever." },
+    2021: { title: "2021: Free Money", text: "Interest rates hit historic lows (sub-3%). Tech stocks soared, giving buyers near-infinite purchasing power and driving the steepest appreciation curve in history." },
+    2022: { title: "2022: The Rate Shock", text: "Inflation forced the Fed to aggressively hike rates. Tech companies began mass layoffs, and home prices corrected sharply in Q3/Q4." },
+    2023: { title: "2023: The AI Renaissance", text: "The launch of ChatGPT sparked an AI gold rush. Tech stocks—led by Nvidia—ballooned, reviving buyer purchasing power despite 7% mortgage rates." },
+    2024: { title: "2024: Golden Handcuffs", text: "Inventory hit record lows because homeowners refused to trade their pandemic-era 3% mortgages for new 7% rates, keeping prices artificially high." },
+    2025: { title: "2025: The Great Divergence", text: "Single Family houses hit new records ($2.0M+), while 2-4 unit multi-family properties corrected sharply, expanding yields significantly." }
+};
+
+const defaultInsight = {
+    title: "History Rhymes: The AI Parallel",
+    text: "Today's AI boom feels eerily similar to the Dot-Com surge of 1999/2000. Just like then, we are seeing immense wealth creation. But even when the Dot-Com bubble burst in 2001, home prices merely paused and didn't crash until the unrelated subprime bubble years later.<br><br><strong>The Lesson:</strong> Market crashes usually aren't a good time to buy simply because it's in a moment of economic uncertainty."
+};
+
+// --- 2. MODULAR FILTER LOGIC ---
+function setFilter(chartType, propertyType, btn) {
+    filters[chartType] = propertyType;
+    
+    const container = btn.closest('.filter-row');
+    const pills = container.querySelectorAll('.filter-pill');
+
+    pills.forEach(p => {
+        p.classList.remove('active', 'passive');
+        if (propertyType === 'All') {
+            if(p.innerText.includes('All')) p.classList.add('active');
+        } else {
+            if (p === btn) p.classList.add('active');
+            else p.classList.add('passive');
+        }
+    });
+
+    if (chartType === 'price') {
+        document.getElementById('insight-title').innerHTML = defaultInsight.title;
+        document.getElementById('insight-text').innerHTML = defaultInsight.text;
+    }
+
+    drawCharts();
+}
+
+// --- 3. STRATEGY & DOCK DRAWER TOGGLES ---
+function setStrategy(type, btn) {
+    document.querySelectorAll('.strategy-container .toggle-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.strategy-container .strat-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('strat-' + type).classList.add('active');
+}
+
+function toggleDrawer(e) {
+    if (e) e.stopPropagation(); 
+    const drawer = document.getElementById('era-drawer');
+    drawer.classList.toggle('open');
+}
+
+document.addEventListener('click', (e) => {
+    const drawer = document.getElementById('era-drawer');
+    const toggleBtn = document.getElementById('era-toggle');
+    if (drawer && drawer.classList.contains('open')) {
+        if (!drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+            drawer.classList.remove('open');
+        }
+    }
+});
+
+// --- 4. AUTO DARK MODE ---
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+}
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    if (event.matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+    if (typeof drawCharts === "function" && resinvData.length > 0) drawCharts(); 
+});
+
+// --- 5. CORE DRAWING FUNCTION ---
+function drawCharts() {
+    if (!resinvData || resinvData.length === 0) return;
+
+    const isDark = document.body.classList.contains('dark-mode');
+    const textC = isDark ? '#A1A1A6' : '#86868B';
+    const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
+      
+    // The 4 Apple HIG Semantic Colors
+    const cRed    = isDark ? '#FF453A' : '#FF3B30'; // Houses
+    const cBlue   = isDark ? '#0A84FF' : '#007AFF'; // Duplex
+    const cGreen  = isDark ? '#32D74B' : '#34C759'; // Triplex
+    const cYellow = isDark ? '#FFD60A' : '#FFCC00'; // Fourplex
+
+    const dateFmt = new google.visualization.DateFormat({ pattern: 'yyyy' });
+    const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
+
+    // Filter Logic setup
+    let activeColsP = [0, 1, 2, 3, 4]; 
+    let activeColorsP = [cRed, cBlue, cGreen, cYellow];
+    if (filters.price === 'Houses') { activeColsP = [0, 1]; activeColorsP = [cRed]; } 
+    else if (filters.price === 'Duplex') { activeColsP = [0, 2]; activeColorsP = [cBlue]; } 
+    else if (filters.price === 'Triplex') { activeColsP = [0, 3]; activeColorsP = [cGreen]; }
+    else if (filters.price === 'Fourplex') { activeColsP = [0, 4]; activeColorsP = [cYellow]; }
+
+    let activeColsC = [0, 1, 2, 3]; // Data Table indexes (0=Date, 1=Dup, 2=Tri, 3=Four)
+    let activeColorsC = [cBlue, cGreen, cYellow];
+    if (filters.cap === 'Duplex') { activeColsC = [0, 1]; activeColorsC = [cBlue]; } 
+    else if (filters.cap === 'Triplex') { activeColsC = [0, 2]; activeColorsC = [cGreen]; }
+    else if (filters.cap === 'Fourplex') { activeColsC = [0, 3]; activeColorsC = [cYellow]; }
+
+    let activeColsG = [0, 1, 2, 3]; // Data Table indexes (0=Date, 1=Dup, 2=Tri, 3=Four)
+    let activeColorsG = [cBlue, cGreen, cYellow];
+    if (filters.grm === 'Duplex') { activeColsG = [0, 1]; activeColorsG = [cBlue]; } 
+    else if (filters.grm === 'Triplex') { activeColsG = [0, 2]; activeColorsG = [cGreen]; }
+    else if (filters.grm === 'Fourplex') { activeColsG = [0, 3]; activeColorsG = [cYellow]; }
+
+    // --- Build Price Chart (Cols: Date, SFR, Dup, Tri, Four) ---
+    if (!dataP) {
+        dataP = new google.visualization.DataTable();
+        dataP.addColumn('date', 'Date');
+        dataP.addColumn('number', 'SFR');
+        dataP.addColumn('number', 'Duplex');
+        dataP.addColumn('number', 'Triplex');
+        dataP.addColumn('number', 'Fourplex');
+        dataP.addRows(resinvData.map(r => [r[0], r[1], r[2], r[3], r[4]]));
+        dateFmt.format(dataP, 0);
+        currencyFmt.format(dataP, 1);
+        currencyFmt.format(dataP, 2);
+        currencyFmt.format(dataP, 3);
+        currencyFmt.format(dataP, 4);
+    }
+
+    const viewP = new google.visualization.DataView(dataP);
+    viewP.setColumns(activeColsP);
+
+    if (!chartP) {
+        chartP = new google.visualization.LineChart(document.getElementById('price_chart'));
+        
+        // Interactive Scrubbing for Insights
+        google.visualization.events.addListener(chartP, 'onmouseover', function(e) {
+            if (e.row != null) {
+                const hoveredDate = dataP.getValue(e.row, 0);
+                const year = hoveredDate.getFullYear();
+                const insight = historicalInsights[year] || defaultInsight;
+                document.getElementById('insight-title').innerHTML = insight.title;
+                document.getElementById('insight-text').innerHTML = insight.text;
+            }
+        });
+    }
+
+    chartP.draw(viewP, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC, format: 'short' },
+        lineWidth: 3, curveType: 'function', colors: activeColorsP
+    });
+
+    // --- Build Cap Rate Chart (Cols: Date, Dup, Tri, Four) ---
+    if (!dataC) {
+        dataC = new google.visualization.DataTable();
+        dataC.addColumn('date', 'Date');
+        dataC.addColumn('number', 'Duplex');
+        dataC.addColumn('number', 'Triplex');
+        dataC.addColumn('number', 'Fourplex');
+        // Indexes 8, 9, 10 in resinvData
+        dataC.addRows(resinvData.map(r => [r[0], r[8], r[9], r[10]]));
+        dateFmt.format(dataC, 0);
+    }
+
+    const viewC = new google.visualization.DataView(dataC);
+    viewC.setColumns(activeColsC);
+
+    if (!chartC) chartC = new google.visualization.LineChart(document.getElementById('cap_chart'));
+
+    chartC.draw(viewC, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC },
+        lineWidth: 3, curveType: 'function', colors: activeColorsC
+    });
+
+    // --- Build GRM Chart (Cols: Date, Dup, Tri, Four) ---
+    if (!dataG) {
+        dataG = new google.visualization.DataTable();
+        dataG.addColumn('date', 'Date');
+        dataG.addColumn('number', 'Duplex');
+        dataG.addColumn('number', 'Triplex');
+        dataG.addColumn('number', 'Fourplex');
+        // Indexes 11, 12, 13 in resinvData
+        dataG.addRows(resinvData.map(r => [r[0], r[11], r[12], r[13]])); 
+        dateFmt.format(dataG, 0);
+    }
+
+    const viewG = new google.visualization.DataView(dataG);
+    viewG.setColumns(activeColsG);
+
+    if (!chartG) chartG = new google.visualization.LineChart(document.getElementById('grm_chart'));
+
+    chartG.draw(viewG, {
+        backgroundColor: 'transparent',
+        legend: { position: 'none' },
+        chartArea: { width: '85%', height: '82%' },
+        hAxis: { textStyle: { color: textC, fontSize: 11 }, format: 'yyyy', gridlines: { color: 'transparent' }, baselineColor: 'transparent' },
+        vAxis: { textStyle: { color: textC, fontSize: 11 }, gridlines: { color: gridC }, baselineColor: gridC },
+        lineWidth: 3, curveType: 'function', colors: activeColorsG
+    });
+}
+
+window.addEventListener('resize', () => {
+    if (resinvData.length > 0) drawCharts();
+});
