@@ -211,6 +211,7 @@ strong, b { font-weight: 600; }
 .icon-blue   { color: var(--c-condos); }
 .icon-green  { color: var(--c-townhomes); }
 .icon-yellow { color: var(--c-volume); }
+.icon-purple { color: var(--c-purple); }
 
 .dot { width: 10px; height: 10px; border-radius: 50%; }
 .dot.blue { background: var(--a-blue); }
@@ -230,9 +231,13 @@ strong, b { font-weight: 600; }
   background: color-mix(in srgb, var(--c-townhomes) 15%, var(--glass-inner)) !important; 
   border-color: color-mix(in srgb, var(--c-townhomes) 40%, transparent) !important; 
 }
-.filter-pill.all-pill, .legend-pill.volume-pill   { 
+.filter-pill.all-pill, .legend-pill.all-pill   { 
   background: color-mix(in srgb, var(--c-volume) 15%, var(--glass-inner)) !important; 
   border-color: color-mix(in srgb, var(--c-volume) 40%, transparent) !important; 
+}
+.filter-pill.fourplex-pill, .legend-pill.fourplex-pill, .filter-pill.volume-pill, .legend-pill.volume-pill { 
+  background: color-mix(in srgb, var(--c-purple) 15%, var(--glass-inner)) !important; 
+  border-color: color-mix(in srgb, var(--c-purple) 40%, transparent) !important; 
 }
 
 /* Active Filter States */
@@ -241,6 +246,7 @@ strong, b { font-weight: 600; }
 .filter-pill.condo-pill.active { border-color: var(--c-condos) !important; }
 .filter-pill.town-pill.active  { border-color: var(--c-townhomes) !important; }
 .filter-pill.all-pill.active   { border-color: var(--c-volume) !important; }
+.filter-pill.fourplex-pill.active, .filter-pill.volume-pill.active { border-color: var(--c-purple) !important; }
 .filter-pill.passive { opacity: 0.4; filter: grayscale(80%); transform: scale(0.95); box-shadow: none; }
 
 /* ============================================================== */
