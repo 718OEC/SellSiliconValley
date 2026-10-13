@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 Multi-Family Market Report</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Core Liquid Glass Engine -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Page-Specific Styles (Charts & FAB) -->
+  <link rel="stylesheet" href="resinv.css">
+</head>
+<body data-era="resinv">
+
+  <!-- THE JUMP MENU (FAB) -->
+  <div class="fab-wrapper" id="fabWrapper">
+      <ul class="fab-menu glass-inner">
+          <li><a href="#top" onclick="toggleFab()">Top</a></li>
+          <li><a href="#prices" onclick="toggleFab()">Price Trends</a></li>
+          <li><a href="#caprates" onclick="toggleFab()">Cap Rates</a></li>
+          <li><a href="#grm" onclick="toggleFab()">GRM Trends</a></li>
+          <li><a href="#forecast" onclick="toggleFab()">2026 Forecast</a></li>
+          <li><a href="#timeline" onclick="toggleFab()">Timeline</a></li>
+          <li><a href="#strategy" onclick="toggleFab()">Strategy</a></li>
+          <li><a href="#contact" onclick="toggleFab()">Contact</a></li>
+      </ul>
+      <button class="fab-btn" onclick="toggleFab()">
+          <span class="material-symbols-rounded" id="fabIcon">map</span>
+      </button>
+  </div>
+
+  <div id="market-report-main">
+    <div class="report-container">
+      
+      <!-- HERO SECTION -->
+      <header class="hero" id="top">
+          <!-- Note: Theme toggle is handled globally in style.css or your main script, but kept here if standalone -->
+          <button class="theme-toggle glass-inner" onclick="document.body.classList.toggle('dark-mode'); typeof drawCharts === 'function' && drawCharts();">
+              <span class="material-symbols-rounded">dark_mode</span>
+          </button>
+          <h1>2025 Residential Investment Guide</h1>
+          <p>Real Estate Rewind ⏪ - Investor edition</p>
+      </header>
+
+      <!-- STATS GRID -->
+      <div class="stats-grid">
+          <div class="glass stat-box">
+              <div class="stat-label">Duplex</div>
+              <div class="stat-val">$1.49M</div>
+              <div class="stat-delta neg">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_downward</span> 6.9% YoY
+              </div>
+          </div>
+          <div class="glass stat-box">
+              <div class="stat-label">Triplex</div>
+              <div class="stat-val">$1.84M</div>
+              <div class="stat-delta pos">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_upward</span> 11.3% YoY
+              </div>
+          </div>
+          <div class="glass stat-box">
+              <div class="stat-label">Fourplex</div>
+              <div class="stat-val">$1.80M</div>
+              <div class="stat-delta neg">
+                  <span class="material-symbols-rounded" style="font-size:16px">arrow_downward</span> 13.5% YoY
+              </div>
+          </div>
+      </div>
+
+      <!-- PRICE CHART -->
+      <section id="prices" class="glass chart-section">
+          <h2>Price History (Interactive)</h2>
+          <p class="chart-desc">A visual history ending in 2025. While single-family homes hit record highs, investment property values corrected sharply.<br><br><em>These charts are interactive.</em></p>
+          
+          <div class="legend-row">
+              <div class="legend-pill house-pill"><div class="dot" style="background:var(--c-houses)"></div> House (SFR)</div>
+              <div class="legend-pill condo-pill"><div class="dot" style="background:var(--c-condos)"></div> Duplex</div>
+              <div class="legend-pill town-pill"><div class="dot" style="background:var(--c-townhomes)"></div> Triplex</div>
+              <div class="legend-pill volume-pill"><div class="dot" style="background:var(--c-volume)"></div> Fourplex</div>
+          </div>
+          
+          <div id="price_chart" class="chart-canvas"></div>
+      </section>
+
+      <!-- CAP RATE CHART -->
+      <section id="caprates" class="glass chart-section">
+          <h2>Cap Rate Trends</h2>
+          <p class="chart-desc">Yield is King. With the price drop, Fourplex Cap Rates have expanded to 4.25%, the highest median yield in the residential sector.<br><br>Cap rate: Your annual return percentage if you buy with cash.<br>(<em>Annual net operating income divided by the purchase price. The higher the better.</em>)</p>
+          
+          <div class="legend-row">
+              <div class="legend-pill condo-pill"><div class="dot" style="background:var(--c-condos)"></div> Duplex</div>
+              <div class="legend-pill town-pill"><div class="dot" style="background:var(--c-townhomes)"></div> Triplex</div>
+              <div class="legend-pill volume-pill"><div class="dot" style="background:var(--c-volume)"></div> Fourplex</div>
+          </div>
+          
+          <div id="cap_chart" class="chart-canvas"></div>
+      </section>
+
+      <!-- GRM CHART -->
+      <section id="grm" class="glass chart-section">
+          <h2>GRM Trends</h2>
+          <p class="chart-desc">Gross Rent Multiplier. The "Double Value" event: Duplex income rose 8% ($60k &rarr; $64.8k) while prices fell 7%, compressing GRM significantly.<br><br>GRM: The number of years for rent to pay off the price.<br>(<em>The purchase price divided by gross annual rental income.</em>)</p>
+          
+          <div class="legend-row">
+              <div class="legend-pill condo-pill"><div class="dot" style="background:var(--c-condos)"></div> Duplex</div>
+              <div class="legend-pill town-pill"><div class="dot" style="background:var(--c-townhomes)"></div> Triplex</div>
+              <div class="legend-pill volume-pill"><div class="dot" style="background:var(--c-volume)"></div> Fourplex</div>
+          </div>
+
+          <div id="grm_chart" class="chart-canvas"></div>
+      </section>
+
+      <!-- FORECAST CARDS -->
+      <section id="forecast" style="margin-bottom: 3rem;">
+          <h2 class="section-title">2026 Investor Outlook</h2>
+          <div class="flex-grid">
+              <div class="glass-inner card-small">
+                  <div>
+                      <div class="card-label">Financing</div>
+                      <h3>The Rate Pivot</h3>
+                  </div>
+                  <p>Investment property is sensitive to debt cost. A predicted Q2 rate cut would instantly reverse the 13.5% discount we see today.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div>
+                      <div class="card-label">Yield</div>
+                      <h3>4.25% Cap Rate</h3>
+                  </div>
+                  <p>Fourplexes are the "Yield Kings" of 2026. This cap rate expansion is purely a function of price correction, not income loss.</p>
+              </div>
+              <div class="glass-inner card-small">
+                  <div>
+                      <div class="card-label">Opportunity</div>
+                      <h3>The Contrarian Play</h3>
+                  </div>
+                  <p>While everyone chases Single Family homes at all-time highs, the smart money is quietly absorbing undervalued 2-4 unit inventory.</p>
+              </div>
+          </div>
+      </section>
+
+      <!-- TIMELINE -->
+      <section id="timeline" class="glass chart-section">
+          <h2>Market Cycles</h2>
+          <div class="timeline-container">
+              <div class="timeline-line"></div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2008</div>
+                  <div class="node-content">
+                      <div class="node-title">The Great Financial Crisis</div>
+                      <p class="node-text">Cap rates compressed to near zero before the crash. Prices bottomed in 2009.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2015</div>
+                  <div class="node-content">
+                      <div class="node-title">The Million Dollar Norm</div>
+                      <p class="node-text">Single Family and Multi-Family assets permanently crossed the 7-figure mark.</p>
+                  </div>
+              </div>
+
+              <div class="timeline-node">
+                  <div class="year-bubble">2021</div>
+                  <div class="node-content">
+                      <div class="node-title">Peak Appreciation</div>
+                      <p class="node-text">Cheap money drove all asset classes (Houses, Duplexes, Triplexes) to move in lockstep.</p>
+                  </div>
+              </div>
+              
+              <div class="timeline-node">
+                  <div class="year-bubble">2025</div>
+                  <div class="node-content">
+                      <div class="node-title">The Great Divergence</div>
+                      <p class="node-text">The correlation broke. Houses hit new highs ($2.0M+), while Fourplexes dropped 13.5% to $1.8M.</p>
+                      <div class="insight-box glass-inner">
+                          <p>This divergence suggests the "Investment Premium" has vanished, making Multi-family cheaper than Single Family for the first time in years.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- STRATEGY TOGGLES -->
+      <section id="strategy" class="glass strategy-container">
+          <h2 style="margin-bottom: 20px;">2026 Strategy</h2>
+          <div class="ios-toggle">
+              <button class="toggle-opt active" onclick="setResStrategy('buy', this)">For Investors</button>
+              <button class="toggle-opt" onclick="setResStrategy('sell', this)">For Owners</button>
+          </div>
+
+          <div id="strat-buy" class="strat-content active">
+              <h3 style="color:var(--status-pos); margin-bottom: 1rem;">Buy the "4"</h3>
+              <p style="font-size: 1.0625rem; color:var(--text-main);">
+                  Focus exclusively on Fourplex assets. The market has over-corrected on these units. The median price is favorable ($1.8M vs $2.0M) and they're generally even less than the median in San Jose.
+              </p>
+          </div>
+
+          <div id="strat-sell" class="strat-content">
+              <h3 style="color:var(--a-blue); margin-bottom: 1rem;">Wait for Rates</h3>
+              <p style="font-size: 1.0625rem; color:var(--text-main);">
+                  Do not sell your 2-4 unit property in Q1. Buyers are constrained by rates. Wait for the Fed pivot in Q2/Q3 to allow buyer purchasing power to recover before listing.
+              </p>
+          </div>
+      </section>
+
+      <!-- CONTACT -->
+      <div id="contact" class="glass sig-block">
+          <div class="sig-info">
+              <h3>Oscar Deion Espinosa</h3>
+              <div class="sig-role">SellSiliconValley</div>
+              <div class="sig-links">
+                  <a href="tel:iPhone">(718)781-9942</a>
+                  <a href="mailto:Realtordeion@gmail.com">RealtorDeion@gmail.com</a>
+              </div>
+          </div>
+          <img src="https://i.imgur.com/PQ1MQKl.png" class="sig-img" alt="Deion">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- THE FLOATING APP DOCK (From Template) -->
+  <nav class="floating-dock">
+      <a href="index.html" class="dock-btn" aria-label="Archives">
+          <span class="material-symbols-rounded">folder_open</span>
+          <span class="dock-label">Archives</span>
+      </a>
+      
+      <div class="dock-drawer-container">
+          <button class="dock-btn" id="era-toggle" aria-label="Timeline" onclick="toggleDrawer(event)">
+              <span class="material-symbols-rounded">history</span>
+              <span class="dock-label">Timeline</span>
+          </button>
+          
+          <div class="glass-inner era-drawer" id="era-drawer">
+              <a href="resinv.html" class="drawer-item active-era">2025: Multi-Family</a>
+              <a href="2025.html" class="drawer-item">2025: The Peak?</a>
+              <a href="2020-2024.html" class="drawer-item">2020–2024</a>
+              <a href="2010s.html" class="drawer-item">2010s: Web 2.0</a>
+              <a href="2000s.html" class="drawer-item">2000s: Double Bubble</a>
+          </div>
+      </div>
+
+      <a href="investing.html" class="dock-btn" aria-label="Investing Guide">
+          <span class="material-symbols-rounded">real_estate_agent</span>
+          <span class="dock-label">Investing</span>
+      </a>
+  </nav>
+
+  <!-- Google Charts & Custom Script -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="resinv.js"></script>
+  <!-- Base Script for universal layout logic -->
+  <script src="script.js"></script> 
+</body>
+</html>
