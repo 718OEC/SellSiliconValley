@@ -12,86 +12,132 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lexend:wght@300;400;500;600;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Lexend:wght@300;400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block" />
+  
+  <!-- Core Liquid Glass Engine -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+      /* Minor page-specific alignment overrides to keep HTML clean */
+      .theme-toggle { position: absolute; top: 2rem; right: 2rem; width: 2.75rem; height: 2.75rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-main); transition: transform 0.3s; z-index: 10; }
+      .theme-toggle:hover { transform: scale(1.1); }
+      @media(max-width: 768px) { .theme-toggle { top: 1.5rem; right: 1.5rem; } }
+      .timeline-link-card { transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); text-decoration: none; display: block; }
+      .timeline-link-card:hover { transform: translateX(8px); }
+  </style>
 </head>
+
 <body id="top" class="theme-index">
   <div class="app-wrapper">
     
     <!-- Hero Header -->
     <header class="hero hub-hero">
-        <p class="subtitle" style="margin: 0 0 0.5rem;">SellSiliconValley</p>
-        <h1 id="college-title" style="margin: 0 0 0.75rem; font-size: 2.5rem;">Market Archives</h1>
-        <p style="color: var(--text-sub); max-width: 32rem; margin: 0 auto; font-size: 1rem; line-height: 1.5;">Your centralized directory for Silicon Valley real estate reports, market history, and forecasting.</p>
+        <button class="theme-toggle glass-inner" onclick="document.body.classList.toggle('dark-mode');">
+            <span class="material-symbols-rounded">dark_mode</span>
+        </button>
+        <p class="subtitle">SellSiliconValley</p>
+        <h1>Market Archives</h1>
+        <p>Your centralized directory for Silicon Valley real estate reports, market history, and forecasting.</p>
     </header>
 
-    <!-- SECTION 1: Market Reports & Forecasting -->
-    <h2 style="font-family: 'Lexend', sans-serif; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-bottom: 1.25rem; text-align: center;">
-        Market Reports & Forecasting
-    </h2> 
-    <main style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
+    <!-- SECTION 1: Active Reports (Bento Grid) -->
+    <h2 class="subtitle" style="text-align: center; margin-bottom: 1.5rem;">Current Insights & Strategy</h2> 
+    <div class="grid-cards" style="margin-bottom: 4rem;">
         
-        <!-- 2025 Market Report Card -->
-        <a href="2025.html" class="clickable-card-link" style="text-decoration: none;">
-            <article class="glass article-card" style="display: flex; align-items: center; padding: 1.25rem 1.5rem; gap: 1rem; width: 100%;">
-                <span class="material-symbols-rounded" style="color: var(--c-purple); font-size: 2rem;">monitoring</span>
-                <div style="display: flex; flex-direction: column;">
-                    <div style="font-weight: 600; color: var(--text-main); line-height: 1.2; margin-bottom: 0.25rem;">2025: The Tech Top ?</div>
-                    <div style="font-size: 0.8125rem; color: var(--text-sub);">Current Year Forecast</div>
+        <!-- 2025 Main Market Report -->
+        <a href="2025.html" class="glass article-card">
+            <div class="article-header">
+                <div class="article-avatar glass-inner" style="color: var(--c-houses);">
+                    <span class="material-symbols-rounded">monitoring</span>
                 </div>
-            </article>
-        </a>
-        
-        <!-- Investing Guide Card -->
-        <a href="investing.html" class="clickable-card-link" style="text-decoration: none;">
-            <article class="glass article-card" style="display: flex; align-items: center; padding: 1.25rem 1.5rem; gap: 1rem; width: 100%;">
-                <span class="material-symbols-rounded" style="color: var(--c-green); font-size: 2rem;">real_estate_agent</span>
-                <div style="display: flex; flex-direction: column;">
-                    <div style="font-weight: 600; color: var(--text-main); line-height: 1.2; margin-bottom: 0.25rem;">Investing Guide</div>
-                    <div style="font-size: 0.8125rem; color: var(--text-sub);">Silicon Valley Playbook</div>
+                <div class="article-meta">
+                    <h3 class="article-title">2025: The Tech Top?</h3>
+                    <span class="article-date">General Market Forecast</span>
                 </div>
-            </article>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0;">Comprehensive data tracking single-family homes, condos, and the impending interest rate pivot.</p>
         </a>
-    </main>
 
-    <!-- SECTION 2: Historical Archives -->
-    <h2 style="font-family: 'Lexend', sans-serif; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-bottom: 1.25rem; text-align: center;">
-        Historical Data Archives
-    </h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 3rem;">
-        
-        <!-- 2020-2024 Pandemic Peaks -->
-        <a href="2020-2024.html" class="clickable-card-link" style="text-decoration: none;">
-            <article class="glass article-card" style="display: flex; align-items: center; padding: 1.25rem 1.5rem; gap: 1rem; width: 100%;">
-                <span class="material-symbols-rounded" style="color: var(--secondary-accent); font-size: 1.75rem;">history</span>
-                <div style="display: flex; flex-direction: column;">
-                    <div style="font-weight: 600; color: var(--text-main); line-height: 1.2; margin-bottom: 0.25rem;">2020-2024: Pandemic Peaks</div>
-                    <div style="font-size: 0.8125rem; color: var(--text-sub);">Archive</div>
+        <!-- 2025 Multi-Family Report (NEW) -->
+        <a href="resinv.html" class="glass article-card">
+            <div class="article-header">
+                <div class="article-avatar glass-inner" style="color: var(--c-purple);">
+                    <span class="material-symbols-rounded">domain</span>
                 </div>
-            </article>
-        </a>
-        
-        <!-- 2010's Recession to Rocketship -->
-        <a href="2010s.html" class="clickable-card-link" style="text-decoration: none;">
-            <article class="glass article-card" style="display: flex; align-items: center; padding: 1.25rem 1.5rem; gap: 1rem; width: 100%;">
-                <span class="material-symbols-rounded" style="color: var(--secondary-accent); font-size: 1.75rem;">history</span>
-                <div style="display: flex; flex-direction: column;">
-                    <div style="font-weight: 600; color: var(--text-main); line-height: 1.2; margin-bottom: 0.25rem;">2010's: Recession to Rocketship</div>
-                    <div style="font-size: 0.8125rem; color: var(--text-sub);">Archive</div>
+                <div class="article-meta">
+                    <h3 class="article-title">2025 Multi-Family</h3>
+                    <span class="article-date">Investor Edition</span>
                 </div>
-            </article>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0;">Cap rates, GRM tracking, and the historic price divergence of 2-4 unit properties.</p>
         </a>
-        
-        <!-- 2000's The Double Bubble -->
-        <a href="2000s.html" class="clickable-card-link" style="text-decoration: none;">
-            <article class="glass article-card" style="display: flex; align-items: center; padding: 1.25rem 1.5rem; gap: 1rem; width: 100%;">
-                <span class="material-symbols-rounded" style="color: var(--secondary-accent); font-size: 1.75rem;">history</span>
-                <div style="display: flex; flex-direction: column;">
-                    <div style="font-weight: 600; color: var(--text-main); line-height: 1.2; margin-bottom: 0.25rem;">2000's: The Double Bubble</div>
-                    <div style="font-size: 0.8125rem; color: var(--text-sub);">Archive</div>
+
+        <!-- Investing Guide -->
+        <a href="investing.html" class="glass article-card">
+            <div class="article-header">
+                <div class="article-avatar glass-inner" style="color: var(--c-townhomes);">
+                    <span class="material-symbols-rounded">real_estate_agent</span>
                 </div>
-            </article>
+                <div class="article-meta">
+                    <h3 class="article-title">Investing Playbook</h3>
+                    <span class="article-date">Silicon Valley Strategy</span>
+                </div>
+            </div>
+            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0;">The master framework for building, protecting, and scaling real estate wealth in the Valley.</p>
         </a>
+
     </div>
+
+    <!-- SECTION 2: Historical Archives (Timeline Layout) -->
+    <section class="glass chart-section" style="padding-top: 3rem; padding-bottom: 1rem;">
+        <h2 style="margin-bottom: 2.5rem; text-align: center;">The History Books</h2>
+        
+        <div class="timeline-container" style="max-width: 600px; margin: 0 auto;">
+            <div class="timeline-line"></div>
+            
+            <!-- 2020s Node -->
+            <div class="timeline-node">
+                <div class="year-bubble">'20s</div>
+                <div class="node-content" style="padding-top: 0;">
+                    <a href="2020-2024.html" class="timeline-link-card">
+                        <div class="glass-inner article-card" style="padding: 1.25rem 1.5rem;">
+                            <h3 class="article-title" style="margin-bottom: 0.25rem;">Pandemic Peaks</h3>
+                            <span class="article-date">2020 &ndash; 2024</span>
+                            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0.75rem 0 0;">The remote work boom, 3% interest rates, tech layoffs, and the great inventory freeze.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2010s Node -->
+            <div class="timeline-node">
+                <div class="year-bubble">'10s</div>
+                <div class="node-content" style="padding-top: 0;">
+                    <a href="2010s.html" class="timeline-link-card">
+                        <div class="glass-inner article-card" style="padding: 1.25rem 1.5rem;">
+                            <h3 class="article-title" style="margin-bottom: 0.25rem;">Web 2.0 Recovery</h3>
+                            <span class="article-date">2010 &ndash; 2019</span>
+                            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0.75rem 0 0;">Rising from the recession bottom, the Facebook IPO millionaire effect, and crossing the $1M median floor.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2000s Node -->
+            <div class="timeline-node">
+                <div class="year-bubble">'00s</div>
+                <div class="node-content" style="padding-top: 0;">
+                    <a href="2000s.html" class="timeline-link-card">
+                        <div class="glass-inner article-card" style="padding: 1.25rem 1.5rem;">
+                            <h3 class="article-title" style="margin-bottom: 0.25rem;">The Double Bubble</h3>
+                            <span class="article-date">2000 &ndash; 2009</span>
+                            <p style="color: var(--text-sub); font-size: 0.9375rem; margin: 0.75rem 0 0;">The rapid rise and fall of the Dot-Com crash, immediately followed by the Subprime mortgage crisis.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <!-- CONTACT SECTION -->
     <div id="contact" class="glass sig-block">
@@ -107,6 +153,20 @@
     </div>
 
   </div>
+
+  <!-- Auto Dark-Mode Detection Script -->
+  <script>
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.classList.add('dark-mode');
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+          if (event.matches) {
+              document.body.classList.add('dark-mode');
+      } else {
+          document.body.classList.remove('dark-mode');
+      }
+      });
+  </script>
 
   <!-- INSTANT.PAGE Hover Prefetching -->
   <script src="//instant.page/5.2.0" type="module" crossorigin="anonymous"></script>
