@@ -136,34 +136,35 @@ function drawCharts() {
     const textC = isDark ? '#A1A1A6' : '#86868B';
     const gridC = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)';
       
-    // The 4 Apple HIG Semantic Colors
+    // The Apple HIG Semantic Colors
     const cRed    = isDark ? '#FF453A' : '#FF3B30'; // Houses
     const cBlue   = isDark ? '#0A84FF' : '#007AFF'; // Duplex
     const cGreen  = isDark ? '#32D74B' : '#34C759'; // Triplex
-    const cYellow = isDark ? '#FFD60A' : '#FFCC00'; // Fourplex
+    const cPurple = isDark ? '#BF5AF2' : '#AF52DE'; // Fourplex
+    const cYellow = isDark ? '#FFD60A' : '#FFCC00'; // Global Aggregate/Volume
 
     const dateFmt = new google.visualization.DateFormat({ pattern: 'yyyy' });
     const currencyFmt = new google.visualization.NumberFormat({ prefix: '$', pattern: 'short' });
 
     // Filter Logic setup
     let activeColsP = [0, 1, 2, 3, 4]; 
-    let activeColorsP = [cRed, cBlue, cGreen, cYellow];
+    let activeColorsP = [cRed, cBlue, cGreen, cPurple];
     if (filters.price === 'Houses') { activeColsP = [0, 1]; activeColorsP = [cRed]; } 
     else if (filters.price === 'Duplex') { activeColsP = [0, 2]; activeColorsP = [cBlue]; } 
     else if (filters.price === 'Triplex') { activeColsP = [0, 3]; activeColorsP = [cGreen]; }
-    else if (filters.price === 'Fourplex') { activeColsP = [0, 4]; activeColorsP = [cYellow]; }
+    else if (filters.price === 'Fourplex') { activeColsP = [0, 4]; activeColorsP = [cPurple]; }
 
     let activeColsC = [0, 1, 2, 3]; // Data Table indexes (0=Date, 1=Dup, 2=Tri, 3=Four)
-    let activeColorsC = [cBlue, cGreen, cYellow];
+    let activeColorsC = [cBlue, cGreen, cPurple];
     if (filters.cap === 'Duplex') { activeColsC = [0, 1]; activeColorsC = [cBlue]; } 
     else if (filters.cap === 'Triplex') { activeColsC = [0, 2]; activeColorsC = [cGreen]; }
-    else if (filters.cap === 'Fourplex') { activeColsC = [0, 3]; activeColorsC = [cYellow]; }
+    else if (filters.cap === 'Fourplex') { activeColsC = [0, 3]; activeColorsC = [cPurple]; }
 
     let activeColsG = [0, 1, 2, 3]; // Data Table indexes (0=Date, 1=Dup, 2=Tri, 3=Four)
-    let activeColorsG = [cBlue, cGreen, cYellow];
+    let activeColorsG = [cBlue, cGreen, cPurple];
     if (filters.grm === 'Duplex') { activeColsG = [0, 1]; activeColorsG = [cBlue]; } 
     else if (filters.grm === 'Triplex') { activeColsG = [0, 2]; activeColorsG = [cGreen]; }
-    else if (filters.grm === 'Fourplex') { activeColsG = [0, 3]; activeColorsG = [cYellow]; }
+    else if (filters.grm === 'Fourplex') { activeColsG = [0, 3]; activeColorsG = [cPurple]; }
 
     // --- Build Price Chart (Cols: Date, SFR, Dup, Tri, Four) ---
     if (!dataP) {
